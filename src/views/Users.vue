@@ -55,7 +55,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <users-table type="light" title="Users Table"></users-table>
+              <!-- <users-table type="light" title="Users Table"></users-table> -->
               <!-- <projects-table title="Points Table"></projects-table> -->
             </div>
           </div>
@@ -63,16 +63,17 @@
       </div>
       <!--End tables-->
     </div>
-    <div class="row mt-5">
+    <div class="row mt--3">
       <div class="container-fluid">
         <div class="row">
           <div class="col">
-            <el-table :data="userData" style="width: 100%">
+            <el-table :data="userData" style="width: 100%;border:2px solid black;border-radius:5px">
               <el-table-column type="index"/>
               <el-table-column prop="full_name" label="Name" width="150"></el-table-column>
               <el-table-column prop="email" label="email" width="120"></el-table-column>
               <el-table-column prop="mobile" label="Contact" width="120"></el-table-column>
               <el-table-column prop="team" label="Team" width="120"></el-table-column>
+              <el-table-column prop="joined" label="Joined on" width="155"></el-table-column>
 
               <el-table-column fixed="right" label="Operations" width="120">
                 <template slot-scope="scope">
@@ -99,7 +100,7 @@ export default {
   components: {
     // PageVisitsTable,
     // ProjectsTable,
-    UsersTable
+    // UsersTable
   },
   data() {
     return {
@@ -107,15 +108,29 @@ export default {
         email: "",
         full_name: "",
         mobile: "",
-        team: ""
+        team: "",
+        joined: ""
       }
     };
   },
   methods: {
     getUsers() {
+      var options = {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        day: "numeric",
+        weekday: "short",
+        year: "numeric",
+        month: "long"
+      };
       var url = base_url + "users/all";
       this.axios.get(url).then(response => {
         this.userData = response.data.result;
+        this.userData = this.userData.map(user => {
+          user.joined = new Date(user.joined).toLocaleString("en", options);
+          return user;
+        });
         this.userCount = response.data.count;
         console.log(this.userData);
       });
