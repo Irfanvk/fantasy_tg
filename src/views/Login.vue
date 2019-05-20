@@ -93,7 +93,7 @@ export default {
           this.password = "";
           this.$notify({
             type: "info",
-            message: res.data.full_name + " Successfully "
+            message: res.data.full_name + " logged in Successfully "
           });
           this.$router.push({ name: "dashboard" });
         })
@@ -105,6 +105,14 @@ export default {
     emitMethod() {
       EventBus.$emit("logged-in", "loggedin");
     }
+  },
+  beforeCreate() {
+    if (localStorage.getItem("usertoken")) {
+      this.$router.push({ name: "dashboard" });
+      //   console.log("vgahvgacca");
+      //   this.$router.go(-1);
+    }
+    // console.log("Nothing gets called before me!");
   }
 };
 </script>

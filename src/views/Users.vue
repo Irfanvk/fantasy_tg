@@ -19,118 +19,6 @@
             </div>
           </card>
         </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/CSK.png" height="80">
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Chennai Super Kings</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/SRH.png" height="80">
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Sun Risers Hyderabad</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/DC.png" height="80">
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Delhi Capitals</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/MI.png" height="80">
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Mumbai Indians</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/KXIP.png" height="80">
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Kings XI Punjab</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center" style="max">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/RR.png" height="80">
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Rajasthan Royals</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/KKR.png" height="80">
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Kolkata Knight Riders</h5>
-              </div>
-            </div>
-          </card>
-        </div>
         <!-- <div class="col-xl-3 col-lg-6">
                     <stats-card title="Performance"
                                 type="gradient-info"
@@ -157,40 +45,93 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col">
-              <projects-table title="Points Table"></projects-table>
+              <!-- <projects-table title="Points Table"></projects-table> -->
             </div>
           </div>
           <div class="row mt-5">
             <div class="col">
-              <projects-table type="dark" title="Dark Table"></projects-table>
+              <!-- <projects-table type="dark" title="Dark Table"></projects-table> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <users-table type="light" title="Users Table"></users-table>
+              <!-- <projects-table title="Points Table"></projects-table> -->
             </div>
           </div>
         </div>
       </div>
       <!--End tables-->
     </div>
+    <div class="row mt-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col">
+            <el-table :data="userData" style="width: 100%">
+              <el-table-column type="index"/>
+              <el-table-column prop="full_name" label="Name" width="150"></el-table-column>
+              <el-table-column prop="email" label="email" width="120"></el-table-column>
+              <el-table-column prop="mobile" label="Contact" width="120"></el-table-column>
+              <el-table-column prop="team" label="Team" width="120"></el-table-column>
+
+              <el-table-column fixed="right" label="Operations" width="120">
+                <template slot-scope="scope">
+                  <el-button @click="handleClick" type="text" size="small">Detail</el-button>
+                  <el-button type="text" size="small">Edit</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 // Tables
 // import PageVisitsTable from "./Dashboard/PageVisitsTable";
-import ProjectsTable from "./Tables/ProjectsTable";
+// import ProjectsTable from "./Tables/ProjectsTable";
+import UsersTable from "./Tables/UsersTable";
+import { base_url } from "../../config";
 
 export default {
-  name:'users'
+  name: "users",
   components: {
     // PageVisitsTable,
-    ProjectsTable
+    // ProjectsTable,
+    UsersTable
   },
   data() {
-    return {};
+    return {
+      userData: {
+        email: "",
+        full_name: "",
+        mobile: "",
+        team: ""
+      }
+    };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    getUsers() {
+      var url = base_url + "users/all";
+      this.axios.get(url).then(response => {
+        this.userData = response.data.result;
+        this.userCount = response.data.count;
+        console.log(this.userData);
+      });
+    },
+    handleClick() {
+      console.log("click");
+    }
+  },
+  created() {
+    this.getUsers();
+  },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
       this.$router.push({ name: "login" });
-    //   this.$router.go(-1);
+      //   console.log("vgahvgacca");
+      //   this.$router.go(-1);
     }
     // console.log("Nothing gets called before me!");
   }

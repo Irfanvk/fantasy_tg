@@ -17,13 +17,24 @@
                   <h6 class="heading-small text-muted mb-4">Question</h6>
                   <div class="pl-lg-4">
                     <div class="row">
-                      <div class="col-lg-6">
+                      <div class="col-lg-12">
                         <base-input
                           alternative
-                          label="Qustion"
+                          label="Question"
                           placeholder="enter here"
                           input-classes="form-control-alternative"
                           v-model="model.question"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <base-input
+                          alternative
+                          label="option 1"
+                          placeholder="option"
+                          input-classes="form-control-alternative"
+                          v-model="model.option1"
                         />
                       </div>
                       <div class="col-lg-6">
@@ -136,21 +147,19 @@ export default {
         option1: "",
         option2: "",
         option3: "",
-        address: "",
-        city: "",
-        country: "",
-        zipCode: "",
-        about: ""
+        option4: ""
       }
     };
   },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
-      // this.$router.push({ name: "login" });
-      console.log("vgahvgacca");
-      this.$router.go(-1);
+      this.$router.push({ name: "login" });
+      // this.$router.go(-1);
+      this.$notify({
+        type: "danger",
+        message: "Please login to continue"
+      });
     }
-    console.log("Nothing gets called before me!");
   }
 };
 </script>
