@@ -69,7 +69,7 @@ export default {
       localStorage.removeItem("usertoken");
       this.$notify({
         type: "info",
-        message: res.data.result.email + " Successfully "
+        message: res.data.result.email + "Log out Successful "
       });
       this.$router.push({ name: "login" });
     },
