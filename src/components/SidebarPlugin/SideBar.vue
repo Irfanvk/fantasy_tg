@@ -23,8 +23,7 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >
-            </a>
+            ></a>
 
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
@@ -52,10 +51,13 @@
               <span>Activity</span>
             </router-link>
             <div class="dropdown-divider"></div>
-            <a href="#!" class="dropdown-item">
+            <a href @click="logout" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
+            <div class="text-center">
+              <base-button type="primary" class="my-4" @click="logout">Sign out</base-button>
+            </div>
           </base-dropdown>
         </ul>
       </slot>
@@ -110,6 +112,7 @@
 </template>
 <script>
 import NavbarToggleButton from "@/components/NavbarToggleButton";
+import { base_url } from "../../../config";
 
 export default {
   name: "sidebar",
@@ -135,6 +138,29 @@ export default {
     };
   },
   methods: {
+    logout() {
+      var url = base_url + "logout";
+      this.axios
+        .delete(url)
+        .then(res => {
+          console.log("logging out===out");
+          localStorage.removeItem("usertoken");
+          localStorage.removeItem("refreshtoken");
+          this.$notify({
+            type: "warning",
+            message: res.data.message
+          });
+          // this.$router.push({ name: "dashboard" });
+        })
+        .catch(err => {
+          console.log("asdfghj");
+          console.log(err);
+        });
+      // this.emitMethod();
+    },
+    // emitMethod() {
+    //   EventBus.$emit("logged-in", "loggedin");
+    // },
     closeSidebar() {
       this.$sidebar.displaySidebar(false);
     },

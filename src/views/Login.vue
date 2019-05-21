@@ -88,7 +88,8 @@ export default {
           password: this.model.password
         })
         .then(res => {
-          localStorage.setItem("usertoken", res.data.result);
+          localStorage.setItem("usertoken", res.data.result.access_token);
+          localStorage.setItem("refreshtoken", res.data.result.refresh_token);
           this.email = "";
           this.password = "";
           this.$notify({
