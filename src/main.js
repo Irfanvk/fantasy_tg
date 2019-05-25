@@ -10,6 +10,15 @@ import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 
+// import store from './store'
+import Axios from 'axios'
+
+Vue.prototype.$http = Axios;
+const token = localStorage.getItem('usertoken')
+if (token) {
+  Axios.defaults.headers.common['Authorization'] = token
+}
+console.log(Axios)
 
 Vue.config.productionTip = false
 
