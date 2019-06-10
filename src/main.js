@@ -9,16 +9,24 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+// import VueAuthenticate from 'vue-authenticate'
 
 // import store from './store'
 import Axios from 'axios'
+// import { base_url } from '../config';
 
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('usertoken')
 if (token) {
   Axios.defaults.headers.common['Authorization'] = token
 }
-console.log(Axios)
+else Axios.defaults.headers.common['Authorization'] = localStorage.getItem('refreshtoken')
+
+// Vue.use(VueAuthenticate, {
+//   tokenName: 'access_token',
+//   baseUrl: base_url
+//   // storageType: 'cookieStorage'
+// })
 
 Vue.config.productionTip = false
 
