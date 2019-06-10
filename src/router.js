@@ -29,6 +29,11 @@ export default new Router({
           component: () => import('./views/PointsTable.vue')
         },
         {
+          path: '/questions',
+          name: 'Questions',
+          component: () => import('./views/Questions.vue')
+        },
+        {
           path: '/postquest',
           name: 'Post Questions',
           component: () => import('./views/PostQuestions.vue')
