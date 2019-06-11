@@ -256,4 +256,8 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+.el-message-box {
+  width: auto;
+}
+</style>
