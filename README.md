@@ -2,4 +2,7 @@
 `npm i`
 
 # run the appllication
-`npm run serve --fix`      
+`npm run serve --fix` 
+
+# build for production
+`npm run build`
