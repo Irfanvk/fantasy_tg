@@ -23,6 +23,9 @@
                     <el-tag
                       @click="$router.push('postadminanswer/'+scope.row.qid)"
                     >{{scope.row.question}}</el-tag>
+                    <span v-if="tempData===undefined">
+                      <el-tag>No Data</el-tag>
+                    </span>
                   </template>
                 </el-table-column>
                 <!-- <el-table-column prop="email" label="email" width="120"></el-table-column> -->
@@ -50,7 +53,8 @@ export default {
   },
   data() {
     return {
-      apiData: []
+      apiData: [],
+      tempData: []
     };
   },
   methods: {
@@ -59,9 +63,9 @@ export default {
       var url = base_url + "questions";
 
       this.axios.get(url).then(response => {
-        console.log(response.data.questions);
-        console.log("aa");
         this.apiData = response.data.questions;
+        this.tempData = response.config.data;
+        console.log(this.tempData);
       });
     }
   },
