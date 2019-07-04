@@ -14,13 +14,17 @@
     <div class="table-responsive">
       <base-table thead-classes="thead-light" :data="newMatches">
         <template slot="columns">
-          <th>Name</th>
+          <!-- <th>Name</th> -->
           <th>Start Time</th>
-          <th>Status</th>
+          <!-- <th>Status</th> -->
+          <th>Team-1</th>
+          <th>Team-2</th>
+          <th>Winner</th>
+          <th>Started</th>
         </template>
 
         <template slot-scope="{row}">
-          <th scope="row">{{row.name}}</th>
+          <!-- <th scope="row">{{row.name}}</th> -->
           <td>{{row.date}}</td>
           <td>{{row.team-1}}</td>
           <td>{{row.team-2}}</td>

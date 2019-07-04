@@ -157,16 +157,13 @@ export default {
         }
       );
       this.axios.get(url).then(response => {
-        // console.log(response, "aa");
         // console.log(response.data.questions);
         this.quesData = response.data.questions;
         // this.quesData = this.quesData.map(user => {
-        // console.log(Date.parse(user.added_on), "aaaaaaaaaaaaaaaaaaaa");
         // user.added_on = new Date(Date.now()).toLocaleString("en", options);
         // return user;
         // });
         // this.userCount = response.data.count;
-        console.log(this.quesData, "bb");
       });
     }
   },

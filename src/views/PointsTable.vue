@@ -7,6 +7,179 @@
           <card header-classes="bg-transparent" class="row align-items-center">
             <div slot="header" class="row align-items-center">
               <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/India_flag.png" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>India</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/Australia_flag.png" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>Australia</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img
+              src="../../public/img/brand/pakistan_flag.png"
+              height="80"
+              style="border: 1px solid green;border-radius:5px"
+            />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>Pakistan</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/bangladesh_flag.png" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>Bangladesh</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/England_flag.png" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>England</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/Flag_of_Sri_Lanka.svg" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>Sri Lanka</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center" style="max">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/afganistan_flag.png" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>Afganistan</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center" style="max">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/Southafrica_flag.png" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>South Africa</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center" style="max">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/West_indies_flag.png" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>West Indies</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center" style="max">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
+              </div>
+            </div>
+            <img src="../../public/img/brand/new-zealand_flag.jpg" height="80" />
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>New Zealand</h5>
+              </div>
+            </div>
+          </card>
+        </div>
+
+        <!-- IPL IPl IPL IPL IPL -->
+        <!-- <div class="row">
+        <div class="col-xl-3">
+          <card header-classes="bg-transparent" class="row align-items-center">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
@@ -130,7 +303,7 @@
               </div>
             </div>
           </card>
-        </div>
+        </div>-->
         <!-- <div class="col-xl-3 col-lg-6">
                     <stats-card title="Performance"
                                 type="gradient-info"
@@ -160,7 +333,7 @@
               <projects-table title="Points Table"></projects-table>
             </div>
           </div>
-          <div class="row mt-5">
+          <!-- <div class="row mt-5">
             <div class="col">
               <template>
                 <el-table
@@ -179,7 +352,7 @@
                 </el-table>
               </template>
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
       <!--End tables-->

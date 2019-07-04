@@ -404,7 +404,6 @@ export default {
       // this.$router.push({ name: "login" });
       this.$router.push({ name: "login" });
     }
-    console.log("Nothing gets called before me!");
   }
 };
 </script>
