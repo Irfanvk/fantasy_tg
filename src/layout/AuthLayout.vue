@@ -7,7 +7,7 @@
       expand
     >
       <router-link slot="brand" class="navbar-brand" to="/">
-        <img src="img/brand/white.png">
+        <img src="img/brand/tpl1.png" style="height:80px" />
       </router-link>
 
       <template v-slot="{closeMenu}">
@@ -16,7 +16,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <router-link to="/">
-                <img src="img/brand/green.png">
+                <img src="img/brand/tpl0.png" />
               </router-link>
             </div>
             <div class="col-6 collapse-close">
@@ -34,12 +34,12 @@
         </div>
         <!-- Navbar items -->
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link class="nav-link nav-link-icon" to="/dashboard">
               <i class="ni ni-planet"></i>
               <span class="nav-link-inner--text">Dashboard</span>
             </router-link>
-          </li>
+          </li>-->
           <li class="nav-item">
             <router-link class="nav-link nav-link-icon" to="/register">
               <i class="ni ni-circle-08"></i>
@@ -52,12 +52,12 @@
               <span class="nav-link-inner--text">Login</span>
             </router-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link class="nav-link nav-link-icon" to="/profile">
               <i class="ni ni-single-02"></i>
               <span class="nav-link-inner--text">Profile</span>
             </router-link>
-          </li>
+          </li>-->
         </ul>
       </template>
     </base-nav>
@@ -68,10 +68,7 @@
           <div class="row justify-content-center">
             <div class="col-lg-5 col-md-6">
               <h1 class="text-white">Welcome!</h1>
-              <p class="text-lead text-white">
-                Use these awesome forms to login or create new account in
-                your project for free.
-              </p>
+              <p class="text-lead text-white">Target Prediction League Platform</p>
             </div>
           </div>
         </div>
@@ -85,7 +82,7 @@
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+          <polygon class="fill-default" points="2560 0 2560 100 0 100" />
         </svg>
       </div>
     </div>
@@ -102,37 +99,33 @@
             <div class="copyright text-center text-xl-left text-muted">
               &copy; {{year}}
               <a
-                href="https://www.creative-tim.com"
+                href="#"
                 class="font-weight-bold ml-1"
                 target="_blank"
-              >Creative Tim</a>
+              >Target Prediction League</a>
             </div>
           </div>
           <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
               <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+                <a href="#" class="nav-link" target="_blank">Target Guyz</a>
               </li>
               <li class="nav-item">
-                <a
-                  href="https://www.creative-tim.com/presentation"
-                  class="nav-link"
-                  target="_blank"
-                >
+                <a href="google.com" class="nav-link" target="_blank">
                   About
                   Us
                 </a>
               </li>
               <li class="nav-item">
-                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+                <a href="#" class="nav-link" target="_blank">Blog</a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a
                   href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md"
                   class="nav-link"
                   target="_blank"
                 >MIT License</a>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>
