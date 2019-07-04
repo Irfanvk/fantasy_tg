@@ -68,14 +68,19 @@
         <div class="row">
           <div class="col">
             <el-table :data="userData" style="border:2px solid black;border-radius:5px">
-              <el-table-column type="index"/>
+              <el-table-column type="index" />
               <el-table-column prop="full_name" label="Name" width="150"></el-table-column>
               <el-table-column prop="email" label="email" width="120"></el-table-column>
               <el-table-column prop="mobile" label="Contact" width="120"></el-table-column>
               <el-table-column prop="team" label="Team" width="120" sortable></el-table-column>
               <el-table-column prop="joined" label="Joined on" width="155" sortable></el-table-column>
-
-              <el-table-column fixed="right" label="Operations" width="100">
+              <el-table-column label="Operations">
+                <template slot-scope="scope">
+                  <!-- <el-button size="mini" @click="editUser(scope.row.email)">Edit</el-button> -->
+                  <el-button size="mini" type="danger" @click="deleteUser(scope.row.email)">Delete</el-button>
+                </template>
+              </el-table-column>
+              <!-- <el-table-column fixed="right" label="Operations" width="100">
                 <template slot-scope="scope">
                   <el-tooltip content="Delete User" placement="top">
                     <el-button
@@ -89,7 +94,7 @@
                   </el-tooltip>
                   <el-button type="text" size="small">Edit</el-button>
                 </template>
-              </el-table-column>
+              </el-table-column>-->
             </el-table>
           </div>
         </div>
@@ -158,20 +163,17 @@ export default {
       this.axios
         .get(url)
         .then(response => {
-          console.log(response);
           this.userData = response.data.result;
           this.userData = this.userData.map(user => {
             user.joined = new Date(user.joined).toLocaleString("en", options);
             return user;
           });
           this.userCount = response.data.count;
-          console.log(this.userData);
         })
         .catch(err => {
           // window.location = "/";
           let reftoken = localStorage.getItem("refreshtoken");
           delete this.axios.defaults.headers.common.Authorization;
-          console.log("sss");
           if (err.response && err.response.status === 401) {
             this.axios
               .post(base_url + "refresh", {
@@ -206,17 +208,13 @@ export default {
       )
         .then(() => {
           // this.$Progress.start()
-          console.log(id);
-          console.log("****************************************");
-          let jsondata = { email: id };
-          console.log(jsondata);
           this.axios.delete(url).then(
             response => {
-              console.log("delete user");
+              // console.log("delete user");
               console.log(response);
-              console.log("efgbnm,kjhgfdedf");
+              // console.log("efgbnm,kjhgfdedf");
               this.$notify({
-                type: "error",
+                type: "warning",
                 message: this.$createElement(
                   "i",
                   { style: "color: red" },
@@ -227,13 +225,13 @@ export default {
             },
             err => {
               // this.$Progress.fail();
-              console.log("Err User Remove ", err.response);
+              // console.log("Err User Remove ", err.response);
             }
           );
         })
         .catch(() => {
           this.$notify({
-            type: "warning",
+            type: "error",
             message: this.$createElement(
               "i",
               { style: "color: red" },
@@ -258,6 +256,6 @@ export default {
 </script>
 <style>
 .el-message-box {
-  width: auto;
+  width: 330px;
 }
 </style>
