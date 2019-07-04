@@ -212,7 +212,7 @@ export default {
     PostQuest() {
       var url = base_url + "questions";
       // console.log(this.model)
-      console.log(this.team1 + " vs " + this.team2);
+      // console.log(this.team1 + " vs " + this.team2);
       this.axios
         .post(url, {
           question: this.model.question,
@@ -224,9 +224,6 @@ export default {
           teams_playing: this.team1 + " vs " + this.team2
         })
         .then(res => {
-          console.log(this.teams_playing);
-          console.log(res);
-          console.log(res.data.result);
           // this.$router.push({ name: "login" });
           // this.$notify({
           //   type: "default",
@@ -250,7 +247,7 @@ export default {
           // });
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           this.RefToken();
           // this.$router.go();
         });

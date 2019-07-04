@@ -237,10 +237,6 @@ export default {
           team: this.model.team
         })
         .then(res => {
-          console.log("asdfghjkl");
-          console.log(res);
-          console.log("asasaaasas");
-          console.log(res.data.result);
           this.$router.push({ name: "login" });
           // this.$notify({
           //   type: "default",
@@ -264,7 +260,7 @@ export default {
           // });
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           this.$router.go();
         });
     }

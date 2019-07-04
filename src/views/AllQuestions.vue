@@ -68,7 +68,7 @@
         <div class="row">
           <div class="col">
             <el-table :data="allQues" style="border:2px solid black;border-radius:5px">
-              <el-table-column type="index"/>
+              <el-table-column type="index" />
               <el-table-column prop="added_on" label="Added On" width="150"></el-table-column>
               <el-table-column prop="teams" label="Match B/w" width="120"></el-table-column>
               <el-table-column prop="question" label="Question" width="120"></el-table-column>
@@ -140,7 +140,7 @@ export default {
       this.axios
         .get(url)
         .then(response => {
-          console.log(response);
+          // console.log(response);
           this.allQues = response.data.questions;
           this.allQues = this.allQues.map(user => {
             ques.added_on = new Date(ques.added_on).toLocaleString(
@@ -150,13 +150,12 @@ export default {
             return ques;
           });
           // this.userCount = response.data.count;
-          console.log(this.allQues);
+          // console.log(this.allQues);
         })
         .catch(err => {
           // window.location = "/";
           let reftoken = localStorage.getItem("refreshtoken");
           delete this.axios.defaults.headers.common.Authorization;
-          console.log("sss");
           if (err.response && err.response.status === 401) {
             this.axios
               .post(base_url + "refresh", {
@@ -170,7 +169,7 @@ export default {
                 window.location = "/";
               });
           }
-          console.log(err.response);
+          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -179,7 +178,6 @@ export default {
     },
     deleteQues: function(id) {
       var url = base_url + "users/remove?email=" + id;
-      console.log(url);
       this.$confirm(
         "This will permanently delete the user. Continue?",
         "Delete User!",
@@ -193,9 +191,6 @@ export default {
           // this.$Progress.start()
           this.axios.delete(url).then(
             response => {
-              console.log("delete user");
-              console.log(response);
-              console.log("efgbnm,kjhgfdedf");
               this.$notify({
                 type: "warning",
                 message: this.$createElement(
@@ -208,7 +203,7 @@ export default {
             },
             err => {
               // this.$Progress.fail();
-              console.log("Err User Remove ", err.response);
+              // console.log("Err User Remove ", err.response);
             }
           );
         })

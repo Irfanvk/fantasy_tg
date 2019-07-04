@@ -157,7 +157,6 @@ export default {
 
         error => {
           return Promise.reject(error);
-          this.axios.get;
         }
       );
       this.axios
@@ -187,7 +186,7 @@ export default {
                 window.location = "/";
               });
           }
-          console.log(err.response);
+          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -196,7 +195,6 @@ export default {
     },
     deleteUser: function(id) {
       var url = base_url + "users/remove?email=" + id;
-      console.log(url);
       this.$confirm(
         "This will permanently delete the user. Continue?",
         "Delete User!",
@@ -211,8 +209,6 @@ export default {
           this.axios.delete(url).then(
             response => {
               // console.log("delete user");
-              console.log(response);
-              // console.log("efgbnm,kjhgfdedf");
               this.$notify({
                 type: "warning",
                 message: this.$createElement(

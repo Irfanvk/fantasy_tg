@@ -141,8 +141,7 @@ export default {
       var url = base_url + "questions/" + this.$route.params.qid;
 
       this.axios.get(url).then(response => {
-        console.log(response.data.questions);
-        console.log("aa");
+        // console.log(response.data.questions);
         this.apiData = response.data.questions;
       });
     }

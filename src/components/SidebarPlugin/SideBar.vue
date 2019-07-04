@@ -159,8 +159,7 @@ export default {
           // this.$router.push({ name: "dashboard" });
         })
         .catch(err => {
-          console.log("asdfghj");
-          console.log(err);
+          // console.log(err);
         });
       // this.emitMethod();
     },

@@ -56,6 +56,7 @@
 </template>
 <script>
 import { base_url } from "../../config";
+import jwtDecode from "jwt-decode";
 export default {
   data() {
     const token = localStorage.usertoken;
@@ -78,7 +79,7 @@ export default {
       localStorage.removeItem("usertoken");
       this.$notify({
         type: "info",
-        message: res.data.result.email + "Log out Successful "
+        message: "Log out Successful "
       });
       this.$router.push({ name: "login" });
     },

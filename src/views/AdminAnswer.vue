@@ -65,7 +65,7 @@ export default {
       this.axios.get(url).then(response => {
         this.apiData = response.data.questions;
         this.tempData = response.config.data;
-        console.log(this.tempData);
+        // console.log(this.tempData);
       });
     }
   },
