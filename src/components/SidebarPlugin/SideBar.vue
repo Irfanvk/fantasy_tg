@@ -76,7 +76,8 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <router-link to="/">
-                <img src="../../../public/img/brand/ipl-logo.png" />
+                <!-- <img src="../../../public/img/brand/ipl-logo.png" /> -->
+                <img src="../../../public/img/brand/2019-ICCWC.png" />
               </router-link>
             </div>
             <div class="col-6 collapse-close">
@@ -91,9 +92,9 @@
         <!--Divider-->
         <hr class="my-3" />
         <!--Heading-->
-        <h6 class="navbar-heading text-muted">Documentation</h6>
+        <h6 class="navbar-heading text-muted">TPL - Target Prediction League</h6>
         <!--Navigation-->
-        <ul class="navbar-nav mb-md-3">
+        <!-- <ul class="navbar-nav mb-md-3">
           <li class="nav-item">
             <a
               class="nav-link"
@@ -110,7 +111,7 @@
               <i class="ni ni-ui-04"></i> Components
             </a>
           </li>
-        </ul>
+        </ul>-->
       </div>
     </div>
   </nav>
