@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-lg-5 col-md-7">
       <div class="card bg-secondary shadow border-0">
-        <div class="card-header bg-transparent pb-5">
+        <!-- <div class="card-header bg-transparent pb-5">
           <div class="text-muted text-center mt-2 mb-3">
             <small>Sign in with</small>
           </div>
@@ -20,10 +20,23 @@
               <span class="btn-inner--text">Google</span>
             </a>
           </div>
+        </div>-->
+        <div class="card bg-secondary bg-transparent pb-5">
+          <div
+            class="text-center mt-6"
+            style="display:flex;justify-content:center;align-items:center;"
+          >
+            <img style="padding-right:1em;" src="img/brand/tpl0.png" width="80" />
+            <span
+              class
+              style="border-right:0.5px dotted #8c8b8b;width:2px;height:3rem;display:inline-block;"
+            ></span>
+            <img style="padding-left:1em;" src="img/brand/2019-ICCWC.png" width="80" />
+          </div>
         </div>
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
-            <small>Or sign in with credentials</small>
+            <small>sign in with credentials</small>
           </div>
           <form role="form">
             <base-input
@@ -39,6 +52,7 @@
               type="password"
               addon-left-icon="ni ni-lock-circle-open"
               v-model="model.password"
+              required
             ></base-input>
 
             <base-checkbox class="custom-control-alternative">
