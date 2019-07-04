@@ -128,7 +128,6 @@ export default {
     onSubmit() {
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);
-      console.log(decoded.identity);
       var url =
         base_url +
         "answer/" +
@@ -149,8 +148,6 @@ export default {
       var url = base_url + "questions/" + this.$route.params.qid;
 
       this.axios.get(url).then(response => {
-        console.log(response.data.questions);
-        console.log("aa");
         this.apiData = response.data.questions;
       });
     }

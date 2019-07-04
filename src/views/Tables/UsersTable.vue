@@ -30,7 +30,7 @@
           <th scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Image placeholder" :src="row.img">
+                <img alt="Image placeholder" :src="row.img" />
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.title}}</span>
@@ -48,7 +48,7 @@
                 data-toggle="tooltip"
                 data-original-title="Ryan Tompson"
               >
-                <img alt="Image placeholder" src="img/brand/CSK.png">
+                <img alt="Image placeholder" src="img/brand/CSK.png" />
               </a>
               <a
                 href="#"
@@ -56,7 +56,7 @@
                 data-toggle="tooltip"
                 data-original-title="Romina Hadid"
               >
-                <img alt="Image placeholder" src="img/brand/RCB.png">
+                <img alt="Image placeholder" src="img/brand/RCB.png" />
               </a>
               <a
                 href="#"
@@ -64,7 +64,7 @@
                 data-toggle="tooltip"
                 data-original-title="Jessica Doe"
               >
-                <img alt="Image placeholder" src="img/brand/RR.png">
+                <img alt="Image placeholder" src="img/brand/RR.png" />
               </a>
               <a
                 href="#"
@@ -72,7 +72,7 @@
                 data-toggle="tooltip"
                 data-original-title="Jessica Doe"
               >
-                <img alt="Image placeholder" src="img/brand/MI.png">
+                <img alt="Image placeholder" src="img/brand/MI.png" />
               </a>
               <a
                 href="#"
@@ -80,7 +80,7 @@
                 data-toggle="tooltip"
                 data-original-title="Ryan Tompson"
               >
-                <img alt="Image placeholder" src="img/brand/KXIP.png">
+                <img alt="Image placeholder" src="img/brand/KXIP.png" />
               </a>
               <a
                 href="#"
@@ -88,7 +88,7 @@
                 data-toggle="tooltip"
                 data-original-title="Romina Hadid"
               >
-                <img alt="Image placeholder" src="img/brand/SRH.png">
+                <img alt="Image placeholder" src="img/brand/SRH.png" />
               </a>
               <a
                 href="#"
@@ -96,7 +96,7 @@
                 data-toggle="tooltip"
                 data-original-title="Alexander Smith"
               >
-                <img alt="Image placeholder" src="img/brand/DC.png">
+                <img alt="Image placeholder" src="img/brand/DC.png" />
               </a>
               <a
                 href="#"
@@ -104,7 +104,7 @@
                 data-toggle="tooltip"
                 data-original-title="Alexander Smith"
               >
-                <img alt="Image placeholder" src="img/brand/KKR.png">
+                <img alt="Image placeholder" src="img/brand/KKR.png" />
               </a>
             </div>
           </td>
@@ -166,7 +166,7 @@ export default {
       this.axios.get(url).then(response => {
         this.userData = response.data.result;
         this.userCount = response.data.count;
-        console.log(this.userData);
+        // console.log(this.userData);
       });
     }
   },
