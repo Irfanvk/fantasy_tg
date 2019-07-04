@@ -39,6 +39,26 @@ export default new Router({
           component: () => import('./views/PostQuestions.vue')
         },
         {
+          path: '/adminanswer',
+          name: 'Admin Answer',
+          component: () => import('./views/AdminAnswer.vue')
+        },
+        {
+          path: '/postadminanswer/:qid',
+          name: 'Post Admin Answer',
+          component: () => import('./views/PostadminAnswer.vue')
+        },
+        {
+          path: '/questions/:qid',
+          name: 'Answer Questions',
+          component: () => import('./views/AnsQuestions.vue')
+        },
+        {
+          path: '/allquestions',
+          name: 'All Questions',
+          component: () => import('./views/AllQuestions.vue')
+        },
+        {
           path: '/icons',
           name: 'icons',
           component: () => import('./views/Icons.vue')
