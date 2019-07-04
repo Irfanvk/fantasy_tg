@@ -20,15 +20,29 @@
                     <div class="row">
                       <div class="col-sm-6">
                         <el-select v-model="team1" slot="prepend" placeholder="Match Between">
-                          <el-option label="CSK" value="CSK"></el-option>
-                          <el-option label="DD" value="DD"></el-option>
-                          <el-option label="Tel" value="3"></el-option>
+                          <el-option label="IND" value="IND"></el-option>
+                          <el-option label="AUS" value="AUS"></el-option>
+                          <el-option label="ENG" value="ENG"></el-option>
+                          <el-option label="NZ" value="NZ"></el-option>
+                          <el-option label="SA" value="SA"></el-option>
+                          <el-option label="PAK" value="PAK"></el-option>
+                          <el-option label="AFG" value="AFG"></el-option>
+                          <el-option label="WI" value="WI"></el-option>
+                          <el-option label="SL" value="SL"></el-option>
+                          <el-option label="BAN" value="BAN"></el-option>
                         </el-select>
                         <i class="container">vs</i>
                         <el-select v-model="team2" slot="prepend" placeholder="Match Between">
-                          <el-option label="CSK" value="CSK"></el-option>
-                          <el-option label="DD" value="DD"></el-option>
-                          <el-option label="Tel" value="3"></el-option>
+                          <el-option label="IND" value="IND"></el-option>
+                          <el-option label="AUS" value="AUS"></el-option>
+                          <el-option label="ENG" value="ENG"></el-option>
+                          <el-option label="NZ" value="NZ"></el-option>
+                          <el-option label="SA" value="SA"></el-option>
+                          <el-option label="PAK" value="PAK"></el-option>
+                          <el-option label="AFG" value="AFG"></el-option>
+                          <el-option label="WI" value="WI"></el-option>
+                          <el-option label="SL" value="SL"></el-option>
+                          <el-option label="BAN" value="BAN"></el-option>
                         </el-select>
                         <!-- <base-dropdown label="match between" placeholder="enter">aa</base-dropdown> -->
                       </div>
