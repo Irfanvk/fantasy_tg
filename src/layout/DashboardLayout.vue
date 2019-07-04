@@ -20,25 +20,41 @@
         <sidebar-item
           :link="{name: 'Questions', icon: 'fa fa-question text-blue', path: '/questions'}"
         />
-
-        <sidebar-item
-          :link="{name: 'Post Questions', icon: 'ni ni-notification-70 text-red', path: '/postquest'}"
-        />
-        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}"/>
+        <span v-if="admin">
+          <sidebar-item
+            :link="{name: 'Post Questions', icon: 'ni ni-notification-70 text-red', path: '/postquest'}"
+          />
+        </span>
+        <span v-if="admin">
+          <sidebar-item
+            :link="{name: 'Post Admin Answer', icon: 'ni ni-notification-70 text-yellow', path: '/adminanswer'}"
+          />
+        </span>
+        <!-- <span v-if="admin">
+          <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}" />
+        </span>-->
         <sidebar-item
           :link="{name: 'User Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"
         />
         <!-- <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/> -->
-        <sidebar-item :link="{name: 'Users', icon: 'ni ni ni-single-02 text-red', path: '/users'}"/>
+        <span v-if="admin">
+          <sidebar-item
+            :link="{name: 'Users', icon: 'ni ni ni-single-02 text-red', path: '/users'}"
+          />
+        </span>
 
-        <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}"/>
-        <sidebar-item
+        <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}" />
+        <!-- <sidebar-item
           :link="{name: 'Register', icon: 'ni ni-circle-08 text-pink', path: '/register'}"
+        />-->
+        <sidebar-item
+          :link="{name: 'Logout', icon: 'ni ni-button-power text-red', path: '/logout'}"
+          @click="logout"
         />
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
-      <dashboard-navbar></dashboard-navbar>
+      <dashboard-navbar>qwertyui</dashboard-navbar>
 
       <div @click="toggleSidebar">
         <fade-transition :duration="200" origin="center top" mode="out-in">
@@ -54,6 +70,7 @@
 import DashboardNavbar from "./DashboardNavbar.vue";
 import ContentFooter from "./ContentFooter.vue";
 import { FadeTransition } from "vue2-transitions";
+import jwtDecode from "jwt-decode";
 
 export default {
   components: {
@@ -62,7 +79,15 @@ export default {
     FadeTransition
   },
   data() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
+    // console.log(decoded.identity);
     return {
+      full_name: decoded.identity.full_name,
+      team: decoded.identity.team,
+      mobile: decoded.identity.mobile,
+      email: decoded.identity.email,
+      admin: decoded.identity.admin,
       sidebarBackground: "vue" //vue|blue|orange|green|red|primary
     };
   },
@@ -71,6 +96,9 @@ export default {
       if (this.$sidebar.showSidebar) {
         this.$sidebar.displaySidebar(false);
       }
+    },
+    logout() {
+      localStorage.clear();
     }
   }
 };

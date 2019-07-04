@@ -9,7 +9,12 @@
         <span class="navbar-toggler-icon"></span>
       </navbar-toggle-button>
       <router-link class="navbar-brand" to="/">
-        <img src="../../../public/img/brand/ipl-logo.png" class="navbar-brand-img" alt="...">
+        <img
+          src="../../../public/img/brand/tpl0.png"
+          class="navbar-brand-img"
+          alt="..."
+          width="auto"
+        />
       </router-link>
 
       <slot name="mobile-right">
@@ -34,7 +39,7 @@
             <a slot="title" class="nav-link" href="#" role="button">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="../../../public/img/brand/RR.png">
+                  <img alt="Image placeholder" src="/img/theme/team-1-800x800.jpg" />
                 </span>
               </div>
             </a>
@@ -51,7 +56,7 @@
               <span>Activity</span>
             </router-link>
             <div class="dropdown-divider"></div>
-            <a href @click="logout" class="dropdown-item">
+            <a href @click="logout" to="/logout" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
@@ -71,7 +76,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <router-link to="/">
-                <img src="../../../public/img/brand/ipl-logo.png">
+                <img src="../../../public/img/brand/ipl-logo.png" />
               </router-link>
             </div>
             <div class="col-6 collapse-close">
@@ -84,7 +89,7 @@
           <slot name="links"></slot>
         </ul>
         <!--Divider-->
-        <hr class="my-3">
+        <hr class="my-3" />
         <!--Heading-->
         <h6 class="navbar-heading text-muted">Documentation</h6>
         <!--Navigation-->
@@ -143,7 +148,7 @@ export default {
       this.axios
         .delete(url)
         .then(res => {
-          console.log("logging out===out");
+          // console.log("logging out===out");
           localStorage.removeItem("usertoken");
           localStorage.removeItem("refreshtoken");
           this.$notify({

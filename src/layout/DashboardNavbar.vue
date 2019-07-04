@@ -15,10 +15,11 @@
         <base-dropdown class="nav-link pr-0">
           <div class="media align-items-center" slot="title">
             <span class="avatar avatar-sm rounded-circle">
-              <img alt="Image placeholder" src="../../public/img/brand/ipl-logo.png">
+              <!-- <img alt="Image placeholder" src="../../public/img/brand/ipl-logo.png"> -->
+              <img alt="Image placeholder" src="../../public/img/brand/2019-ICCWC.png" />
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm font-weight-bold">Sayyed Siraj</span>
+              <span class="mb-0 text-sm font-weight-bold">{{full_name}}</span>
             </div>
           </div>
 
@@ -30,18 +31,18 @@
               <i class="ni ni-single-02"></i>
               <span>My profile</span>
             </router-link>
-            <router-link to="/profile" class="dropdown-item">
+            <!-- <router-link to="/profile" class="dropdown-item">
               <i class="ni ni-settings-gear-65"></i>
               <span>Settings</span>
-            </router-link>
-            <router-link to="/profile" class="dropdown-item">
+            </router-link>-->
+            <!-- <router-link to="/profile" class="dropdown-item">
               <i class="ni ni-calendar-grid-58"></i>
               <span>Activity</span>
             </router-link>
             <router-link to="/profile" class="dropdown-item">
               <i class="ni ni-support-16"></i>
               <span>Support</span>
-            </router-link>
+            </router-link>-->
             <div class="dropdown-divider"></div>
             <router-link to="/logout" class="dropdown-item">
               <i class="ni ni-user-run"></i>
@@ -57,7 +58,15 @@
 import { base_url } from "../../config";
 export default {
   data() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
+    // console.log(decoded.identity);
     return {
+      full_name: decoded.identity.full_name,
+      team: decoded.identity.team,
+      mobile: decoded.identity.mobile,
+      email: decoded.identity.email,
+      admin: decoded.identity.admin,
       activeNotifications: false,
       showMenu: false,
       searchQuery: ""
