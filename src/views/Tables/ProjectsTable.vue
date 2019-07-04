@@ -17,116 +17,30 @@
         :class="type === 'dark' ? 'table-dark': ''"
         :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
         tbody-classes="list"
-        :data="tableData"
+        :data="pointData"
       >
         <template slot="columns">
           <th>Player</th>
           <th>Points</th>
-          <th>Users</th>
-          <th></th>
+          <th>mobile</th>
+          <th>Team</th>
         </template>
 
         <template slot-scope="{row}">
-          <th scope="row">
+          <!-- <th scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
-                <img alt="Image placeholder" :src="row.img">
+                <img alt="Image placeholder" :src="row.img" />
               </a>
               <div class="media-body">
                 <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
             </div>
-          </th>
-          <td class="points">{{row.points}}</td>
-          <td>
-            <div class="avatar-group">
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Ryan Tompson"
-              >
-                <img alt="Image placeholder" src="img/brand/CSK.png">
-              </a>
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Romina Hadid"
-              >
-                <img alt="Image placeholder" src="img/brand/RCB.png">
-              </a>
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Jessica Doe"
-              >
-                <img alt="Image placeholder" src="img/brand/RR.png">
-              </a>
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Jessica Doe"
-              >
-                <img alt="Image placeholder" src="img/brand/MI.png">
-              </a>
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Ryan Tompson"
-              >
-                <img alt="Image placeholder" src="img/brand/KXIP.png">
-              </a>
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Romina Hadid"
-              >
-                <img alt="Image placeholder" src="img/brand/SRH.png">
-              </a>
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Alexander Smith"
-              >
-                <img alt="Image placeholder" src="img/brand/DC.png">
-              </a>
-              <a
-                href="#"
-                class="avatar avatar-sm rounded-circle"
-                data-toggle="tooltip"
-                data-original-title="Alexander Smith"
-              >
-                <img alt="Image placeholder" src="img/brand/KKR.png">
-              </a>
-            </div>
-          </td>
-
-          <td class="text-right">
-            <base-dropdown class="dropdown" position="right">
-              <a
-                slot="title"
-                class="btn btn-sm btn-icon-only text-light"
-                role="button"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i class="fas fa-ellipsis-v"></i>
-              </a>
-
-              <template>
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </template>
-            </base-dropdown>
-          </td>
+          </th>-->
+          <td class="points" sortable>{{row.full_name}}</td>
+          <td>{{row.score}}</td>
+          <td>{{row.mobile}}</td>
+          <td>{{row.team}}</td>
         </template>
       </base-table>
     </div>
@@ -138,6 +52,7 @@
   </div>
 </template>
 <script>
+import { base_url } from "../../../config";
 export default {
   name: "projects-table",
   props: {
@@ -148,6 +63,7 @@ export default {
   },
   data() {
     return {
+      pointData: "",
       tableData: [
         {
           img: "img/theme/bootstrap.jpg",
@@ -191,6 +107,19 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    getPoints() {
+      var url = base_url + "points";
+      // console.log(url);
+      this.axios.get(url).then(response => {
+        this.pointData = response.data.result;
+        // console.log(this.pointData);
+      });
+    }
+  },
+  created() {
+    this.getPoints();
   }
 };
 </script>

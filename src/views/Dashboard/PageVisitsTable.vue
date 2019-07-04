@@ -12,7 +12,7 @@
     </div>
 
     <div class="table-responsive">
-      <base-table thead-classes="thead-light" :data="tableData">
+      <base-table thead-classes="thead-light" :data="newMatches">
         <template slot="columns">
           <th>Name</th>
           <th>Start Time</th>
@@ -21,7 +21,12 @@
 
         <template slot-scope="{row}">
           <th scope="row">{{row.name}}</th>
-          <td>{{row.startTime}}</td>
+          <td>{{row.date}}</td>
+          <td>{{row.team-1}}</td>
+          <td>{{row.team-2}}</td>
+          <td>{{row.winner_team}}</td>
+          <td>{{row.matchStarted}}</td>
+
           <td>
             <badge class="badge-dot mr-4" :type="row.statusType">
               <i :class="`bg-${row.statusType}`"></i>
@@ -39,6 +44,7 @@ export default {
   data() {
     // var now =new Date()
     return {
+      newMatches: [],
       tableData: [
         {
           name: "CSK vs DC",
@@ -72,6 +78,19 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    getMatches() {
+      var url =
+        "https://cricapi.com/api/matches?apikey=oMAzt90U1xN3MfOKmtasnbNmFq12";
+      this.axios.get(url).then(response => {
+        // console.log(response);
+        this.newMatches = response.data.matches;
+      });
+    }
+  },
+  created() {
+    this.getMatches();
   }
 };
 </script>
