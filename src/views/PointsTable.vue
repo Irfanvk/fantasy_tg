@@ -10,7 +10,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/RCB.png" height="80">
+            <img src="../../public/img/brand/RCB.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -26,7 +26,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/CSK.png" height="80">
+            <img src="../../public/img/brand/CSK.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -42,7 +42,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/SRH.png" height="80">
+            <img src="../../public/img/brand/SRH.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -58,7 +58,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/DC.png" height="80">
+            <img src="../../public/img/brand/DC.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -74,7 +74,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/MI.png" height="80">
+            <img src="../../public/img/brand/MI.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -90,7 +90,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/KXIP.png" height="80">
+            <img src="../../public/img/brand/KXIP.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -106,7 +106,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/RR.png" height="80">
+            <img src="../../public/img/brand/RR.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -122,7 +122,7 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
               </div>
             </div>
-            <img src="../../public/img/brand/KKR.png" height="80">
+            <img src="../../public/img/brand/KKR.png" height="80" />
 
             <div slot="footer" class="row align-items-center">
               <div class="col">
@@ -162,7 +162,22 @@
           </div>
           <div class="row mt-5">
             <div class="col">
-              <projects-table type="dark" title="Dark Table"></projects-table>
+              <template>
+                <el-table
+                  ref="singleTable"
+                  :data="point2Data"
+                  highlight-current-row
+                  style="max-width: 720px; border: 1px solid black; border-radius: 5px"
+                >
+                  <el-table-column type="index" width="50"></el-table-column>
+                  <el-table-column property="name" label="Name" width="120">
+                    <template slot-scope="scope">{{scope.row.full_name}}</template>
+                  </el-table-column>
+                  <el-table-column property="point" prop="score" label="point" width="120" sortable></el-table-column>
+                  <el-table-column property="mobile" label="mobile" prop="mobile"></el-table-column>
+                  <el-table-column property="team" label="team" prop="team"></el-table-column>
+                </el-table>
+              </template>
             </div>
           </div>
         </div>
@@ -175,6 +190,7 @@
 // Tables
 // import PageVisitsTable from "./Dashboard/PageVisitsTable";
 import ProjectsTable from "./Tables/ProjectsTable";
+import { base_url } from "../../config";
 
 export default {
   components: {
@@ -182,17 +198,30 @@ export default {
     ProjectsTable
   },
   data() {
-    return {};
+    return {
+      point2Data: []
+    };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    getPoints() {
+      var url = base_url + "points";
+      // console.log(url);
+      this.axios.get(url).then(response => {
+        this.point2Data = response.data.result;
+
+        // console.log(this.point2Data);
+      });
+    }
+  },
+  created() {
+    this.getPoints();
+  },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
-      // this.$router.push({ name: "login" });
-      console.log("vgahvgacca");
-      this.$router.go(-1);
+      this.$router.push({ name: "login" });
+      // this.$router.go(-1);
     }
-    console.log("Nothing gets called before me!");
+    // console.log("Nothing gets called before me!");
   }
 };
 </script>
