@@ -11,12 +11,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col">
-              <projects-table title="Points Table"></projects-table>
-            </div>
-          </div>
-          <div class="row mt-5">
-            <div class="col">
-              <projects-table type="dark" title="Dark Table"></projects-table>
+              <custom-table title="Todays Questions"></custom-table>
             </div>
           </div>
         </div>
@@ -28,12 +23,14 @@
 <script>
 // Tables
 // import PageVisitsTable from "./Dashboard/PageVisitsTable";
-import ProjectsTable from "./Tables/ProjectsTable";
+// import ProjectsTable from "./Tables/ProjectsTable";
+import CustomTable from "./Tables/CustomTable";
 
 export default {
   components: {
     // PageVisitsTable,
-    ProjectsTable
+    // ProjectsTable,
+    CustomTable
   },
   data() {
     return {};
