@@ -39,7 +39,7 @@
             <small>sign up with credentials</small>
           </div>
           <form role="form">
-            Pick
+            <!-- Pick
             <base-dropdown v-model="model.team">
               <base-button slot="title" type="secondary" class="dropdown-toggle">Your Team</base-button>
               <option
@@ -49,7 +49,21 @@
                 v-bind:value="tm"
                 v-on:click="displ(tm.abbr)"
               >{{ tm.name }}</option>
-            </base-dropdown>
+            </base-dropdown>-->
+            <select v-model="model.team">
+              <option disabled value>Please select team</option>
+              <option>IND</option>
+              <option>AUS</option>
+              <option>PAK</option>
+              <option>SL</option>
+              <option>AFG</option>
+              <option>NZ</option>
+              <option>ENG</option>
+              <option>WI</option>
+              <option>BAN</option>
+              <option>SA</option>
+              <!-- <option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option> -->
+            </select>
             <el-tag size="mini" v-if="model.team!==''">{{model.team}}</el-tag>
             <!-- <select v-model="model.team">
               <option
