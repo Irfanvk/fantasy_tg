@@ -60,9 +60,9 @@
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
-            <div class="text-center">
+            <!-- <div class="text-center">
               <base-button type="primary" class="my-4" @click="logout">Sign out</base-button>
-            </div>
+            </div>-->
           </base-dropdown>
         </ul>
       </slot>
