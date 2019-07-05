@@ -23,9 +23,9 @@
                     <el-tag
                       @click="$router.push('postadminanswer/'+scope.row.qid)"
                     >{{scope.row.question}}</el-tag>
-                    <span v-if="tempData===undefined">
+                    <!-- <span v-if="tempData===undefined">
                       <el-tag>No Data</el-tag>
-                    </span>
+                    </span>-->
                   </template>
                 </el-table-column>
                 <!-- <el-table-column prop="email" label="email" width="120"></el-table-column> -->

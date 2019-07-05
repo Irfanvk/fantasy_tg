@@ -233,6 +233,7 @@ export default {
             type: "primary",
             message: res.data.msg + " Successfully "
           });
+          this.$router.push({ name: "questions" });
           // this.$notify({
           //   type: "secondary",
           //   message: res.data.result.email + " Successfully "
