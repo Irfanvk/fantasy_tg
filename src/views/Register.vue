@@ -51,8 +51,11 @@
               >{{ tm.name }}</option>
             </base-dropdown>-->
             <select v-model="model.team">
-              <option disabled value>Please select team</option>
-              <option>IND</option>
+              <option disabled value>
+                Please select your team
+                <i class="fa fa-sort-desc" aria-hidden="true"></i>
+              </option>
+              <!-- <option>IND</option>
               <option>AUS</option>
               <option>PAK</option>
               <option>SL</option>
@@ -61,8 +64,12 @@
               <option>ENG</option>
               <option>WI</option>
               <option>BAN</option>
-              <option>SA</option>
-              <!-- <option v-for="option in options" v-bind:value="option.value">{{ option.text }}</option> -->
+              <option>SA</option>-->
+              <option
+                v-for="option in model.teams"
+                v-bind:value="option.abbr"
+                v-bind:key="option.abbr"
+              >{{ option.name }}</option>
             </select>
             <el-tag size="mini" v-if="model.team!==''">{{model.team}}</el-tag>
             <!-- <select v-model="model.team">
@@ -143,7 +150,7 @@
       <div class="row mt-3">
         <div class="col-6">
           <a href="#" class="text-light">
-            <small>Forgot password?</small>
+            <!-- <small>Forgot password?</small> -->
           </a>
         </div>
         <div class="col-6 text-right">
