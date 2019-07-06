@@ -38,14 +38,14 @@
           <div class="text-center text-muted mb-4">
             <small>sign in with credentials</small>
           </div>
-          <form role="form">
+          <form role="form" @submit.prevent="login">
             <base-input
               class="input-group-alternative mb-3"
               placeholder="Email"
               addon-left-icon="ni ni-email-83"
               v-model="model.email"
               aria-required="true"
-              netlify
+              data-netlify="true"
             ></base-input>
 
             <base-input
@@ -61,7 +61,7 @@
               <span class="text-muted">Remember me</span>
             </base-checkbox>
             <div class="text-center">
-              <base-button type="primary" class="my-4" @click="login">Sign in</base-button>
+              <base-button type="submit" class="my-4">Sign in</base-button>
             </div>
           </form>
         </div>
