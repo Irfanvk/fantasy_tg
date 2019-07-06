@@ -5,7 +5,7 @@
 }
 .box {
   /* width: 2em; */
-  width: 10em;
+  /* width: 20em; */
   max-width: 50em;
 }
 
