@@ -92,7 +92,7 @@
         <router-view></router-view>
       </slide-y-up-transition>
     </div>
-    <footer class="py-5">
+    <footer style="height:20vh;" class="py-5">
       <div class="container">
         <div class="row align-items-center justify-content-xl-between">
           <div class="col-xl-6">
