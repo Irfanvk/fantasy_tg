@@ -55,7 +55,7 @@ export default new Router({
         },
         {
           path: '/allquestions',
-          name: 'All Questions',
+          name: 'All Quesalltions',
           component: () => import('./views/AllQuestions.vue')
         },
         {
@@ -82,6 +82,11 @@ export default new Router({
           path: '/users',
           name: 'users',
           component: () => import('./views/Users.vue')
+        },
+        {
+          path: '/users/admin',
+          name: 'users',
+          component: () => import('./views/UsersAdmin.vue')
         }
       ]
     },
