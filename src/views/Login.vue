@@ -38,6 +38,8 @@
           <div class="text-center text-muted mb-4">
             <small>sign in with credentials</small>
           </div>
+
+          <!-- Login Form -->
           <form role="form" @submit.prevent="login">
             <base-input
               class="input-group-alternative mb-3"
@@ -46,6 +48,7 @@
               v-model="model.email"
               aria-required="true"
               data-netlify="true"
+              required
             ></base-input>
 
             <base-input
@@ -61,7 +64,11 @@
               <span class="text-muted">Remember me</span>
             </base-checkbox>
             <div class="text-center">
-              <base-button type="submit" class="my-4">Sign in</base-button>
+              <button
+                type="submit"
+                class="my-4"
+                style="background:#5dcfbd;color:white;font-weight:700;padding:.5em 1em;"
+              >Sign in</button>
             </div>
           </form>
         </div>
@@ -104,6 +111,15 @@ export default {
           password: this.model.password
         })
         .then(res => {
+          if (
+            res.data.msg == "invalid login credential" ||
+            res.data.msg == "Invalid username or password"
+          ) {
+            this.$notify({
+              type: "warning",
+              message: res.data.msg
+            });
+          }
           localStorage.setItem("usertoken", res.data.result.access_token);
           localStorage.setItem("refreshtoken", res.data.result.refresh_token);
           this.email = "";
@@ -112,10 +128,14 @@ export default {
             type: "info",
             message: res.data.full_name + " logged in Successfully "
           });
+
           this.$router.push({ name: "dashboard" });
         })
         .catch(err => {
-          // console.log(err);
+          this.$notify({
+            type: "warning",
+            message: err.data.msg
+          });
         });
       this.emitMethod();
     },
@@ -126,7 +146,6 @@ export default {
   beforeCreate() {
     if (localStorage.getItem("usertoken")) {
       this.$router.push({ name: "dashboard" });
-      //   console.log("vgahvgacca");
       //   this.$router.go(-1);
     }
     // console.log("Nothing gets called before me!");

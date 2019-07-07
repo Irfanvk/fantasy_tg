@@ -258,6 +258,13 @@ export default {
           team: this.model.team
         })
         .then(res => {
+          if (res.data.flag == 1) {
+            this.$notify({
+              type: "danger",
+              message: res.data.msg
+            });
+            return;
+          }
           this.$router.push({ name: "login" });
           // this.$notify({
           //   type: "default",
@@ -281,8 +288,8 @@ export default {
           // });
         })
         .catch(err => {
-          // console.log(err);
-          this.$router.go();
+          console.log(err, "aaa");
+          // this.$router.go();
         });
     }
   },
