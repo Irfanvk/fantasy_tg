@@ -34,7 +34,7 @@
           <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}" />
         </span>-->
         <sidebar-item
-          :link="{name: 'User Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"
+          :link="{name: 'Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"
         />
         <!-- <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/> -->
         <span v-if="admin">
@@ -57,7 +57,7 @@
       </template>
     </side-bar>
     <div class="main-content" :data="sidebarBackground">
-      <dashboard-navbar>qwertyui</dashboard-navbar>
+      <dashboard-navbar></dashboard-navbar>
 
       <div @click="toggleSidebar">
         <fade-transition :duration="200" origin="center top" mode="out-in">
