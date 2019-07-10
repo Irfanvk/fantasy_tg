@@ -3,15 +3,20 @@
     <div class="row align-items-center justify-content-lg-between">
       <div class="col-lg-6">
         <div class="copyright text-center text-lg-left text-muted">
-          © {{year}} <a href="https://www.google.com" class="font-weight-bold ml-1" target="_blank">TPL</a> &
-          <a href="https://www.google.com" class="font-weight-bold ml-1" target="_blank">Target Guyz</a>
+          © {{year}}
+          <a href="https://www.google.com" class="font-weight-bold ml-1" target="_blank">TPL</a> &
+          <a
+            href="https://www.google.com"
+            class="font-weight-bold ml-1"
+            target="_blank"
+          >Target Guyz</a>
         </div>
       </div>
       <div class="col-lg-6">
         <ul class="nav nav-footer justify-content-center justify-content-lg-end">
           <!-- <li class="nav-item">
             <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
-          </li> -->
+          </li>-->
           <li class="nav-item">
             <a href="#" class="nav-link" target="_blank">About Us</a>
           </li>
