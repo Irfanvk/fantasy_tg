@@ -1,12 +1,17 @@
 <style>
 .box-container {
-  display: inline-flex;
-  flex-wrap: wrap;
+  display: flex;
+
+  /* overflow-x: scroll; */
+  /* background: rgb(190, 153, 153); */
+  flex-wrap: wrap !important;
 }
 .box {
   /* width: 2em; */
-  /* width: 20em; */
+  min-width: 20em;
   max-width: 50em;
+  /* min-height: 5vh; */
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 720px) {
