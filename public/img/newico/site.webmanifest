@@ -1,0 +1,20 @@
+{
+    "name": "TPL-TG",
+    "short_name": "TPL-TG",
+    "icons": [
+        {
+            "src": "/img/newico/android-chrome-192x192.png?v=476aWg8YQB",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/newico/android-chrome-512x512.png?v=476aWg8YQB",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index.html",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}
