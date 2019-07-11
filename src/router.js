@@ -85,7 +85,7 @@ export default new Router({
         },
         {
           path: '/users/admin',
-          name: 'users',
+          name: 'admin users',
           component: () => import('./views/UsersAdmin.vue')
         }
       ]

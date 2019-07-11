@@ -31,6 +31,9 @@
                 <!-- <el-table-column prop="email" label="email" width="120"></el-table-column> -->
               </el-table>
             </div>
+            <div class="col">
+              <el-button type="primary" :loading="loading" @click="getScore">Get Scores</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -54,7 +57,8 @@ export default {
   data() {
     return {
       apiData: [],
-      tempData: []
+      tempData: [],
+      loading: false
     };
   },
   methods: {
@@ -67,6 +71,52 @@ export default {
         this.tempData = response.config.data;
         // console.log(this.tempData);
       });
+    },
+    getScore: function() {
+      this.loading = true;
+      var url = base_url + "getscore";
+      this.$confirm(
+        "This will create score for the users. Continue?",
+        "Generate Score!",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "error"
+        }
+      )
+        .then(() => {
+          // this.$Progress.start()
+          this.axios.get(url).then(
+            response => {
+              this.$notify({
+                type: "warning",
+                message: this.$createElement(
+                  "i",
+                  { style: "color: red" },
+                  "You just calculated points"
+                )
+              });
+              this.loading = false;
+              console.log(this.loading);
+            },
+            err => {
+              // this.$Progress.fail();
+              // console.log("Err User Remove ", err.response);
+            }
+          );
+          // console.log(this.loading);
+        })
+        .catch(() => {
+          this.$notify({
+            type: "warning",
+            message: this.$createElement(
+              "i",
+              { style: "color: red" },
+              "You cancelled the opertation"
+            )
+          });
+        });
+      // console.log(this.loading);
     }
   },
   created() {
@@ -85,4 +135,8 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+.el-message-box {
+  width: 330px;
+}
+</style>
