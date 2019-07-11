@@ -34,6 +34,7 @@
                 <!-- <span class="name mb-0 text-sm" @click="open">{{row.question}}</span> -->
 
                 <el-tag
+                  style="cursor:pointer;"
                   type="primary"
                   @click="$router.push('questions/'+row.qid)"
                 >{{row.qid.toString().substr(0,18)}}</el-tag>
@@ -124,7 +125,7 @@ export default {
         });
     },
     onSubmit() {
-      console.log("submit");
+      // console.log("submit");
     },
     // ............................
     getQuestions() {
