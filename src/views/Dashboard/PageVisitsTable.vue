@@ -89,9 +89,10 @@ export default {
     getMatches() {
       var url =
         "https://cricapi.com/api/matches?apikey=oMAzt90U1xN3MfOKmtasnbNmFq12";
-      this.axios.get(url).then(response => {
+      fetch(url).then(response => {return response.json()}).then(response =>{
         // console.log(response);
-        this.newMatches = response.data.matches;
+
+        this.newMatches = response.matches;
         // var d = new Date(this.newMatches.date);
         this.newMatches = this.newMatches.map(user => {
           user.dateTimeGMT = new Date(user.dateTimeGMT).toLocaleString("en");
