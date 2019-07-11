@@ -14,20 +14,22 @@
     <div class="table-responsive">
       <base-table thead-classes="thead-light" :data="newMatches">
         <template slot="columns">
-          <!-- <th>Name</th> -->
+          <th>Index</th>
           <th>Start Time</th>
           <!-- <th>Status</th> -->
           <th>Team-1</th>
           <th>Team-2</th>
+          <th>Type</th>
           <th>Winner</th>
           <th>Started</th>
         </template>
 
         <template slot-scope="{row}">
-          <!-- <th scope="row">{{row.name}}</th> -->
-          <td>{{row.date}}</td>
-          <td>{{row.team-1}}</td>
-          <td>{{row.team-2}}</td>
+          <th scope="row">{{row.unique_id}}</th>
+          <td>{{row.dateTimeGMT}}</td>
+          <td>{{row.team1}}</td>
+          <td>{{row.team2}}</td>
+          <td>{{row.type}}</td>
           <td>{{row.winner_team}}</td>
           <td>{{row.matchStarted}}</td>
 
@@ -90,6 +92,21 @@ export default {
       this.axios.get(url).then(response => {
         // console.log(response);
         this.newMatches = response.data.matches;
+        // var d = new Date(this.newMatches.date);
+        this.newMatches = this.newMatches.map(user => {
+          user.dateTimeGMT = new Date(user.dateTimeGMT).toLocaleString("en");
+          // console.log(user);
+          return user;
+        });
+        this.newMatches1 = this.newMatches.map(user => {
+          user.team1 = user["team-1"];
+          user.team2 = user["team-2"];
+          // console.log(user);
+          return user;
+        });
+
+        // console.log(d.getUTCHours()); // Hours
+        // console.log(d.getUTCMinutes());
       });
     }
   },
