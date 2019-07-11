@@ -55,7 +55,7 @@ export default new Router({
         },
         {
           path: '/allquestions',
-          name: 'All Quesalltions',
+          name: 'All Questions',
           component: () => import('./views/AllQuestions.vue')
         },
         {
