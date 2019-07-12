@@ -16,7 +16,7 @@
           <div class="media align-items-center" slot="title">
             <span class="avatar avatar-sm rounded-circle">
               <!-- <img alt="Image placeholder" src="../../public/img/brand/ipl-logo.png"> -->
-              <img alt="Image placeholder" src="../../public/img/brand/2019-ICCWC.png" />
+              <img alt="Image placeholder" src="../../public/img/theme/team-4-800x800.jpg" />
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
               <span class="mb-0 text-sm font-weight-bold">{{full_name}}</span>
