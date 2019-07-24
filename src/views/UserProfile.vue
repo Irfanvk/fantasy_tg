@@ -39,7 +39,7 @@
                 <!-- <base-button size="sm" type="default" class="float-right">Message</base-button> -->
               </div>
             </div>
-            <div class="card-body pt-0 pt-md-4">
+            <div class="card-body pt-0 pt-md-4 text-center">
               <div class="row">
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
@@ -60,28 +60,32 @@
               </div>
               <div class="text-center ni ni-glasses-2 mr-3 mt-6">
                 <h3>
-                  {{full_name}}
+                  {{full_name.toUpperCase()}}
                   <!-- <span class="font-weight-light">, 27</span> -->
                 </h3>
+                <hr class="my-4" />
                 <!-- <div class="h5 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Bucharest, Romania
                 </div>-->
-                <div class="h5 mt-3">
+                <div class="h5 mt-3 text-left">
                   <i class="fa fa-mobile fa-lg text-blue mr-3" aria-hidden="true"></i>
                   {{ mobile }}
                 </div>
-                <div class="h5 mt-3">
+                <div class="h5 mt-3 text-left">
                   <i class="ni ni-email-83 text-blue mr-3" aria-hidden="true"></i>
                   {{ email }}
                 </div>
-                <div>
-                  <i class="ni education_hat mr-1"></i>
-                  Team - {{team}}
+                <div class="h5 mt-3 text-left" v-if="admin==false">
+                  <!-- <i class="fas fa-flag"></i> -->
+                  <i class="fas fa-flag text-blue mr-3"></i>
+                  Team - {{team.toUpperCase()}}
+                  <i class="far fa-hand-peace"></i>
                 </div>
-                <hr class="my-4" />
-                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
-                <i href="#" v-if="admin">
-                  <i class="fa fa-star" aria-hidden="true"></i>
+
+                <!-- <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p> -->
+                <i href="#" v-if="admin" class="text-green">
+                  <hr class />
+                  <i class="fa fa-star text-red mr-3" aria-hidden="true"></i>
                   '{{full_name}}' has admin privileges
                 </i>
               </div>
@@ -232,7 +236,19 @@ export default {
         country: "",
         zipCode: "",
         about: ""
-      }
+      },
+      teams: [
+        { abbr: "IND.", name: "India." },
+        { abbr: "AUS.", name: "Australia." },
+        { abbr: "PAK.", name: "Pakistan." },
+        { abbr: "SL.", name: "Srilanka." },
+        { abbr: "WI.", name: "West Indies." },
+        { abbr: "BAN.", name: "Bangladesh." },
+        { abbr: "SA.", name: "South Africa." },
+        { abbr: "NZ.", name: "New Zealand." },
+        { abbr: "AFG.", name: "Afghanistan." },
+        { abbr: "ENG.", name: "England." }
+      ]
     };
   },
   beforeCreate() {

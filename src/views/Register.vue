@@ -192,16 +192,16 @@ export default {
         //   { abbr: "SRH.", name: " Sunrisers Hyderabad." }
         // ]
         teams: [
-          { abbr: "IND.", name: "India." },
-          { abbr: "AUS.", name: "Australia." },
-          { abbr: "PAK.", name: "Pakistan." },
-          { abbr: "SL.", name: "Srilanka." },
-          { abbr: "WI.", name: "West Indies." },
-          { abbr: "BAN.", name: "Bangladesh." },
-          { abbr: "SA.", name: "South Africa." },
-          { abbr: "NZ.", name: "New Zealand." },
-          { abbr: "AFG.", name: "Afghanistan." },
-          { abbr: "ENG.", name: "England." }
+          { abbr: "IND", name: "India" },
+          { abbr: "AUS", name: "Australia" },
+          { abbr: "PAK", name: "Pakistan" },
+          { abbr: "SL", name: "Srilanka" },
+          { abbr: "WI", name: "West Indies" },
+          { abbr: "BAN", name: "Bangladesh" },
+          { abbr: "SA", name: "South Africa" },
+          { abbr: "NZ", name: "New Zealand" },
+          { abbr: "AFG", name: "Afghanistan" },
+          { abbr: "ENG", name: "England" }
         ]
       }
     };
