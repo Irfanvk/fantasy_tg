@@ -71,7 +71,7 @@
                 v-bind:key="option.abbr"
               >{{ option.name }}</option>
             </select>
-            <el-tag size="mini" v-if="model.team!==''">{{model.team}}</el-tag>
+            <el-tag class="ml-2" size="mini" v-if="model.team!==''">{{model.team}}</el-tag>
             <!-- <select v-model="model.team">
               <option
                 v-for="tm in model.teams"
@@ -81,12 +81,18 @@
             </select>-->
             <base-input
               class="input-group-alternative mb-3 mt-2"
+              placeholder="Invite Code"
+              addon-left-icon="ni ni-key-25"
+              v-model="model.invite_code"
+              required
+            ></base-input>
+            <base-input
+              class="input-group-alternative mb-3 mt-2"
               placeholder="Full Name"
               addon-left-icon="ni ni-hat-3"
               v-model="model.full_name"
               required
             ></base-input>
-
             <base-input
               class="input-group-alternative mb-3"
               placeholder="Email"
@@ -175,6 +181,7 @@ export default {
         { id: 3, name: "C" }
       ],
       model: {
+        invite_code: "",
         full_name: "",
         email: "",
         password: "",
@@ -212,6 +219,12 @@ export default {
     },
     register() {
       var url = base_url + "users/register";
+      if (this.model.invite_code === "") {
+        this.$alert("Invite Code cannot be blank", "Error", {
+          confirmButtonText: "OK"
+        });
+        return;
+      }
       if (this.model.full_name === "") {
         this.$alert("Name cannot be blank", "Error", {
           confirmButtonText: "OK"
@@ -251,6 +264,7 @@ export default {
       // console.log(this.model)
       this.axios
         .post(url, {
+          invite_code: this.model.invite_code,
           full_name: this.model.full_name,
           email: this.model.email,
           password: this.model.password,
@@ -260,6 +274,7 @@ export default {
         .then(res => {
           if (res.data.flag == 1) {
             this.$notify({
+              title: "error",
               type: "danger",
               message: res.data.msg
             });
