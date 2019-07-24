@@ -10,6 +10,15 @@
                 <h6 class="text-uppercase text-muted ls-1 mb-1">Generate Code</h6>
               </div>
             </div>
+            <!-- <div class>
+              <base-progress
+                type="default"
+                :height="8"
+                :value="60"
+                label="Generating"
+                v-if="loading==true"
+              ></base-progress>
+            </div>-->
             <!-- <img src="../../public/img/brand/India_flag.png" height="80" /> -->
             <!-- <i class="fa fa-cog fa-4x"></i> -->
             <div id="app" v-cloak>
@@ -29,7 +38,9 @@
                         <span
                           class="btn btn-info text-white copy-btn ml-auto"
                           @click.stop.prevent="generateCode"
-                        >Generate</span>
+                        >
+                          <i v-if="loading==true" class="fa fa-spinner fa-spin"></i> Generate
+                        </span>
                         <input type="hidden" id="testing-code" :value="testingCode" />
                       </span>
 
@@ -96,11 +107,13 @@ export default {
     return {
       point2Data: [],
       testingCode: "",
-      flag: 0
+      flag: 0,
+      loading: false
     };
   },
   methods: {
     generateCode() {
+      this.loading = true;
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);
       var url = base_url + "generatecode/" + decoded.identity.email;
@@ -113,6 +126,8 @@ export default {
           type: "success"
         });
         this.flag = 1;
+        this.loading = false;
+
         // this.$router.push("/questions");
       });
     },
@@ -127,7 +142,7 @@ export default {
         this.$notify({
           title: "success",
           message: "Invite code was copied ",
-          type: "info"
+          type: "success"
         });
         // alert("Testing code was copied " + msg);
       } catch (err) {
