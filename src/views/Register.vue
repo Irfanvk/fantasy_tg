@@ -148,7 +148,9 @@
               </div>
             </div>
             <div class="text-center">
-              <base-button type="danger" class="my-4" v-on:click="register">Create account</base-button>
+              <base-button type="danger" class="my-4" v-on:click="register">
+                <i v-if="loading==true" class="fa fa-spinner fa-spin"></i> Create account
+              </base-button>
             </div>
           </form>
         </div>
@@ -174,6 +176,7 @@ export default {
   name: "register",
   data() {
     return {
+      loading: false,
       selected: "",
       products: [
         { id: 1, name: "A" },
@@ -218,6 +221,7 @@ export default {
       this.model.team = value;
     },
     register() {
+      this.loading = true;
       var url = base_url + "users/register";
       if (this.model.invite_code === "") {
         this.$alert("Invite Code cannot be blank", "Error", {
@@ -280,6 +284,7 @@ export default {
             });
             return;
           }
+          this.loading = false;
           this.$router.push({ name: "login" });
           // this.$notify({
           //   type: "default",

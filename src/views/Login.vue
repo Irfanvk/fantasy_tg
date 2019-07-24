@@ -68,7 +68,9 @@
                 type="submit"
                 class="my-4"
                 style="background:#5dcfbd;color:white;font-weight:700;padding:.5em 1em;"
-              >Sign in</button>
+              >
+                <i v-if="loading==true" class="fa fa-spinner fa-spin"></i> Sign in
+              </button>
             </div>
           </form>
         </div>
@@ -96,6 +98,7 @@ export default {
   name: "login",
   data() {
     return {
+      loading: false,
       model: {
         email: "",
         password: ""
@@ -104,6 +107,7 @@ export default {
   },
   methods: {
     login() {
+      this.loading = true;
       var url = base_url + "users/login";
       this.axios
         .post(url, {
@@ -120,8 +124,11 @@ export default {
               message: res.data.msg
             });
           }
+          this.loading = false;
           localStorage.setItem("usertoken", res.data.result.access_token);
           localStorage.setItem("refreshtoken", res.data.result.refresh_token);
+          this.loading = false;
+
           this.email = "";
           this.password = "";
           this.$notify({
