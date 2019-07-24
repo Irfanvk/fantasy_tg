@@ -87,6 +87,11 @@ export default new Router({
           path: '/users/admin',
           name: 'admin users',
           component: () => import('./views/UsersAdmin.vue')
+        },
+        {
+          path: '/adminpanel',
+          name: 'admin panel',
+          component: () => import('./views/AdminPanel.vue')
         }
       ]
     },

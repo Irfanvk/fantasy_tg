@@ -44,6 +44,7 @@
           <sidebar-item
             :link="{name: 'Admins', icon: 'ni ni ni-single-02 text-green', path: '/users/admin'}"
           />
+          <sidebar-item :link="{name:'Admin Panel', icon: 'ni ni-settings', path:'/adminpanel'}" />
         </span>
 
         <!-- <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}" /> -->
