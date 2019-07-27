@@ -161,11 +161,36 @@ export default {
     getPoints() {
       var url = base_url + "points";
       // console.log(url);
-      this.axios.get(url).then(response => {
-        this.point2Data = response.data.result;
+      this.axios
+        .get(url)
+        .then(response => {
+          this.point2Data = response.data.result;
 
-        // console.log(this.point2Data);
-      });
+          // console.log(this.point2Data);
+        })
+        .catch(err => {
+          // window.location = "/";
+          let reftoken = localStorage.getItem("refreshtoken");
+          delete this.axios.defaults.headers.common.Authorization;
+          if (err.response && err.response.status === 401) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          }
+          // console.log(err.response);
+          this.$notify({
+            type: "primary",
+            message: err.response.data.msg + ", please login to continue "
+          });
+        });
     }
   },
   created() {
