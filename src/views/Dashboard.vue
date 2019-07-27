@@ -341,6 +341,7 @@
 <script>
 // Tables
 import PageVisitsTable from "./Dashboard/PageVisitsTable";
+import { base_url } from "../../config";
 
 export default {
   components: {
@@ -373,6 +374,37 @@ export default {
     };
   },
   methods: {
+    initTest() {
+      var url = base_url + "test";
+      this.axios
+        .get(url)
+        .then(response => {
+          this.dataTest = response.data.status;
+        })
+        .catch(err => {
+          // window.location = "/";
+          let reftoken = localStorage.getItem("refreshtoken");
+          delete this.axios.defaults.headers.common.Authorization;
+          if (err.response && err.response.status === 401) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          }
+          // console.log(err.response);
+          this.$notify({
+            type: "primary",
+            message: err.response.data.msg + ", please login to continue "
+          });
+        });
+    },
     initBigChart(index) {
       let chartData = {
         datasets: [
