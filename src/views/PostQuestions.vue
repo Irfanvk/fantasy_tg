@@ -100,7 +100,7 @@
                     </div>
                   </div>
                   <hr class="my-4" />
-                  <base-button block type="primary" @click="PostQuest">Submit</base-button>
+                  <base-button block type="primary" @click="PostQuest" v-loading="loading">Submit</base-button>
                   <!-- Address -->
                   <!-- <h6 class="heading-small text-muted mb-4">Contact information</h6>
                 <div class="pl-lg-4">
@@ -180,6 +180,7 @@ export default {
     const decoded = jwtDecode(token);
 
     return {
+      loading: false,
       full_name: decoded.identity.full_name,
       team1: null,
       team2: "",
@@ -195,6 +196,52 @@ export default {
     };
   },
   methods: {
+    getUsers() {
+      url = base_url + "test";
+      // this.axios.interceptors.request.use(
+      //   config => {
+      //     let token = localStorage.usertoken;
+
+      //     if (token) {
+      //       config.headers["Authorization"] = `Bearer ${token}`;
+      //     }
+
+      //     return config;
+      //   },
+
+      //   error => {
+      //     return Promise.reject(error);
+      //   }
+      // );
+      this.axios
+        .get(url)
+        .then(response => {
+          this.userData = response.data.status;
+        })
+        .catch(err => {
+          // window.location = "/";
+          let reftoken = localStorage.getItem("refreshtoken");
+          delete this.axios.defaults.headers.common.Authorization;
+          if (err.response && err.response.status === 401) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          }
+          // console.log(err.response);
+          this.$notify({
+            type: "primary",
+            message: err.response.data.msg + ", please login to continue "
+          });
+        });
+    },
     RefToken() {
       var rurl = base_url + "refresh";
       var ref_token = localStorage.getItem("refreshtoken");
@@ -210,6 +257,7 @@ export default {
       // axios.defaults.headers.common = { Authorization: `Bearer ${usertoken}` };
     },
     PostQuest() {
+      var loading = true;
       var url = base_url + "questions";
       // console.log(this.model)
       // console.log(this.team1 + " vs " + this.team2);
@@ -252,6 +300,7 @@ export default {
           this.RefToken();
           // this.$router.go();
         });
+      var loading = false;
     }
   },
 
