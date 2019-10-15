@@ -81,7 +81,9 @@ export default {
         type: "info",
         message: "Log out Successful "
       });
-      this.$router.push({ name: "login" });
+      // this.$router.push({ name: "login" });
+      localStorage.clear();
+      window.location = "/";
     },
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
