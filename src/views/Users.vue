@@ -38,7 +38,7 @@
             <el-table :data="userData" style="border:2px solid black;border-radius:5px">
               <el-table-column type="index" />
               <el-table-column prop="full_name" label="Name" width="150"></el-table-column>
-              <el-table-column prop="email" label="email" width="120"></el-table-column>
+              <el-table-column prop="email" label="Email" width="120"></el-table-column>
               <el-table-column prop="mobile" label="Contact" width="120"></el-table-column>
               <el-table-column prop="team" label="Team" width="120" sortable></el-table-column>
               <el-table-column prop="joined" label="Joined on" width="155" sortable></el-table-column>
