@@ -86,6 +86,7 @@
                     <el-form-item size="large">
                       <el-button type="primary" @click="onSubmit">Submit</el-button>
                       <el-button @click="$router.go(-1)">Cancel</el-button>
+                      <el-button v-if="admin" type="danger" @click="onDelete">Delete</el-button>
                     </el-form-item>
                   </el-form>
                 </div>
@@ -117,6 +118,7 @@ export default {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
     return {
+      admin: decoded.identity.admin,
       ansData: "",
       apiData: {
         emailid: decoded.identity.email,
@@ -146,6 +148,27 @@ export default {
           type: "success"
         });
         this.$router.push("/questions");
+      });
+    },
+    onDelete() {
+      var url = base_url + "questions/" + this.$route.params.qid;
+      this.$confirm(
+        "This will permanently delete the question. Continue?",
+        "Delete Question!",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "error"
+        }
+      ).then(() => {
+        this.axios.delete(url).then(response => {
+          this.deleteData = response.data.msg;
+          this.$message({
+            message: this.deleteData,
+            type: "success"
+          });
+          this.$router.push("/questions");
+        });
       });
     },
     getQuestion() {
