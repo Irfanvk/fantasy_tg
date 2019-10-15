@@ -4,7 +4,7 @@
       <!-- Card stats -->
       <div class="row">
         <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
+          <card header-classes="bg-transparent" class="row align-items-center mt-4">
             <div slot="header" class="row align-items-center">
               <div class="col">
                 <h6 class="text-uppercase text-muted ls-1 mb-1">Generate Code</h6>
@@ -70,6 +70,25 @@
               </div>
             </div>
           </card>
+        </div>
+        <div class="col-xl-3">
+          <el-card class="box-card pb-4 pt-5 mt-4 mb-4" style="text-align:center">
+            <div slot="header" class="clearfix">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">Admin List</h6>
+              </div>
+              <!-- <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button> -->
+              <el-divider>
+                <i class="el-icon-star-on"></i>
+              </el-divider>
+              <a style="cursor:pointer" @click="$router.push('/users/admin')">
+                <i class="fa fa-user fa-7x" style="color:green"></i>
+              </a>
+            </div>
+            <div class="text item" style="cursor:pointer" @click="$router.push('/users/admin')">
+              <h5>Click to see the list</h5>
+            </div>
+          </el-card>
         </div>
         <!-- <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center">
@@ -171,25 +190,25 @@ export default {
         .catch(err => {
           // window.location = "/";
           let reftoken = localStorage.getItem("refreshtoken");
-          delete this.axios.defaults.headers.common.Authorization;
-          if (err.response && err.response.status === 401) {
-            this.axios
-              .post(base_url + "refresh", {
-                headers: { Authorization: `Bearer ${reftoken}` }
-              })
-              .then(response => {
-                localStorage.setItem("usertoken", response.data.access_token);
-              })
-              .catch(e => {
-                localStorage.clear();
-                window.location = "/";
-              });
-          }
-          // console.log(err.response);
-          this.$notify({
-            type: "primary",
-            message: err.response.data.msg + ", please login to continue "
-          });
+          // delete this.axios.defaults.headers.common.Authorization;
+          // if (err.response && err.response.status === 401) {
+          //   this.axios
+          //     .post(base_url + "refresh", {
+          //       headers: { Authorization: `Bearer ${reftoken}` }
+          //     })
+          //     .then(response => {
+          //       localStorage.setItem("usertoken", response.data.access_token);
+          //     })
+          //     .catch(e => {
+          //       localStorage.clear();
+          //       window.location = "/";
+          //     });
+          // }
+          // // console.log(err.response);
+          // this.$notify({
+          //   type: "primary",
+          //   message: err.response.data.msg + ", please login to continue "
+          // });
         });
     }
   },
