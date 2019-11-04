@@ -247,6 +247,12 @@ export default {
         });
         return;
       }
+      if (this.model.password.match(?=.{6,})) {
+        this.$alert("Password must be atleast 6 characters", "Error", {
+          confirmButtonText: "OK"
+        });
+        return;
+      }
       if (this.model.password !== this.model.confirmpass) {
         // this.$alert({ type: "danger", message: "Password doesn't match!" });
         this.$alert("Password doesn't match!", "Error", {
