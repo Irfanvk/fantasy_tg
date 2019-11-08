@@ -247,7 +247,7 @@ export default {
         });
         return;
       }
-      if (this.model.password.match(/?=.{6,}/)) {
+      if (this.model.password.match(/.{6,}/)) {
         this.$alert("Password must be atleast 6 characters", "Error", {
           confirmButtonText: "OK"
         });
@@ -314,7 +314,7 @@ export default {
           // });
         })
         .catch(err => {
-          console.log(err, "aaa");
+          // console.log(err, "aaa");
           // this.$router.go();
         });
     }
