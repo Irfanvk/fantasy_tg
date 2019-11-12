@@ -157,15 +157,51 @@ export default {
           this.axios.get;
         }
       );
-      this.axios.get(url).then(response => {
-        // console.log(response.data.questions);
-        this.quesData = response.data.questions;
-        // this.quesData = this.quesData.map(user => {
-        // user.added_on = new Date(Date.now()).toLocaleString("en", options);
-        // return user;
-        // });
-        // this.userCount = response.data.count;
-      });
+      this.axios
+        .get(url)
+        .then(response => {
+          // console.log(response.data.questions);
+          this.quesData = response.data.questions;
+          // this.quesData = this.quesData.map(user => {
+          // user.added_on = new Date(Date.now()).toLocaleString("en", options);
+          // return user;
+          // });
+          // this.userCount = response.data.count;
+        })
+        .catch(err => {
+          // window.location = "/";
+          let reftoken = localStorage.getItem("refreshtoken");
+          delete this.axios.defaults.headers.common.Authorization;
+          if (err.response && err.response.status === 401) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          } else if (err.response && err.response.status === 422) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          }
+          this.$notify({
+            type: "primary",
+            message: err.response.data.msg + ", please login to continue "
+          });
+        });
     }
   },
   created() {
