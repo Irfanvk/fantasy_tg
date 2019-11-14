@@ -379,6 +379,21 @@ export default {
     getPoints() {
       var url = base_url + "points";
       // console.log(url);
+      this.axios.interceptors.request.use(
+        config => {
+          let token = localStorage.usertoken;
+
+          if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+          }
+
+          return config;
+        },
+
+        error => {
+          return Promise.reject(error);
+        }
+      );
       this.axios
         .get(url)
         .then(response => {
@@ -389,6 +404,7 @@ export default {
         .catch(err => {
           // window.location = "/";
           let reftoken = localStorage.getItem("refreshtoken");
+          // let usertoken = localStorage.getItem("usertoken");
           delete this.axios.defaults.headers.common.Authorization;
           if (err.response && err.response.status === 401) {
             this.axios
@@ -403,7 +419,8 @@ export default {
                 window.location = "/";
               });
           }
-          // console.log(err.response);
+
+          console.log(err.response.data);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
