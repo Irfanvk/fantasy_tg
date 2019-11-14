@@ -2,7 +2,8 @@
   <div>
     <base-header
       class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-      style="min-height: 600px; background-image: url(img/theme/team-1-800x800.jpg); background-size: cover; background-position: center top;"
+      :style="{'background-image': `url('${url_img}')`}"
+      style="min-height: 600px; background-size: cover; background-position: center top;"
     >
       <!-- Mask -->
       <span class="mask bg-gradient-success opacity-8"></span>
@@ -28,11 +29,17 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="img/theme/team-1-800x800.jpg" class="rounded-circle" />
+                    <span v-if="url_img===undefined">
+                      <img src="img/theme/team-2-800x800.jpg" class="rounded-circle" />
+                    </span>
+                    <span v-if="url_img!==undefined">
+                      <img :src="url_img" class="rounded-circle" />
+                    </span>
                   </a>
                 </div>
               </div>
             </div>
+
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <!-- <base-button size="sm" type="info" class="mr-4">Connect</base-button> -->
@@ -58,6 +65,7 @@
                   </div>
                 </div>
               </div>
+
               <div class="text-center ni ni-glasses-2 mr-3 mt-6">
                 <h3>
                   {{full_name.toUpperCase()}}
@@ -89,6 +97,44 @@
                   '{{full_name}}' has admin privileges
                 </i>
               </div>
+              <!-- upload image for profile pic -->
+              <br />
+              <el-button
+                type="text"
+                @click="dialogVisible = true"
+              >click here to change profile picture</el-button>
+
+              <el-dialog
+                title="Change profile picture"
+                :visible.sync="dialogVisible"
+                width="60%"
+                :before-close="handleClose"
+              >
+                <span>
+                  <!-- http://127.0.0.1:5000/upload -->
+                  <!-- :action="'http://127.0.0.1:5000/upload/'+email" -->
+                  <el-upload
+                    class="upload"
+                    :action="base_url+'upload/'+email"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    list-type="picture-card"
+                    :limit="1"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList"
+                  >
+                    <i class="el-icon-plus"></i>
+                    <!-- <el-button size="small" type="primary" @change="handleSubmit">Click to upload</el-button> -->
+                    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+                  </el-upload>
+                </span>
+                <span slot="footer" class="dialog-footer">
+                  <el-button @click="dialogVisible = false">Cancel</el-button>
+                  <!-- <el-button type="primary" @click="dialogVisible = false">Confirm</el-button> -->
+                </span>
+              </el-dialog>
+              <div class="mt-3"></div>
             </div>
           </div>
         </div>
@@ -216,6 +262,11 @@
 </template>
 <script>
 import jwtDecode from "jwt-decode";
+import axios from "axios";
+import { base_url } from "../../config";
+export const HTTP = axios.create({
+  headers: { Autherization: "Bearer {token}" }
+});
 export default {
   name: "user-profile",
   data() {
@@ -223,11 +274,16 @@ export default {
     const decoded = jwtDecode(token);
     // console.log(decoded.identity);
     return {
+      base_url: base_url,
+      url_img: "img/theme/team-1-800x800.jpg",
+      dialogVisible: false,
+      fileList: [],
       full_name: decoded.identity.full_name,
       team: decoded.identity.team,
       mobile: decoded.identity.mobile,
       email: decoded.identity.email,
       admin: decoded.identity.admin,
+      prof_pic: decoded.identity.avatar,
       model: {
         full_name_: this.full_name,
         email_: this.email,
@@ -236,20 +292,104 @@ export default {
         country: "",
         zipCode: "",
         about: ""
-      },
-      teams: [
-        { abbr: "IND.", name: "India." },
-        { abbr: "AUS.", name: "Australia." },
-        { abbr: "PAK.", name: "Pakistan." },
-        { abbr: "SL.", name: "Srilanka." },
-        { abbr: "WI.", name: "West Indies." },
-        { abbr: "BAN.", name: "Bangladesh." },
-        { abbr: "SA.", name: "South Africa." },
-        { abbr: "NZ.", name: "New Zealand." },
-        { abbr: "AFG.", name: "Afghanistan." },
-        { abbr: "ENG.", name: "England." }
-      ]
+      }
     };
+  },
+  methods: {
+    // handleSubmit() {
+    //   console.log("submit");
+    // },
+    // submitUpload() {
+    //   // console.log("submit");
+    //   let url = base_url + "upload/" + this.mobile;
+    //   this.axios
+    //     .post(url, { email: this.model.email, mobile: this.mobile })
+    //     .then(res => {});
+    // },
+    getAvatar() {
+      let url = base_url + "avatar/" + this.email;
+      // console.log(url);
+      this.axios.post(url).then(response => {
+        if (response.data.url !== undefined) {
+          this.url_img = response.data.url;
+        }
+      });
+    },
+    handleClose(done) {
+      this.$confirm("Are you sure to close this?", {
+        distinguishCancelAndClose: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No"
+      })
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    handleRemove(file, fileList) {
+      // console.log("remove");
+      // console.log(file, fileList);
+    },
+    handlePreview(file) {
+      // console.log("preview");
+      // console.log(file);
+    },
+    handleExceed(files, fileList) {
+      this.$message.warning(
+        `The limit is 1, you selected ${
+          files.length
+        } files this time, add up to ${files.length + fileList.length} totally`
+      );
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`Cancel the transfer of ${file.name} ?`);
+    },
+    getData() {
+      var url = base_url + "upload";
+      // console.log(this.prof_pic);
+      // console.log(url);
+      this.axios
+        .get(url)
+        .then(response => {
+          // this.point2Data = response.data.result;
+          // console.log(this.point2Data);
+        })
+        .catch(err => {
+          // window.location = "/";
+          let reftoken = localStorage.getItem("refreshtoken");
+          delete this.axios.defaults.headers.common.Authorization;
+          if (err.response && err.response.status === 401) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          } else if (err.reponse && err.response.status === 422) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          }
+          // console.log(err.response);
+          this.$notify({
+            type: "primary",
+            message: err.response.data.msg + ", please login to continue "
+          });
+        });
+    }
   },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
@@ -257,7 +397,15 @@ export default {
       //   this.$router.go(-1);
     }
     // console.log("Nothing gets called before me!");
+  },
+  created() {
+    this.getAvatar();
+    // this.getData();
   }
 };
 </script>
-<style></style>
+<style>
+.el-message-box {
+  width: auto;
+}
+</style>
