@@ -30,7 +30,7 @@
                 <div class="card-profile-image">
                   <a href="#">
                     <span v-if="url_img===undefined">
-                      <img src="img/theme/team-2-800x800.jpg" class="rounded-circle" />
+                      <img src="img/theme/team-1-800x800.jpg" class="rounded-circle" />
                     </span>
                     <span v-if="url_img!==undefined">
                       <img :src="url_img" class="rounded-circle" />
@@ -312,6 +312,7 @@ export default {
       this.axios.post(url).then(response => {
         if (response.data.url !== undefined) {
           this.url_img = response.data.url;
+          localStorage.setItem("avatar", response.data.url);
         }
       });
     },
