@@ -39,7 +39,7 @@
             <a slot="title" class="nav-link" href="#" role="button">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="/img/theme/team-1-800x800.jpg" />
+                  <img alt="Image placeholder" :src="img_url" />
                 </span>
               </div>
             </a>
@@ -51,10 +51,10 @@
               <i class="ni ni-single-02"></i>
               <span>My profile</span>
             </router-link>
-            <router-link to="/profile" class="dropdown-item">
+            <!-- <router-link to="/profile" class="dropdown-item">
               <i class="ni ni-calendar-grid-58"></i>
               <span>Activity</span>
-            </router-link>
+            </router-link>-->
             <div class="dropdown-divider"></div>
             <a href @click="logout" to="/logout" class="dropdown-item">
               <i class="ni ni-user-run"></i>
@@ -121,6 +121,11 @@ import NavbarToggleButton from "@/components/NavbarToggleButton";
 import { base_url } from "../../../config";
 
 export default {
+  data() {
+    return {
+      img_url: localStorage.getItem("avatar")
+    };
+  },
   name: "sidebar",
   components: {
     NavbarToggleButton
@@ -156,7 +161,7 @@ export default {
             type: "warning",
             message: res.data.message
           });
-          // this.$router.push({ name: "dashboard" });
+          this.$router.push({ name: "login" });
         })
         .catch(err => {
           // console.log(err);
@@ -180,3 +185,5 @@ export default {
   }
 };
 </script>
+<style >
+</style>
