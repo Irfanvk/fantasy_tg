@@ -399,7 +399,7 @@ export default {
     }
     // console.log("Nothing gets called before me!");
   },
-  created() {
+  mounted () {
     this.getAvatar();
     // this.getData();
   }
