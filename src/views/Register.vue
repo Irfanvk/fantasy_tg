@@ -31,7 +31,8 @@
               class
               style="border-right:0.5px dotted #8c8b8b;width:2px;height:3rem;display:inline-block;"
             ></span>
-            <img style="padding-left:1em;" src="img/brand/2019-ICCWC.png" width="80" />
+            <!-- <img style="padding-left:1em;" src="img/brand/2019-ICCWC.png" width="80" /> -->
+            <img style="padding-left:1em;" src="img/brand/ipl-logo.png" width="80" />
           </div>
         </div>
         <div class="card-body px-lg-5 py-lg-5">
