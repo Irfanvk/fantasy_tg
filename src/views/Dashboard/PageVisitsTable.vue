@@ -6,7 +6,7 @@
           <h3 class="mb-0">Upcoming Matches</h3>
         </div>
         <div class="col text-right">
-          <a href="#!" class="btn btn-sm btn-primary">See all</a>
+          <!-- <a href="#!" class="btn btn-sm btn-primary">See all</a> -->
         </div>
       </div>
     </div>
@@ -89,26 +89,30 @@ export default {
     getMatches() {
       var url =
         "https://cricapi.com/api/matches?apikey=oMAzt90U1xN3MfOKmtasnbNmFq12";
-      fetch(url).then(response => {return response.json()}).then(response =>{
-        // console.log(response);
+      fetch(url)
+        .then(response => {
+          return response.json();
+        })
+        .then(response => {
+          // console.log(response);
 
-        this.newMatches = response.matches;
-        // var d = new Date(this.newMatches.date);
-        this.newMatches = this.newMatches.map(user => {
-          user.dateTimeGMT = new Date(user.dateTimeGMT).toLocaleString("en");
-          // console.log(user);
-          return user;
-        });
-        this.newMatches1 = this.newMatches.map(user => {
-          user.team1 = user["team-1"];
-          user.team2 = user["team-2"];
-          // console.log(user);
-          return user;
-        });
+          this.newMatches = response.matches;
+          // var d = new Date(this.newMatches.date);
+          this.newMatches = this.newMatches.map(user => {
+            user.dateTimeGMT = new Date(user.dateTimeGMT).toLocaleString("en");
+            // console.log(user);
+            return user;
+          });
+          this.newMatches1 = this.newMatches.map(user => {
+            user.team1 = user["team-1"];
+            user.team2 = user["team-2"];
+            // console.log(user);
+            return user;
+          });
 
-        // console.log(d.getUTCHours()); // Hours
-        // console.log(d.getUTCMinutes());
-      });
+          // console.log(d.getUTCHours()); // Hours
+          // console.log(d.getUTCMinutes());
+        });
     }
   },
   created() {
