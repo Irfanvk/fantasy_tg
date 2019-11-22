@@ -51,12 +51,12 @@
                 v-on:click="displ(tm.abbr)"
               >{{ tm.name }}</option>
             </base-dropdown>-->
-            <select v-model="model.team">
-              <option disabled value>
-                Please select your team
-                <i class="fa fa-sort-desc" aria-hidden="true"></i>
-              </option>
-              <!-- <option>IND</option>
+            <div id="mainselection">
+              <i class="fa fa-caret-down"></i>
+
+              <select v-model="model.team">
+                <option disabled value>Please select your team</option>
+                <!-- <option>IND</option>
               <option>AUS</option>
               <option>PAK</option>
               <option>SL</option>
@@ -65,14 +65,16 @@
               <option>ENG</option>
               <option>WI</option>
               <option>BAN</option>
-              <option>SA</option>-->
-              <option
-                v-for="option in model.teams"
-                v-bind:value="option.abbr"
-                v-bind:key="option.abbr"
-              >{{ option.name }}</option>
-            </select>
-            <el-tag class="ml-2" size="mini" v-if="model.team!==''">{{model.team}}</el-tag>
+                <option>SA</option>-->
+                <option
+                  v-for="option in model.teams"
+                  v-bind:value="option.abbr"
+                  v-bind:key="option.abbr"
+                >{{ option.name }}</option>
+              </select>
+              <!-- <i class="fa fa-caret-down"></i> -->
+              <el-tag class="ml-2" size="mini" v-if="model.team!==''">{{model.team}}</el-tag>
+            </div>
             <!-- <select v-model="model.team">
               <option
                 v-for="tm in model.teams"
@@ -192,28 +194,28 @@ export default {
         confirmpass: "",
         mobile: "",
         team: "",
-        // teams: [
-        //   { abbr: "CSK.", name: "Chennai Super Kings." },
-        //   { abbr: "DC.", name: " Delhi Capitals." },
-        //   { abbr: "KXIP.", name: "Kings XI Punjab." },
-        //   { abbr: "KKR.", name: "Kolkata Knight Riders." },
-        //   { abbr: "MI.", name: " Mumbai Indians." },
-        //   { abbr: "RR.", name: " Rajasthan Royals." },
-        //   { abbr: "RCB.", name: "Royal Challengers Bangalore." },
-        //   { abbr: "SRH.", name: " Sunrisers Hyderabad." }
-        // ]
         teams: [
-          { abbr: "IND", name: "India" },
-          { abbr: "AUS", name: "Australia" },
-          { abbr: "PAK", name: "Pakistan" },
-          { abbr: "SL", name: "Srilanka" },
-          { abbr: "WI", name: "West Indies" },
-          { abbr: "BAN", name: "Bangladesh" },
-          { abbr: "SA", name: "South Africa" },
-          { abbr: "NZ", name: "New Zealand" },
-          { abbr: "AFG", name: "Afghanistan" },
-          { abbr: "ENG", name: "England" }
+          { abbr: "CSK", name: "Chennai Super Kings" },
+          { abbr: "DC", name: " Delhi Capitals" },
+          { abbr: "KXIP", name: "Kings XI Punjab" },
+          { abbr: "KKR", name: "Kolkata Knight Riders" },
+          { abbr: "MI", name: " Mumbai Indians" },
+          { abbr: "RR", name: " Rajasthan Royals" },
+          { abbr: "RCB", name: "Royal Challengers Bangalore" },
+          { abbr: "SRH", name: " Sunrisers Hyderabad" }
         ]
+        // teams: [
+        //   { abbr: "IND", name: "India" },
+        //   { abbr: "AUS", name: "Australia" },
+        //   { abbr: "PAK", name: "Pakistan" },
+        //   { abbr: "SL", name: "Srilanka" },
+        //   { abbr: "WI", name: "West Indies" },
+        //   { abbr: "BAN", name: "Bangladesh" },
+        //   { abbr: "SA", name: "South Africa" },
+        //   { abbr: "NZ", name: "New Zealand" },
+        //   { abbr: "AFG", name: "Afghanistan" },
+        //   { abbr: "ENG", name: "England" }
+        // ]
       }
     };
   },
@@ -331,5 +333,17 @@ export default {
 <style>
 .el-message-box {
   width: auto;
+}
+#mainselection select {
+  border: 0;
+  /* color: #eee; */
+  background: transparent;
+  /* font-size: 20px; */
+  font-weight: bold;
+  /* padding: 2px 10px; */
+  /* width: auto; */
+  /* *width: 350px; */
+  *background: #58b14c;
+  -webkit-appearance: none;
 }
 </style>
