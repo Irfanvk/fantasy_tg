@@ -3,7 +3,7 @@
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
       <!-- Card stats -->
       <div class="row">
-        <div class="col-xl-3">
+        <!-- <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center">
             <div slot="header" class="row align-items-center">
               <div class="col">
@@ -18,8 +18,8 @@
               </div>
             </div>
           </card>
-        </div>
-        <div class="col-xl-3">
+        </div>-->
+        <!-- <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center">
             <div slot="header" class="row align-items-center">
               <div class="col">
@@ -34,8 +34,8 @@
               </div>
             </div>
           </card>
-        </div>
-        <div class="col-xl-3">
+        </div>-->
+        <!-- <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center">
             <div slot="header" class="row align-items-center">
               <div class="col">
@@ -54,93 +54,9 @@
               </div>
             </div>
           </card>
-        </div>
+        </div>-->
 
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/bangladesh_flag.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Bangladesh</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/England_flag.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>England</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/Flag_of_Sri_Lanka.svg" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Sri Lanka</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center" style="max">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/afganistan_flag.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Afganistan</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center" style="max">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">ICC WC Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/Southafrica_flag.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>South Africa</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-
-        <div class="col-xl-3">
+        <!-- <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center" style="max">
             <div slot="header" class="row align-items-center">
               <div class="col">
@@ -172,138 +88,8 @@
               </div>
             </div>
           </card>
-        </div>
-
-        <!-- IPL IPl IPL IPL IPL -->
-        <!-- <div class="row">
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/RCB.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Royal Challengers Bangalore</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/CSK.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Chennai Super Kings</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/SRH.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Sun Risers Hyderabad</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/DC.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Delhi Capitals</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/MI.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Mumbai Indians</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/KXIP.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Kings XI Punjab</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center" style="max">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/RR.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Rajasthan Royals</h5>
-              </div>
-            </div>
-          </card>
-        </div>
-        <div class="col-xl-3">
-          <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">IPL Team</h6>
-              </div>
-            </div>
-            <img src="../../public/img/brand/KKR.png" height="80" />
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Kolkata Knight Riders</h5>
-              </div>
-            </div>
-          </card>
         </div>-->
+
         <!-- <div class="col-xl-3 col-lg-6">
                     <stats-card title="Performance"
                                 type="gradient-info"
@@ -372,11 +158,13 @@ export default {
   },
   data() {
     return {
-      point2Data: []
+      point2Data: [],
+      loading: false
     };
   },
   methods: {
     getPoints() {
+      // loading = true;
       var url = base_url + "points";
       // console.log(url);
       this.axios.interceptors.request.use(
@@ -426,6 +214,7 @@ export default {
             message: err.response.data.msg + ", please login to continue "
           });
         });
+      // loading = false;
     }
   },
   created() {

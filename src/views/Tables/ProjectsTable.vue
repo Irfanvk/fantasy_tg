@@ -6,12 +6,18 @@
           <h3 class="mb-0" :class="type === 'dark' ? 'text-white': ''">{{title}}</h3>
         </div>
         <div class="col text-right">
-          <base-button type="primary" size="sm">See all</base-button>
+          <!-- <base-button type="primary" size="sm">See all</base-button> -->
         </div>
       </div>
     </div>
 
-    <div class="table-responsive">
+    <div
+      class="table-responsive"
+      v-loading.fullscreen.lock="loading"
+      element-loading-text="Loading..."
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0, 0, 0, 0.8)"
+    >
       <base-table
         class="table align-items-center table-flush"
         :class="type === 'dark' ? 'table-dark': ''"
@@ -63,7 +69,8 @@ export default {
   },
   data() {
     return {
-      pointData: "",
+      pointData: [],
+      loading: true,
       tableData: [
         {
           img: "img/theme/bootstrap.jpg",
@@ -113,6 +120,7 @@ export default {
       var url = base_url + "points";
       // console.log(url);
       this.axios.get(url).then(response => {
+        this.loading = false;
         this.pointData = response.data.result;
         // console.log(this.pointData);
       });
