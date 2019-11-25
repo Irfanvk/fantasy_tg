@@ -99,10 +99,10 @@
               </div>
               <!-- upload image for profile pic -->
               <br />
-              <el-button
-                type="text"
-                @click="dialogVisible = true"
-              >click here to change profile picture</el-button>
+              <el-button type="text" @click="dialogVisible = true">
+                <i class="el-icon-picture-outline-round" style="margin-right:5px"></i>
+                <a style="font-size:11px">click here to change profile picture</a>
+              </el-button>
 
               <el-dialog
                 title="Change profile picture"
@@ -283,7 +283,6 @@ export default {
       mobile: decoded.identity.mobile,
       email: decoded.identity.email,
       admin: decoded.identity.admin,
-      prof_pic: decoded.identity.avatar,
       model: {
         full_name_: this.full_name,
         email_: this.email,
@@ -307,14 +306,15 @@ export default {
     //     .then(res => {});
     // },
     getAvatar() {
-      let url = base_url + "avatar/" + this.email;
-      // console.log(url);
-      this.axios.post(url).then(response => {
-        if (response.data.url !== undefined) {
-          this.url_img = response.data.url;
-          localStorage.setItem("avatar", response.data.url);
-        }
-      });
+      this.url_img = localStorage.getItem("avatar");
+      // let url = base_url + "avatar/" + this.email;
+      // // console.log(url);
+      // this.axios.post(url).then(response => {
+      //   if (response.data.url !== undefined) {
+      //     this.url_img = response.data.url;
+      //     localStorage.setItem("avatar", response.data.url);
+      //   }
+      // });
     },
     handleClose(done) {
       this.$confirm("Are you sure to close this?", {
@@ -399,7 +399,7 @@ export default {
     }
     // console.log("Nothing gets called before me!");
   },
-  mounted () {
+  mounted() {
     this.getAvatar();
     // this.getData();
   }
