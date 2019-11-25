@@ -39,7 +39,7 @@
             <a slot="title" class="nav-link" href="#" role="button">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" :src="img_url" />
+                  <img alt="Image placeholder" :src="img_url" width="50%" height="95%" />
                 </span>
               </div>
             </a>
@@ -173,13 +173,53 @@ export default {
       // this.emitMethod();
     },
     getAvatar() {
-      let url = base_url + "avatar/" + this.email;
-      this.axios.post(url).then(response => {
-        if (response.data.url !== undefined) {
-          this.url_img = response.data.url;
-          localStorage.setItem("avatar", response.data.url);
+      this.axios.interceptors.request.use(
+        config => {
+          let token = localStorage.usertoken;
+
+          if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+          }
+
+          return config;
+        },
+
+        error => {
+          return Promise.reject(error);
         }
-      });
+      );
+      let url = base_url + "avatar/" + this.email;
+      this.axios
+        .post(url)
+        .then(response => {
+          if (response.data.url !== undefined) {
+            this.url_img = response.data.url;
+            localStorage.setItem("avatar", response.data.url);
+          }
+        })
+        .catch(err => {
+          // window.location = "/";
+          let reftoken = localStorage.getItem("refreshtoken");
+          delete this.axios.defaults.headers.common.Authorization;
+          if (err.response && err.response.status === 401) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                localStorage.clear();
+                window.location = "/";
+              });
+          }
+          // console.log(err.response);
+          this.$notify({
+            type: "primary",
+            message: err.response.data.msg + ", please login to continue "
+          });
+        });
     },
     // emitMethod() {
     //   EventBus.$emit("logged-in", "loggedin");
