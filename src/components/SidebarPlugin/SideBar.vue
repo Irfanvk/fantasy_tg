@@ -119,14 +119,18 @@
 <script>
 import NavbarToggleButton from "@/components/NavbarToggleButton";
 import { base_url } from "../../../config";
+import jwtDecode from "jwt-decode";
 
 export default {
+  name: "sidebar",
   data() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
     return {
+      email: decoded.identity.email,
       img_url: localStorage.getItem("avatar")
     };
   },
-  name: "sidebar",
   components: {
     NavbarToggleButton
   },
@@ -168,6 +172,15 @@ export default {
         });
       // this.emitMethod();
     },
+    getAvatar() {
+      let url = base_url + "avatar/" + this.email;
+      this.axios.post(url).then(response => {
+        if (response.data.url !== undefined) {
+          this.url_img = response.data.url;
+          localStorage.setItem("avatar", response.data.url);
+        }
+      });
+    },
     // emitMethod() {
     //   EventBus.$emit("logged-in", "loggedin");
     // },
@@ -177,6 +190,9 @@ export default {
     showSidebar() {
       this.$sidebar.displaySidebar(true);
     }
+  },
+  created() {
+    this.getAvatar();
   },
   beforeDestroy() {
     if (this.$sidebar.showSidebar) {
