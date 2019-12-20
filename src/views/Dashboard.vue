@@ -407,20 +407,8 @@ export default {
             message: err.response.data.msg + ", please login to continue "
           });
         });
-    },
-    initBigChart(index) {
-      let chartData = {
-        datasets: [
-          {
-            label: "Performance",
-            data: this.bigLineChart.allData[index]
-          }
-        ],
-        labels: ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-      };
-      this.bigLineChart.chartData = chartData;
-      this.bigLineChart.activeIndex = index;
     }
+
     // getMatchdata() {
     //   var api =
     //     "https://fantasy.iplt20.com/graphql/query/pwa/shme-home-site-match-query";
@@ -431,7 +419,8 @@ export default {
     // }
   },
   mounted() {
-    this.initBigChart(0);
+    this.initTest();
+    // this.initBigChart(0);
     // this.getMatchdata()
   },
   beforeCreate() {
