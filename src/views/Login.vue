@@ -78,9 +78,9 @@
       </div>
       <div class="row mt-3">
         <div class="col-6">
-          <a href="#" class="text-light">
+          <router-link to="/resetpassword" class="text-light">
             <small>Forgot password?</small>
-          </a>
+          </router-link>
         </div>
         <div class="col-6 text-right">
           <router-link to="/register" class="text-light">
