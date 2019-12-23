@@ -6,13 +6,11 @@ Vue.use(Router)
 
 export default new Router({
   linkExactActiveClass: 'active',
-  routes: [
-    {
+  routes: [{
       path: '/',
       redirect: 'login',
       component: DashboardLayout,
-      children: [
-        {
+      children: [{
           path: '/dashboard',
           name: 'dashboard',
           // route level code-splitting
@@ -99,21 +97,25 @@ export default new Router({
       path: '/',
       redirect: 'login',
       component: AuthLayout,
-      children: [
-        {
+      children: [{
           path: '/login',
           name: 'login',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
+          component: () => import( /* webpackChunkName: "demo" */ './views/Login.vue')
         },
         {
           path: '/logout',
           name: '/logout',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Logout.vue')
+          component: () => import( /* webpackChunkName: "demo" */ './views/Logout.vue')
         },
         {
           path: '/register',
           name: 'register',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Register.vue')
+          component: () => import( /* webpackChunkName: "demo" */ './views/Register.vue')
+        },
+        {
+          path: '/resetpassword',
+          name: 'Password reset',
+          component: () => import('./views/PasswordRes.vue')
         }
       ]
     }
