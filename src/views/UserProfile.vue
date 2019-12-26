@@ -33,7 +33,7 @@
                       <img src="img/theme/team-1-800x800.jpg" class="rounded-circle" />
                     </span>
                     <span v-if="url_img!==undefined">
-                      <img :src="url_img" class="rounded-circle" />
+                      <img :src="url_img" class="rounded-circle" id="avatar_circle" />
                     </span>
                   </a>
                 </div>
@@ -277,7 +277,7 @@ export default {
       base_url: base_url,
       url_img: "img/theme/team-1-800x800.jpg",
       dialogVisible: false,
-      fileList: [],
+      // fileList: [],
       full_name: decoded.identity.full_name,
       team: decoded.identity.team,
       mobile: decoded.identity.mobile,
@@ -408,5 +408,10 @@ export default {
 <style>
 .el-message-box {
   width: auto;
+}
+#avatar_circle {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 </style>
