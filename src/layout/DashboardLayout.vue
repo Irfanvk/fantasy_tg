@@ -13,6 +13,7 @@
             path: '/dashboard'
           }"
         />
+        <sidebar-item :link="{name:'Matches', icon: 'ni ni-trophy text-blue', path:'/matches'}" />
         <!-- <sidebar-item :link="{name: 'Points Table', icon: 'ni ni-collection text-blue', path: '/points'}"/> -->
         <sidebar-item
           :link="{name: 'Points Table', icon: 'fa fa-list-ol text-blue', path: '/points'}"
@@ -51,6 +52,10 @@
         <!-- <sidebar-item
           :link="{name: 'Register', icon: 'ni ni-circle-08 text-pink', path: '/register'}"
         />-->
+        <sidebar-item
+          :link="{name:'Support', icon: 'ni ni-support-16 text-blue', path:'/support'}"
+        />
+
         <sidebar-item
           :link="{name: 'Logout', icon: 'ni ni-button-power text-red', path: '/logout'}"
           @click="logout"

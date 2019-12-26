@@ -90,6 +90,11 @@ export default new Router({
           path: '/adminpanel',
           name: 'admin panel',
           component: () => import('./views/AdminPanel.vue')
+        },
+        {
+          path: '/matches',
+          name: 'matches',
+          component: () => import('./views/Matches.vue')
         }
       ]
     },
