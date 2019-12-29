@@ -53,7 +53,6 @@ export default {
     },
     matchDetails() {
       this.loading = true;
-      // var url = base_url + "getmatches";
       var url = base_url + "livematches";
       this.axios
         .get(url)
