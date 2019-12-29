@@ -53,7 +53,8 @@ export default {
     },
     matchDetails() {
       this.loading = true;
-      var url = base_url + "livematches";
+      var url = `https://mapps.cricbuzz.com/cbzios/match/livematches`
+      // var url = base_url + "livematches";
       this.axios
         .get(url)
         .then(res => {
