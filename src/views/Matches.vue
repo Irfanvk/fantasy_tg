@@ -61,7 +61,7 @@ export default {
           // console.log(res.data.matches);
           // this.loading = false;
 
-          this.matchData = res.data.matches;
+          this.matchData = res.data.result.matches;
           // console.log(this.matchData);
           this.loading = false;
         })
