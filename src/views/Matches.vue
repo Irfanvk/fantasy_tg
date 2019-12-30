@@ -46,59 +46,60 @@ export default {
       loading: true
     };
   },
+  // methods: {
+  //   goBack() {
+  //     //   this.$router.push({ name: "login" });
+  //     this.$router.go(-1);
+  //   },
+  //   matchDetails() {
+  //     this.loading = true;
+  //     var url = base_url + "livematches";
+  //     this.axios
+  //       .get(url)
+  //       .then(res => {
+  //         // console.log(res.data.matches);
+  //         // this.loading = false;
+
+  //         this.matchData = res.data.result.matches;
+  //         // console.log(this.matchData);
+  //         this.loading = false;
+  //       })
+  //       .catch(err => {
+  //         this.loading = false;
+  //         this.$notify({
+  //           type: "warning",
+  //           message: "something went wrong"
+  //         });
+  //       });
+  //   }
+  // },
   methods: {
     goBack() {
       //   this.$router.push({ name: "login" });
       this.$router.go(-1);
     },
-    matchDetails() {
+    getMatches() {
       this.loading = true;
-      var url = `https://mapps.cricbuzz.com/cbzios/match/livematches`
-      // var url = base_url + "livematches";
-      this.axios
-        .get(url)
-        .then(res => {
-          // console.log(res.data.matches);
+      var url = "https://mapps.cricbuzz.com/cbzios/match/livematches";
+      // var url = base_url+'livematches'
+      fetch(url)
+        .then(response => {
+          // console.log("res:" + response);
+          // console.log("res json:" + response.json());
           // this.loading = false;
-
-          this.matchData = res.data.result.matches;
-          // console.log(this.matchData);
-          this.loading = false;
+          return response.json();
         })
-        .catch(err => {
+        .then(response => {
+          this.matchData = response.matches;
+
           this.loading = false;
-          this.$notify({
-            type: "warning",
-            message: "something went wrong"
-          });
         });
     }
   },
   created() {
-    var refreshdata = setInterval(this.matchDetails, 60000);
-    // this.matchDetails();
+    this.getMatches()
+    // var refreshdata = setInterval(this.getMatches, 60000);
   }
-  // beforeCreate() {
-  //   // this.matchDetails();
-  //   this.loading = true;
-  //   // var url = base_url + "getmatches";
-  //   var url = "https://mapps.cricbuzz.com/cbzios/match/livematches";
-  //   // console.log(url);
-
-  //   this.axios
-  //     .get(url)
-  //     .then(res => {
-  //       console.log(url);
-  //       this.matchData = res.data.matches;
-  //       this.loading = false;
-  //     })
-  //     .catch(err => {
-  //       this.$notify({
-  //         type: "warning",
-  //         message: err
-  //       });
-  //     });
-  // }
 };
 </script>
 <style >
