@@ -97,8 +97,8 @@ export default {
     }
   },
   created() {
-    this.getMatches()
-    // var refreshdata = setInterval(this.getMatches, 60000);
+    this.getMatches();
+    var refreshdata = setInterval(this.getMatches, 60000);
   }
 };
 </script>
