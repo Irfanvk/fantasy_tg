@@ -46,33 +46,6 @@ export default {
       loading: true
     };
   },
-  // methods: {
-  //   goBack() {
-  //     //   this.$router.push({ name: "login" });
-  //     this.$router.go(-1);
-  //   },
-  //   matchDetails() {
-  //     this.loading = true;
-  //     var url = base_url + "livematches";
-  //     this.axios
-  //       .get(url)
-  //       .then(res => {
-  //         // console.log(res.data.matches);
-  //         // this.loading = false;
-
-  //         this.matchData = res.data.result.matches;
-  //         // console.log(this.matchData);
-  //         this.loading = false;
-  //       })
-  //       .catch(err => {
-  //         this.loading = false;
-  //         this.$notify({
-  //           type: "warning",
-  //           message: "something went wrong"
-  //         });
-  //       });
-  //   }
-  // },
   methods: {
     goBack() {
       //   this.$router.push({ name: "login" });
@@ -81,12 +54,8 @@ export default {
     getMatches() {
       this.loading = true;
       var url = "https://mapps.cricbuzz.com/cbzios/match/livematches";
-      // var url = base_url+'livematches'
       fetch(url)
         .then(response => {
-          // console.log("res:" + response);
-          // console.log("res json:" + response.json());
-          // this.loading = false;
           return response.json();
         })
         .then(response => {
