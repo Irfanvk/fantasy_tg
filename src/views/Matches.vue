@@ -3,7 +3,6 @@
     <base-alert type="success">
       <h1 class="display-1 text-center" style>
         <span class="alert-inner--icon">
-          <i class="ni ni-watch-time"></i>
         </span>Match Details
       </h1>
     </base-alert>
