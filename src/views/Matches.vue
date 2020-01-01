@@ -2,8 +2,7 @@
   <div v-loading="loading">
     <base-alert type="success">
       <h1 class="display-1 text-center" style>
-        <span class="alert-inner--icon">
-        </span>Match Details
+        <span class="alert-inner--icon"></span>Match Details
       </h1>
     </base-alert>
     <el-page-header @back="goBack" content="match"></el-page-header>
@@ -11,7 +10,22 @@
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
       <!-- </base-header> -->
       <span v-for="data in matchData" v-bind:key="data.match_id">
-        <base-button block type="default mt-3 " style="margin:0px 10px 0px 10px">
+        <card header-classes="bg-transparent" class="row align-items-center">
+            <div slot="header" class="row align-items-center">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">{{data.team1.name +" vs "+data.team2.name}}</h6>
+              </div>
+            </div>
+            <!-- <img src="../../public/img/brand/KKR.png" height="80" /> -->
+            <p>{{data.series_name}}</p>
+
+            <div slot="footer" class="row align-items-center">
+              <div class="col">
+                <h5>Kolkata Knight Riders</h5>
+              </div>
+            </div>
+          </card>
+        <base-button block type="default mt-3 " style>
           <small>{{data.series_name}}</small>
           <br />
           <span>
@@ -55,6 +69,7 @@ export default {
       var url = "https://mapps.cricbuzz.com/cbzios/match/livematches";
       fetch(url)
         .then(response => {
+          this.loading = false;
           return response.json();
         })
         .then(response => {
@@ -63,6 +78,9 @@ export default {
           this.loading = false;
         });
     }
+  },
+  beforeCreate(){
+    this.getMatches()
   },
   created() {
     this.getMatches();
