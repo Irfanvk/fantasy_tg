@@ -19,21 +19,26 @@
                   <div class="pl-lg-4">
                     <div class="row">
                       <div class="col-sm-6">
-                        <el-select v-model="team1" slot="prepend" placeholder="Match Between">
-                          <el-option label="IND" value="IND"></el-option>
-                          <el-option label="AUS" value="AUS"></el-option>
-                          <el-option label="ENG" value="ENG"></el-option>
-                          <el-option label="NZ" value="NZ"></el-option>
-                          <el-option label="SA" value="SA"></el-option>
-                          <el-option label="PAK" value="PAK"></el-option>
-                          <el-option label="AFG" value="AFG"></el-option>
-                          <el-option label="WI" value="WI"></el-option>
-                          <el-option label="SL" value="SL"></el-option>
-                          <el-option label="BAN" value="BAN"></el-option>
+                        <el-select
+                          id="postteam"
+                          v-model="team1"
+                          slot="prepend"
+                          placeholder="Match Between"
+                        >
+                          <el-option
+                            v-for="tm in teamlist"
+                            v-bind:value="tm.value"
+                            v-bind:key="tm.label"
+                          >{{ tm.label }}</el-option>
                         </el-select>
                         <i class="container">vs</i>
-                        <el-select v-model="team2" slot="prepend" placeholder="Match Between">
-                          <el-option label="IND" value="IND"></el-option>
+                        <el-select
+                          id="postteam"
+                          v-model="team2"
+                          slot="prepend"
+                          placeholder="Match Between"
+                        >
+                          <!-- <el-option label="IND" value="IND"></el-option>
                           <el-option label="AUS" value="AUS"></el-option>
                           <el-option label="ENG" value="ENG"></el-option>
                           <el-option label="NZ" value="NZ"></el-option>
@@ -42,7 +47,7 @@
                           <el-option label="AFG" value="AFG"></el-option>
                           <el-option label="WI" value="WI"></el-option>
                           <el-option label="SL" value="SL"></el-option>
-                          <el-option label="BAN" value="BAN"></el-option>
+                          <el-option label="BAN" value="BAN"></el-option>-->
                         </el-select>
                         <!-- <base-dropdown label="match between" placeholder="enter">aa</base-dropdown> -->
                       </div>
@@ -184,6 +189,16 @@ export default {
       full_name: decoded.identity.full_name,
       team1: null,
       team2: "",
+      teamlist: [
+        { label: "CSK", value: "CSK", name: "Chennai Super Kings" },
+        { label: "DC", value: "DC", name: " Delhi Capitals" },
+        { label: "KKR", value: "KKR", name: "Kings XI Punjab" },
+        { label: "KXIP", value: "KXIP", name: "Kolkata Knight Riders" },
+        { label: "MI", value: "MI", name: " Mumbai Indians" },
+        { label: "RCB", value: "RCB", name: " Rajasthan Royals" },
+        { label: "RR", value: "RR", name: "Royal Challengers Bangalore" },
+        { label: "SRH", value: "SRH", name: " Sunrisers Hyderabad" }
+      ],
       model: {
         question: "",
         option1: "",
@@ -322,5 +337,8 @@ export default {
 }
 .input-with-select .el-input-group__prepend {
   background-color: #fff;
+}
+#postteam {
+  padding: 10px;
 }
 </style>
