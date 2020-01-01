@@ -10,21 +10,6 @@
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
       <!-- </base-header> -->
       <span v-for="data in matchData" v-bind:key="data.match_id">
-        <card header-classes="bg-transparent" class="row align-items-center">
-            <div slot="header" class="row align-items-center">
-              <div class="col">
-                <h6 class="text-uppercase text-muted ls-1 mb-1">{{data.team1.name +" vs "+data.team2.name}}</h6>
-              </div>
-            </div>
-            <!-- <img src="../../public/img/brand/KKR.png" height="80" /> -->
-            <p>{{data.series_name}}</p>
-
-            <div slot="footer" class="row align-items-center">
-              <div class="col">
-                <h5>Kolkata Knight Riders</h5>
-              </div>
-            </div>
-          </card>
         <base-button block type="default mt-3 " style>
           <small>{{data.series_name}}</small>
           <br />
@@ -66,26 +51,38 @@ export default {
     },
     getMatches() {
       this.loading = true;
-      var url = "https://mapps.cricbuzz.com/cbzios/match/livematches";
+      var url = "https://mapps.cricbuzz.com/cbzios/match/livematches.json";
       fetch(url)
         .then(response => {
+          // console.log(response);
+          // console.log("fetch done");
           this.loading = false;
+          // ress = response.json();
           return response.json();
         })
         .then(response => {
+          // console.log("ne w ", response);
           this.matchData = response.matches;
 
           this.loading = false;
-        });
+        })
+        .catch(err => console.error(err));
     }
   },
-  beforeCreate(){
-    this.getMatches()
-  },
-  created() {
+  mounted() {
     this.getMatches();
     var refreshdata = setInterval(this.getMatches, 60000);
   }
+  /*{
+    fetch("https://mapps.cricbuzz.com/cbzios/match/livematches.json", {
+      headers: {
+        "Access-Control-Allow-Origin": "https://mapps.cricbuzz.com"
+      }
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }*/
 };
 </script>
 <style >
