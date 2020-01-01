@@ -108,16 +108,16 @@
           <div class="col-xl-6">
             <ul class="nav nav-footer justify-content-center justify-content-xl-end">
               <li class="nav-item">
-                <a href="#" class="nav-link" target="_blank">Target Guyz</a>
+                <a href="www.targetguyz.com" class="nav-link" target="_blank">Target Guyz</a>
               </li>
               <li class="nav-item">
-                <a href="google.com" class="nav-link" target="_blank">
+                <a href="www.targetguyz.com" class="nav-link" target="_blank">
                   About
                   Us
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link" target="_blank">Blog</a>
+                <a href="www.targetguyz.com" class="nav-link" target="_blank">Blog</a>
               </li>
               <!-- <li class="nav-item">
                 <a
