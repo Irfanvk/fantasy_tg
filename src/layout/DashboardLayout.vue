@@ -13,11 +13,12 @@
             path: '/dashboard'
           }"
         />
-        <sidebar-item :link="{name:'Matches', icon: 'ni ni-trophy text-blue', path:'/matches'}" />
+        <!-- <sidebar-item :link="{name:'Matches', icon: 'ni ni-trophy text-blue', path:'/matches'}" /> -->
         <!-- <sidebar-item :link="{name: 'Points Table', icon: 'ni ni-collection text-blue', path: '/points'}"/> -->
         <sidebar-item
           :link="{name: 'Points Table', icon: 'fa fa-list-ol text-blue', path: '/points'}"
         />
+        <sidebar-item :link="{name:'Question Grp', icon: 'ni ni-pus',path:'/quesgroups'}" />
         <sidebar-item
           :link="{name: 'Questions', icon: 'fa fa-question text-blue', path: '/questions'}"
         />
