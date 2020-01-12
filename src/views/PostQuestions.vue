@@ -8,22 +8,30 @@
               <div slot="header" class="bg-white border-0">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Add Questions</h3>
+                    <h3 class="mb-0">Add Question Group</h3>
                   </div>
                 </div>
               </div>
               <template>
                 <!-- <form @submit.prevent> -->
-                <form role="form">
-                  <h6 class="heading-small text-muted mb-4">Question</h6>
+                <!-- <form role="form"> -->
+                <el-form
+                  :model="dynamicValidateForm"
+                  ref="dynamicValidateForm"
+                  label-width="120px"
+                  class="demo-dynamic"
+                  label-position="top"
+                >
+                  <h6 class="heading-small text-muted mb-4">Teams</h6>
                   <div class="pl-lg-4">
                     <div class="row">
-                      <div class="col-sm-6">
+                      <div class="col-sm-12">
                         <el-select
                           id="postteam"
                           v-model="team1"
                           slot="prepend"
                           placeholder="Match Between"
+                          style="padding:10px"
                         >
                           <el-option
                             v-for="tm in teamlist"
@@ -37,53 +45,51 @@
                           v-model="team2"
                           slot="prepend"
                           placeholder="Match Between"
+                          style="padding:10px"
+                          :rules="[{ required: true, message: 'Please select a Team', trigger: 'change' }]"
                         >
-                          <!-- <el-option label="IND" value="IND"></el-option>
-                          <el-option label="AUS" value="AUS"></el-option>
-                          <el-option label="ENG" value="ENG"></el-option>
-                          <el-option label="NZ" value="NZ"></el-option>
-                          <el-option label="SA" value="SA"></el-option>
-                          <el-option label="PAK" value="PAK"></el-option>
-                          <el-option label="AFG" value="AFG"></el-option>
-                          <el-option label="WI" value="WI"></el-option>
-                          <el-option label="SL" value="SL"></el-option>
-                          <el-option label="BAN" value="BAN"></el-option>-->
+                          <el-option
+                            v-for="tm in teamlist"
+                            v-bind:value="tm.value"
+                            v-bind:key="tm.label"
+                          >{{ tm.label }}</el-option>
                         </el-select>
                         <!-- <base-dropdown label="match between" placeholder="enter">aa</base-dropdown> -->
                       </div>
                     </div>
                     <div class="row mt-3">
-                      <div class="col-lg-12">
-                        <base-input
-                          alternative
-                          label="Question"
-                          placeholder="enter here"
-                          input-classes="form-control-alternative"
-                          v-model="model.question"
-                        />
-                      </div>
-                    </div>
-                    <div class="row">
                       <div class="col-lg-6">
-                        <base-input
-                          alternative
-                          label="option 1"
-                          placeholder="option"
-                          input-classes="form-control-alternative"
-                          v-model="model.option1"
-                        />
+                        <el-form-item
+                          label="Score"
+                          prop="score"
+                          :rules="[{ required: true, message: 'Score is required'},
+                          { type: 'number', message: 'this must be a number'}]"
+                        >
+                          <el-input
+                            type="age"
+                            class="col-sm-4"
+                            v-model.number="dynamicValidateForm.score"
+                            autocomplete="off"
+                          ></el-input>
+                        </el-form-item>
                       </div>
                       <div class="col-lg-6">
-                        <base-input
-                          alternative
-                          label="option 2"
-                          placeholder="option"
-                          input-classes="form-control-alternative"
-                          v-model="model.option2"
-                        />
+                        <el-form-item
+                          label="Bonus Score"
+                          prop="bscore"
+                          :rules="[{ required: true, message: 'Score is required'},
+                          { type: 'number', message: 'this must be a number'}]"
+                        >
+                          <el-input
+                            type="age"
+                            class="col-sm-4"
+                            v-model.number="dynamicValidateForm.bscore"
+                            autocomplete="off"
+                          ></el-input>
+                        </el-form-item>
                       </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                       <div class="col-lg-6">
                         <base-input
                           alternative
@@ -102,75 +108,38 @@
                           v-model="model.option4"
                         />
                       </div>
-                    </div>
+                    </div>-->
                   </div>
                   <hr class="my-4" />
-                  <base-button block type="primary" @click="PostQuest" v-loading="loading">Submit</base-button>
-                  <!-- Address -->
-                  <!-- <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <base-input
-                        alternative
-                        label="Address"
-                        placeholder="Home Address"
-                        input-classes="form-control-alternative"
-                        v-model="model.address"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <base-input
-                        alternative
-                        label="City"
-                        placeholder="City"
-                        input-classes="form-control-alternative"
-                        v-model="model.city"
-                      />
-                    </div>
-                    <div class="col-lg-4">
-                      <base-input
-                        alternative
-                        label="Country"
-                        placeholder="Country"
-                        input-classes="form-control-alternative"
-                        v-model="model.country"
-                      />
-                    </div>
-                    <div class="col-lg-4">
-                      <base-input
-                        alternative
-                        label="Postal code"
-                        placeholder="Postal code"
-                        input-classes="form-control-alternative"
-                        v-model="model.zipCode"
-                      />
-                    </div>
-                  </div>
-                </div>
-                  <hr class="my-4">-->
-                  <!-- Description -->
-                  <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <base-input alternative label="About Me">
-                      <textarea
-                        rows="4"
-                        class="form-control form-control-alternative"
-                        placeholder="A few words about you ..."
-                      >A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                    </base-input>
-                  </div>-->
-                  <!-- </div> -->
-                </form>
+                  <base-button block type="primary" @click="PostQuest" v-loading="loading">Add</base-button>
+                </el-form>
+                <!-- </form> -->
               </template>
             </card>
           </div>
         </div>
       </div>
     </base-header>
+    <span v-for="data in groupData" v-bind:key="data.gid">
+      <base-button block type="default mt-3 " style>
+        <small>{{data.series_name}}</small>
+        <br />
+        <span>
+          <strong>{{data.team1.name +" vs "+data.team2.name}}</strong>
+        </span>
+        <badge type="black">{{data.match_id}}</badge>
+        <!-- <el-divider content-position="left">{{data.status}}</el-divider> -->
+        <el-divider content-position="left">{{data.header.status}}</el-divider>
+        <span>{{data.header.type}}</span>
+        <el-divider direction="vertical"></el-divider>
+        <span>{{data.header.match_desc}}</span>
+        <!-- <el-divider direction="vertical"></el-divider> -->
+        <!-- <el-divider></el-divider> -->
+        <br />
+        <small>{{data.venue.name}}</small>
+        <small>{{" ("+ data.venue.location}} )</small>
+      </base-button>
+    </span>
   </div>
 </template>
 <script>
@@ -179,12 +148,16 @@ import { base_url } from "../../config";
 import axios from "axios";
 
 export default {
-  name: "user-profile",
+  name: "post-quest",
   data() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
 
     return {
+      dynamicValidateForm: {
+        score: "10",
+        bscore: "5"
+      },
       loading: false,
       full_name: decoded.identity.full_name,
       team1: null,
@@ -207,27 +180,13 @@ export default {
         option4: "",
         added_by: this.full_name,
         teams: this.team1 + " vs " + this.team2
-      }
+      },
+      groupData: ""
     };
   },
   methods: {
     getUsers() {
       url = base_url + "test";
-      // this.axios.interceptors.request.use(
-      //   config => {
-      //     let token = localStorage.usertoken;
-
-      //     if (token) {
-      //       config.headers["Authorization"] = `Bearer ${token}`;
-      //     }
-
-      //     return config;
-      //   },
-
-      //   error => {
-      //     return Promise.reject(error);
-      //   }
-      // );
       this.axios
         .get(url)
         .then(response => {
@@ -261,42 +220,38 @@ export default {
       var rurl = base_url + "refresh";
       var ref_token = localStorage.getItem("refreshtoken");
       var usertoken = localStorage.getItem("usertoken");
-      // var config = {
-      //   headers: { Authorization: "bearer " + ref_token }
-      // };
-      // this.axios.post(rurl, config).then(res => {
-      //   console.log(res.data);
-      //   localStorage.setItem("access_token", res.data.access_token);
-      // });
-      // axios.defaults.baseURL = rurl;
-      // axios.defaults.headers.common = { Authorization: `Bearer ${usertoken}` };
+    },
+    getGroups() {
+      var loading = true;
+      var url = base_url + "questiongroups";
+      this.axios
+        .get(url)
+        .then(res => {
+          this.groupData = res.data.result;
+          console.log(this.groupData);
+        })
+        .catch(err => {
+          this.$notify({
+            type: "danger",
+            message: err
+          });
+        });
     },
     PostQuest() {
       var loading = true;
-      var url = base_url + "questions";
-      // console.log(this.model)
-      // console.log(this.team1 + " vs " + this.team2);
+      var url = base_url + "questiongrp";
       this.axios
         .post(url, {
-          question: this.model.question,
-          option1: this.model.option1,
-          option2: this.model.option2,
-          option3: this.model.option3,
-          option4: this.model.option4,
-          added_by: this.model.added_by,
+          group: this.dynamicValidateForm,
+          added_by: this.full_name,
           teams_playing: this.team1 + " vs " + this.team2
         })
         .then(res => {
-          // this.$router.push({ name: "login" });
-          // this.$notify({
-          //   type: "default",
-          //   message: res.data.result.email + " Successfully "
-          // });
           this.$notify({
             type: "primary",
             message: res.data.msg + " Successfully "
           });
-          this.$router.push({ name: "Questions" });
+          // this.$router.push({ name: "Questions" });
           // this.$notify({
           //   type: "secondary",
           //   message: res.data.result.email + " Successfully "
@@ -318,7 +273,9 @@ export default {
       var loading = false;
     }
   },
-
+  mounted() {
+    this.getGroups;
+  },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
       this.$router.push({ name: "login" });
