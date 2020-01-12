@@ -95,6 +95,11 @@ export default new Router({
           path: '/matches',
           name: 'matches',
           component: () => import('./views/Matches.vue')
+        },
+        {
+          path: '/quesgroups',
+          name: 'question qroups',
+          component: () => import('./views/QuesGroup.vue')
         }
       ]
     },
