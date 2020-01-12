@@ -17,13 +17,13 @@
             <span class="avatar avatar-sm rounded-circle">
               <!-- <img alt="Image placeholder" src="../../public/img/brand/ipl-logo.png"> -->
               <!-- <img alt="Image placeholder" src="../../public/img/theme/team-4-800x800.jpg" /> -->
-              <span v-if="url_img!==null">
-                <img :src="url_img" alt="Image placeholder" class="rounded-circle" />
+              <span v-if="url_img!==null||undefined">
+                <img :src="url_img" alt="Img" class="rounded-circle" />
               </span>
               <span v-else>
                 <img
                   src="../../public/img/theme/team-4-800x800.jpg"
-                  alt="Image placeholder"
+                  alt="Image"
                   class="rounded-circle"
                 />
               </span>
@@ -96,6 +96,35 @@ export default {
       localStorage.clear();
       window.location = "/";
     },
+    getAvatar() {
+      this.axios.interceptors.request.use(
+        config => {
+          let token = localStorage.usertoken;
+
+          if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+          }
+
+          return config;
+        },
+
+        error => {
+          return Promise.reject(error);
+        }
+      );
+      let url = base_url + "avatar/" + this.email;
+      this.axios
+        .post(url)
+        .then(response => {
+          if (response.data.url !== undefined) {
+            this.url_img = response.data.url;
+            localStorage.setItem("avatar", response.data.url);
+          }
+        })
+        .catch(err => {
+          // window.location = "/";
+        });
+    },
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
@@ -105,6 +134,9 @@ export default {
     toggleMenu() {
       this.showMenu = !this.showMenu;
     }
+  },
+  created() {
+    this.getAvatar();
   }
 };
 </script>
