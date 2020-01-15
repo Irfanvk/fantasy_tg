@@ -60,7 +60,7 @@
                     <div class="row mt-3">
                       <div class="col-lg-6">
                         <el-form-item
-                          label="Score"
+                          label="Score per question"
                           prop="score"
                           :rules="[{ required: true, message: 'Score is required'},
                           { type: 'number', message: 'this must be a number'}]"
@@ -120,24 +120,36 @@
         </div>
       </div>
     </base-header>
-    <span v-for="data in groupData" v-bind:key="data.gid">
-      <base-button block type="default mt-3 " style>
-        <small>{{data.series_name}}</small>
-        <br />
+    <span v-for="data in groupData" v-bind:key="data.gid" class="container">
+      <base-button block type="default mt-3 ">
         <span>
-          <strong>{{data.team1.name +" vs "+data.team2.name}}</strong>
+          <!-- <strong>{{data.teams_playing}}</strong> -->
+          <strong>
+            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
+          </strong>
         </span>
-        <badge type="black">{{data.match_id}}</badge>
+        <br />
+        <small>{{data.gid}}</small>
+        <!-- <badge type="black">{{data.added_on.$date}}</badge> -->
         <!-- <el-divider content-position="left">{{data.status}}</el-divider> -->
-        <el-divider content-position="left">{{data.header.status}}</el-divider>
-        <span>{{data.header.type}}</span>
+        <el-divider content-position="center">{{data.teams_playing}}</el-divider>
+        <span>
+          <i>
+            Score is
+            {{data.group.score}}
+          </i>
+        </span>
         <el-divider direction="vertical"></el-divider>
-        <span>{{data.header.match_desc}}</span>
+        <span>
+          <i>Bonus is {{data.group.bscore}}</i>
+        </span>
         <!-- <el-divider direction="vertical"></el-divider> -->
         <!-- <el-divider></el-divider> -->
         <br />
-        <small>{{data.venue.name}}</small>
-        <small>{{" ("+ data.venue.location}} )</small>
+        <small>{{" ( added by "+ data.added_by+", "}}</small>
+        <!-- <small>{{", "+ data.added_on.$date | moment("from", true) }} ago )</small> -->
+        <small>{{ data.added_on.$date | moment("from", true) }} ago )</small>
       </base-button>
     </span>
   </div>
@@ -146,6 +158,7 @@
 import jwtDecode from "jwt-decode";
 import { base_url } from "../../config";
 import axios from "axios";
+// import moment from "vue-moment";
 
 export default {
   name: "post-quest",
@@ -222,18 +235,61 @@ export default {
       var usertoken = localStorage.getItem("usertoken");
     },
     getGroups() {
+      var options = {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        day: "numeric",
+        weekday: "short",
+        year: "numeric",
+        month: "long"
+      };
       var loading = true;
       var url = base_url + "questiongroups";
       this.axios
         .get(url)
         .then(res => {
           this.groupData = res.data.result;
-          console.log(this.groupData);
+          // this.groupData = this.groupData.map(data => {
+          //   data.added_on = new Date(data.added_on.$date).moment.updateLocale(
+          //     "en",
+          //     options
+          //   );
+          //   return data;
+          // });
         })
         .catch(err => {
           this.$notify({
             type: "danger",
             message: err
+          });
+        });
+    },
+    editGroup() {},
+    deleteGroup(gid) {
+      var url = base_url + "deletegroup/" + gid;
+      this.$confirm(
+        "This will delete the question group. Continue?",
+        "Delete!",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "error"
+        }
+      )
+        .then(() => {
+          this.axios.delete(url).then(response => {
+            this.$notify({
+              type: "warning",
+              message: response.data.msg
+            });
+            this.getGroups();
+          });
+        })
+        .catch(() => {
+          this.$notify({
+            type: "warning",
+            message: "action cancelled"
           });
         });
     },
@@ -251,6 +307,7 @@ export default {
             type: "primary",
             message: res.data.msg + " Successfully "
           });
+          this.getGroups();
           // this.$router.push({ name: "Questions" });
           // this.$notify({
           //   type: "secondary",
@@ -266,15 +323,18 @@ export default {
           // });
         })
         .catch(err => {
-          // console.log(err);
+          console.log(err);
           this.RefToken();
           // this.$router.go();
         });
-      var loading = false;
+      loading = false;
     }
   },
   mounted() {
-    this.getGroups;
+    this.getGroups();
+  },
+  created() {
+    // this.getGroups;
   },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
