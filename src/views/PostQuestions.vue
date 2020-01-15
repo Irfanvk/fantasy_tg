@@ -8,7 +8,12 @@
               <div slot="header" class="bg-white border-0">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Add Question Group</h3>
+                    <span v-if="editmode===false">
+                      <h3 class="mb-0">Add Question Group</h3>
+                    </span>
+                    <span v-else>
+                      <h3 class="mb-0" id="edit_id">Edit Question Group</h3>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -111,7 +116,12 @@
                     </div>-->
                   </div>
                   <hr class="my-4" />
-                  <base-button block type="primary" @click="PostQuest" v-loading="loading">Add</base-button>
+                  <span v-if="editmode==false">
+                    <base-button block type="primary" @click="PostQuest" v-loading="loading">Add</base-button>
+                  </span>
+                  <span v-if="editmode==true">
+                    <base-button block type="primary" @click="PostQuest" v-loading="loading">Update</base-button>
+                  </span>
                 </el-form>
                 <!-- </form> -->
               </template>
@@ -125,7 +135,7 @@
         <span>
           <!-- <strong>{{data.teams_playing}}</strong> -->
           <strong>
-            <el-button type="primary" icon="el-icon-edit" circle></el-button>
+            <el-button type="primary" icon="el-icon-edit" circle @click="editGroup(data.gid)"></el-button>
             <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
           </strong>
         </span>
@@ -171,6 +181,7 @@ export default {
         score: "10",
         bscore: "5"
       },
+      editmode: false,
       loading: false,
       full_name: decoded.identity.full_name,
       team1: null,
@@ -244,7 +255,7 @@ export default {
         year: "numeric",
         month: "long"
       };
-      var loading = true;
+      this.loading = true;
       var url = base_url + "questiongroups";
       this.axios
         .get(url)
@@ -264,8 +275,28 @@ export default {
             message: err
           });
         });
+      this.loading = false;
     },
-    editGroup() {},
+    editGroup(gid) {
+      // window.location = "#edit_id";
+      // this.loading = true;
+      this.editmode = true;
+      // var url = base_url + "editgroup/" + gid;
+      // this.axios
+      //   .post(url, {
+      //     group: this.dynamicValidateForm,
+      //     added_by: this.full_name,
+      //     teams_playing: this.team1 + " vs " + this.team2
+      //   })
+      //   .then(res => {
+      //     this.$notify({
+      //       type: "primary",
+      //       message: res.data.msg + " Successfully "
+      //     });
+      //     this.getGroups();
+      //   });
+      this.editmode = false;
+    },
     deleteGroup(gid) {
       var url = base_url + "deletegroup/" + gid;
       this.$confirm(
@@ -294,7 +325,7 @@ export default {
         });
     },
     PostQuest() {
-      var loading = true;
+      this.loading = true;
       var url = base_url + "questiongrp";
       this.axios
         .post(url, {
@@ -327,7 +358,7 @@ export default {
           this.RefToken();
           // this.$router.go();
         });
-      loading = false;
+      this.loading = false;
     }
   },
   mounted() {
