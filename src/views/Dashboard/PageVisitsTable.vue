@@ -31,7 +31,8 @@
           <td>{{row.team2}}</td>
           <td>{{row.type}}</td>
           <td>{{row.winner_team}}</td>
-          <td>{{row.matchStarted}}</td>
+          <span v-if="row.matchStarted==true">Yes</span>
+          <span v-if="row.matchStarted==false">No</span>
 
           <td>
             <badge class="badge-dot mr-4" :type="row.statusType">
