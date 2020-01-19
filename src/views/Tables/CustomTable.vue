@@ -37,7 +37,7 @@
                   style="cursor:pointer;"
                   type="primary"
                   @click="$router.push('questions/'+row.qid)"
-                >{{row.qid.toString().substr(0,18)}}</el-tag>
+                >{{row.teams_playing.toString().substr(0,18)}}</el-tag>
               </div>
             </div>
           </th>
@@ -135,7 +135,7 @@ export default {
         year: "numeric",
         month: "long"
       };
-      var url = base_url + "questions";
+      var url = base_url + "questiongroups";
 
       // const token = localStorage.usertoken;
       // var config = {
@@ -161,7 +161,7 @@ export default {
         .get(url)
         .then(response => {
           // console.log(response.data.questions);
-          this.quesData = response.data.questions;
+          this.quesData = response.data.result;
           // this.quesData = this.quesData.map(user => {
           // user.added_on = new Date(Date.now()).toLocaleString("en", options);
           // return user;

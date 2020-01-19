@@ -27,6 +27,11 @@ export default new Router({
           component: () => import('./views/PointsTable.vue')
         },
         {
+          path: '/groups',
+          name: 'Groups',
+          component: () => import('./views/Groups.vue')
+        },
+        {
           path: '/questions',
           name: 'Questions',
           component: () => import('./views/Questions.vue')
@@ -97,7 +102,7 @@ export default new Router({
           component: () => import('./views/Matches.vue')
         },
         {
-          path: '/quesgroups',
+          path: '/quesgroups/:gid/:teams',
           name: 'question qroups',
           component: () => import('./views/QuesGroup.vue')
         }

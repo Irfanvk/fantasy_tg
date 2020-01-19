@@ -92,7 +92,19 @@
                             autocomplete="off"
                           ></el-input>
                         </el-form-item>
+                        <!-- <el-input></el-input> -->
                       </div>
+                      <h5 style="margin-left:20px">Description</h5>
+                      <textarea
+                        required
+                        label="Description"
+                        class="form-control"
+                        id="exampleFormControlTextarea1"
+                        rows="2"
+                        placeholder="Write description here ..."
+                        v-model="description"
+                        style="margin:20px"
+                      ></textarea>
                     </div>
                     <!-- <div class="row">
                       <div class="col-lg-6">
@@ -131,15 +143,7 @@
       </div>
     </base-header>
     <span v-for="data in groupData" v-bind:key="data.gid" class="container">
-      <base-button block type="default mt-3 ">
-        <span>
-          <!-- <strong>{{data.teams_playing}}</strong> -->
-          <strong>
-            <el-button type="primary" icon="el-icon-edit" circle @click="editGroup(data.gid)"></el-button>
-            <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
-          </strong>
-        </span>
-        <br />
+      <base-button block type="default mt-3 " v-on:click="navigate(data.gid,data.teams_playing)">
         <small>{{data.gid}}</small>
         <!-- <badge type="black">{{data.added_on.$date}}</badge> -->
         <!-- <el-divider content-position="left">{{data.status}}</el-divider> -->
@@ -160,6 +164,16 @@
         <small>{{" ( added by "+ data.added_by+", "}}</small>
         <!-- <small>{{", "+ data.added_on.$date | moment("from", true) }} ago )</small> -->
         <small>{{ data.added_on.$date | moment("from", true) }} ago )</small>
+        <br />
+        <small>{{ data.description}}</small>
+        <br />
+        <span>
+          <!-- <strong>{{data.teams_playing}}</strong> -->
+          <strong>
+            <!-- <el-button type="primary" icon="el-icon-edit" circle @click="editGroup(data.gid)"></el-button> -->
+            <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
+          </strong>
+        </span>
       </base-button>
     </span>
   </div>
@@ -185,7 +199,8 @@ export default {
       loading: false,
       full_name: decoded.identity.full_name,
       team1: null,
-      team2: "",
+      team2: null,
+      description: "",
       teamlist: [
         { label: "CSK", value: "CSK", name: "Chennai Super Kings" },
         { label: "DC", value: "DC", name: " Delhi Capitals" },
@@ -209,6 +224,12 @@ export default {
     };
   },
   methods: {
+    navigate(qgid, teams) {
+      this.$router.push({
+        name: "question qroups",
+        params: { gid: qgid, teams: teams }
+      });
+    },
     getUsers() {
       url = base_url + "test";
       this.axios
@@ -277,10 +298,16 @@ export default {
         });
       this.loading = false;
     },
-    editGroup(gid) {
-      // window.location = "#edit_id";
-      // this.loading = true;
-      this.editmode = true;
+    // editGroup(gid) {
+    //   this.editmode = true;
+    //   var url = base_url + "editgroup/" + gid;
+    //   this.axios.get(url).then(res=>
+    //   this.group.score=
+    //   this.group.bscore=
+    //   this.teams_playing=
+    //   )
+    // },
+    editGroup_() {
       // var url = base_url + "editgroup/" + gid;
       // this.axios
       //   .post(url, {
@@ -331,7 +358,8 @@ export default {
         .post(url, {
           group: this.dynamicValidateForm,
           added_by: this.full_name,
-          teams_playing: this.team1 + " vs " + this.team2
+          teams_playing: this.team1 + " vs " + this.team2,
+          description: this.description
         })
         .then(res => {
           this.$notify({
