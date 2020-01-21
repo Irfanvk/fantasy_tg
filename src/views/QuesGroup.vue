@@ -31,23 +31,21 @@
               <el-form-item
                 prop="question"
                 label="Question"
-                :rules="[
-      { required: true, message: 'Please input question', trigger: 'blur' }
-    ]"
+                :rules="[{ required: true, message: 'Please input question', trigger: 'blur' }]"
               >
                 <el-input v-model="dynamicValidateForm.question"></el-input>
               </el-form-item>
               <el-form-item
-                v-for="(domain, index) in dynamicValidateForm.domains"
+                v-for="(option, index) in dynamicValidateForm.options"
                 :label="'Option ' + index"
-                :key="domain.key"
-                :prop="'domains.' + index + '.value'"
+                :key="option.key"
+                :prop="'options.' + index + '.value'"
                 :rules="{
       required: true, message: 'option can not be null', trigger: 'blur'
     }"
               >
-                <el-input v-model="domain.value"></el-input>
-                <el-button @click.prevent="removeDomain(domain)">Delete</el-button>
+                <el-input v-model="option.value"></el-input>
+                <el-button @click.prevent="removeDomain(option)">Delete</el-button>
               </el-form-item>
               <el-form-item>
                 <el-button type="primary" @click="submitForm('dynamicValidateForm')">Submit</el-button>
@@ -63,15 +61,60 @@
         </card>
       </div>
     </base-header>
+    <span v-for="data in quesData" v-bind:key="data.qid" class="container">
+      <base-button block type="default mt-3 ">
+        <small>{{data.qid}}</small>
+        <!-- <badge type="black">{{data.added_on.$date}}</badge> -->
+        <!-- <el-divider content-position="left">{{data.status}}</el-divider> -->
+        <el-divider content-position="center">{{data.question}}</el-divider>
+        <span v-for="option,index in data.options" v-bind:key="index">
+          <i>
+            <el-divider direction="vertical"></el-divider>
+            option {{index}} :
+            {{option.value}}
+            <el-divider direction="vertical"></el-divider>
+          </i>
+        </span>
+        <span>
+          <!-- <i>Bonus is {{data.group.bscore}}</i> -->
+        </span>
+        <!-- <el-divider direction="vertical"></el-divider> -->
+        <!-- <el-divider></el-divider> -->
+        <br />
+        <small>( added {{ data.added_on.$date | moment("from", true) }} ago )</small>
+        <br />
+        <small>{{ data.description}}</small>
+        <br />
+        <span>
+          <!-- <strong>{{data.teams_playing}}</strong> -->
+        </span>
+      </base-button>
+      <card block class="text-center">
+        <strong>
+          <!-- <el-button type="primary" icon="el-icon-edit" circle @click="editGroup(data.gid)"></el-button> -->
+          <el-button
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Delete Question"
+            type="danger"
+            icon="el-icon-delete"
+            circle
+            @click="deleteQues(data.qid)"
+          ></el-button>
+        </strong>
+      </card>
+    </span>
   </div>
 </template>
 <script>
+import { base_url } from "../../config";
 export default {
   name: "question-group",
   data() {
     return {
+      quesData: [],
       dynamicValidateForm: {
-        domains: [
+        options: [
           {
             key: 1,
             value: ""
@@ -85,33 +128,107 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
+    getGroups() {
+      this.loading = true;
+      var options = {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        day: "numeric",
+        weekday: "short",
+        year: "numeric",
+        month: "long"
+      };
+      this.loading = true;
+      var url = base_url + "questions/" + this.$route.params.gid;
+      this.axios
+        .get(url)
+        .then(res => {
+          this.quesData = res.data.questions;
+          // eslint-disable-next-line no-console
+        })
+        .catch(err => {
+          this.$notify({
+            type: "danger",
+            message: err
+          });
+        });
+      this.loading = false;
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          console.log(this.dynamicValidateForm);
-          alert("submited!");
-          this.resetForm("dynamicValidateForm");
+          this.postData();
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
+    postData() {
+      var url = base_url + "question/new";
+      this.axios
+        .post(url, {
+          options: this.dynamicValidateForm.options,
+          question: this.dynamicValidateForm.question,
+          gid: this.$route.params.gid
+        })
+        .then(res => {
+          this.$notify({
+            type: "primary",
+            message: res.data.msg + " Successfully "
+          });
+          this.getGroups();
+        })
+        .catch(() => {
+          this.$notify({
+            type: "warning",
+            message: "Something Wrong"
+          });
+        });
+    },
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
     removeDomain(item) {
-      var index = this.dynamicValidateForm.domains.indexOf(item);
+      var index = this.dynamicValidateForm.options.indexOf(item);
       if (index !== -1) {
-        this.dynamicValidateForm.domains.splice(index, 1);
+        this.dynamicValidateForm.options.splice(index, 1);
       }
     },
     addDomain() {
-      this.dynamicValidateForm.domains.push({
+      this.dynamicValidateForm.options.push({
         key: Date.now(),
         value: ""
       });
+    },
+    deleteQues(qid) {
+      var url = base_url + "questions/" + qid;
+      this.$confirm("This will delete the question. Continue?", "Delete!", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+        type: "error"
+      })
+        .then(() => {
+          this.axios.delete(url).then(response => {
+            this.$notify({
+              type: "warning",
+              message: response.data.msg
+            });
+          });
+          this.getGroups();
+        })
+        .catch(() => {
+          this.$notify({
+            type: "warning",
+            message: "action cancelled"
+          });
+        });
+      // this.axios.delete(url).then(res=> )
     }
+  },
+  mounted() {
+    this.getGroups();
   }
 };
 </script>

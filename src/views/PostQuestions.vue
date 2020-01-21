@@ -169,11 +169,11 @@
         <br />
         <span>
           <!-- <strong>{{data.teams_playing}}</strong> -->
-          <strong>
-            <!-- <el-button type="primary" icon="el-icon-edit" circle @click="editGroup(data.gid)"></el-button> -->
-            <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
-          </strong>
         </span>
+        <strong>
+          <!-- <el-button type="primary" icon="el-icon-edit" circle @click="editGroup(data.gid)"></el-button> -->
+          <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
+        </strong>
       </base-button>
     </span>
   </div>
@@ -181,7 +181,6 @@
 <script>
 import jwtDecode from "jwt-decode";
 import { base_url } from "../../config";
-import axios from "axios";
 // import moment from "vue-moment";
 
 export default {
