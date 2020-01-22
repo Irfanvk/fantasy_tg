@@ -24,6 +24,8 @@
 
 <template>
   <div>
+    <el-page-header @back="goBack" content="questions"></el-page-header>
+
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8"></base-header>
 
     <!--Charts-->
@@ -46,36 +48,16 @@
                   <el-form>
                     <el-form-item>
                       <el-radio-group class="box-container" v-model="ansData" size="medium">
-                        <el-radio
-                          class="box"
-                          border
-                          v-bind:label="data.option1"
-                          v-bind:value="data.option1"
-                        >A. {{data.option1.toUpperCase()}}</el-radio>
-                        <el-radio
-                          class="box"
-                          border
-                          v-bind:label="data.option2"
-                          v-bind:value="data.option2"
-                        >B. {{data.option2.toUpperCase()}}</el-radio>
-                        <el-radio
-                          class="box"
-                          border
-                          v-bind:label="data.option3"
-                          v-bind:value="data.option3"
-                        >C. {{data.option3.toUpperCase()}}</el-radio>
-                        <!-- <el-radio
-                          class="box"
-                          border
-                          v-bind:label="data.option4"
-                          v-bind:value="data.option4"
-                        >D. {{data.option4.toUpperCase()}}</el-radio>-->
-                        <el-radio
-                          class="box"
-                          border
-                          v-bind:label="data.option4"
-                          v-bind:value="data.option4"
-                        >D. {{data.option4.toUpperCase()}}</el-radio>
+                        <span v-for="opt,index in data.options" v-bind:key="index">
+                          <h5>Option {{index+1}}</h5>
+                          <el-radio
+                            class="box"
+                            border
+                            v-bind:label="opt.value"
+                            v-bind:value="opt.value"
+                          >{{opt.value}}</el-radio>
+                          <br />
+                        </span>
                       </el-radio-group>
                     </el-form-item>
                     <el-form-item size="large">
@@ -115,16 +97,18 @@ export default {
       ansData: "",
       apiData: {
         emailid: decoded.identity.email,
-        option1: "",
-        option2: "",
-        option3: "",
-        option4: "",
-        teams: "",
-        question: ""
+        options: "",
+        gid: "",
+        qindex: "",
+        question: "",
+        qid: ""
       }
     };
   },
   methods: {
+    goBack(){
+      this.$router.go(-1)
+    },
     onSubmit() {
       var url = base_url + "questions/" + this.$route.params.qid;
       this.axios.post(url, { answer: this.ansData }).then(response => {
@@ -138,12 +122,10 @@ export default {
     },
     getQuestion() {
       // console.log("ansques");
-      var url = base_url + "questions/" + this.$route.params.qid;
-
+      var url = base_url + "questions/one/" + this.$route.params.qid;
       this.axios
         .get(url)
         .then(response => {
-          // console.log(response.data.questions);
           this.apiData = response.data.questions;
         })
         .catch(err => {

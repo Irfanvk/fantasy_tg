@@ -90,6 +90,25 @@
             </div>
           </el-card>
         </div>
+        <div class="col-xl-3">
+          <el-card class="box-card pb-4 pt-5 mt-4 mb-4" style="text-align:center">
+            <div slot="header" class="clearfix">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">All Questions</h6>
+              </div>
+              <!-- <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button> -->
+              <el-divider>
+                <i class="el-icon-star-on"></i>
+              </el-divider>
+              <a style="cursor:pointer" @click="$router.push('/allquestions')">
+                <i class="fa fa-list fa-7x" style="color:green"></i>
+              </a>
+            </div>
+            <div class="text item" style="cursor:pointer" @click="$router.push('/allquestions')">
+              <h5>Click to see the list</h5>
+            </div>
+          </el-card>
+        </div>
         <!-- <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center">
             <div slot="header" class="row align-items-center">

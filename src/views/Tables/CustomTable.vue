@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive" style="z-index:0">
       <base-table
         class="table align-items-center table-flush"
         :class="type === 'dark' ? 'table-dark': ''"
@@ -47,7 +47,7 @@
                 >Score per question: {{row.group.score}}</el-tag>
                 <el-divider direction="vertical"></el-divider>
 
-                <el-tag effect="plain" size="mini" type="success">Bonus score: {{row.group.score}}</el-tag>
+                <el-tag effect="plain" size="mini" type="success">Bonus score: {{row.group.bscore}}</el-tag>
               </div>
             </div>
           </th>

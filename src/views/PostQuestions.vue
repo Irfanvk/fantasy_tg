@@ -1,6 +1,6 @@
 <template>
   <div>
-    <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8">
+    <base-header type="gradient-success" id="mt" class="pb-6 pb-8 pt-5 pt-md-8">
       <div class="container-fluid mt-2">
         <div class="row">
           <div class="col-xl-8 order-xl-1">
@@ -415,5 +415,11 @@ export default {
 }
 #postteam {
   padding: 10px;
+}
+@media (max-width: 750px) {
+  #mt {
+    display: block;
+    margin-top: 30px;
+  }
 }
 </style>
