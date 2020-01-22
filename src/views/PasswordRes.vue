@@ -143,6 +143,12 @@ export default {
           });
         })
         .catch(err => {
+          this.$notify({
+            message: "something went wrong",
+            type: "danger"
+          });
+          this.loading = false;
+
           // console.log(err, "aaa");
         });
     },
