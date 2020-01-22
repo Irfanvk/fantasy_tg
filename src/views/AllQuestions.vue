@@ -67,18 +67,16 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col">
-            <el-table :data="allQues" style="border:2px solid black;border-radius:5px">
+            <el-table :data="allQues" style="border:2px solid black;border-radius:5px;z-index:0">
               <el-table-column type="index" />
               <el-table-column prop="added_on" label="Added On" width="150"></el-table-column>
-              <el-table-column prop="teams" label="Match B/w" width="120"></el-table-column>
+              <el-table-column prop="gid" label="GroupID" width="120"></el-table-column>
               <el-table-column prop="question" label="Question" width="120"></el-table-column>
-              <el-table-column prop="option1" label="Option1" width="120"></el-table-column>
-              <el-table-column prop="option2" label="Option2" width="120"></el-table-column>
-              <el-table-column prop="option3" label="Option3" width="120"></el-table-column>
-              <el-table-column prop="option4" label="Option4" width="120"></el-table-column>
+              <el-table-column prop="options.option" label="Options" width="120"></el-table-column>
+
               <!-- <el-table-column prop="joined" label="Joined on" width="155" sortable></el-table-column> -->
 
-              <el-table-column fixed="right" label="Operations" width="100">
+              <!-- <el-table-column fixed="right" label="Operations" width="100">
                 <template slot-scope="scope">
                   <el-tooltip content="Delete User" placement="top">
                     <el-button
@@ -90,9 +88,9 @@
                       <i class="fa fa-trash"></i>
                     </el-button>
                   </el-tooltip>
-                  <el-button type="text" size="small">Edit</el-button>
-                </template>
-              </el-table-column>
+                  <!-- <el-button type="text" size="small">Edit</el-button> -->
+                <!-- </template>
+              </el-table-column> -->
             </el-table>
           </div>
         </div>
@@ -116,6 +114,7 @@ export default {
   },
   data() {
     return {
+      allQues: "",
       userData: {
         email: "",
         full_name: "",
@@ -142,7 +141,7 @@ export default {
         .then(response => {
           // console.log(response);
           this.allQues = response.data.questions;
-          this.allQues = this.allQues.map(user => {
+          this.allQues = this.allQues.map(ques => {
             ques.added_on = new Date(ques.added_on).toLocaleString(
               "en",
               options
@@ -199,7 +198,6 @@ export default {
                   "You just removed a User"
                 )
               });
-              this.getUsers();
             },
             err => {
               // this.$Progress.fail();
@@ -220,7 +218,7 @@ export default {
     }
   },
   created() {
-    this.getUsers();
+    this.getallQuestions();
   },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {

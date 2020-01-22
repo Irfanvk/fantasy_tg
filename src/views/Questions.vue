@@ -49,4 +49,8 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+.nav-item {
+  z-index: 9;
+}
+</style>

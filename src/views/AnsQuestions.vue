@@ -48,6 +48,14 @@
                   <el-button style="float: right; padding: 3px 0" type="text">{{data.gid}}</el-button>
                 </div>
                 <div v-for="data in apiData_0" v-bind:key="data.qid">
+                  <small text-muted>Please answer</small>
+                  <circular-count-down-timer
+                    class="text-center"
+                    @finish="finished()"
+                    :size="100"
+                    :initial-value="60"
+                    :steps="60"
+                  ></circular-count-down-timer>
                   <h4 style="padding:5px 0 15px 0">Q. {{data.question.toUpperCase()}}</h4>
                   <el-form>
                     <el-form-item>
@@ -57,7 +65,7 @@
                           <el-radio
                             class="box"
                             border
-                            v-bind:label="index+1"
+                            v-bind:label="opt.value"
                             v-bind:value="opt.value"
                           >{{opt.value}}</el-radio>
                           <br />
@@ -113,6 +121,19 @@ export default {
     };
   },
   methods: {
+    finished() {
+      this.$message({
+        message: "Sorry, Timeout",
+        type: "error"
+      });
+      // this.$router.go(-1);
+      this.ansData = "UNANSWERED";
+      this.onSubmit();
+      // this.$notify({
+      //   message: "Sorry, Timeout",
+      //   type: "warning"
+      // });
+    },
     onSubmit() {
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);
@@ -121,14 +142,15 @@ export default {
         "answer/" +
         decoded.identity.email +
         "?qid=" +
-        this.$route.params.qid;
+        this.$route.params.oneid;
       this.axios.post(url, { answer: this.ansData }).then(response => {
-        this.apiPostData = response.data.msg;
+        this.apiPostData = response.data;
         this.$message({
-          message: this.apiPostData,
-          type: "success"
+          message: this.apiPostData.msg,
+          type: this.apiPostData.type
         });
-        this.$router.push("/questions");
+        // this.$router.push("/questions");
+        this.$router.go(-1);
       });
     },
     getQuestion() {
