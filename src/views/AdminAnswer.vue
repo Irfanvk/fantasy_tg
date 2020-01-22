@@ -13,6 +13,7 @@
             <div class="col">
               <!-- <admin-answer-table title="Todays Questions"></admin-answer-table> -->
               <el-table
+                :loading="loading"
                 :data="apiData"
                 style="border:2px solid black;border-radius:5px;max-width:420px"
               >
@@ -63,13 +64,15 @@ export default {
   },
   methods: {
     getQuestion() {
+      this.loading = true;
       // console.log("ansques");
-      var url = base_url + "questions";
+      var url = base_url + "questions/all/false";
 
       this.axios.get(url).then(response => {
         this.apiData = response.data.questions;
         this.tempData = response.config.data;
         // console.log(this.tempData);
+        this.loading = false;
       });
     },
     getScore: function() {
