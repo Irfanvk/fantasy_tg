@@ -42,33 +42,24 @@
             <div class="col">
               <!-- <custom-table title="Todays Questions"></custom-table> -->
               <el-card class="box-card">
-                <div slot="header" class="clearfix" v-for="data in apiData_0" v-bind:key="data.qid">
+                <div slot="header" class="clearfix">
                   <!-- <code>{{data}}</code> -->
-                  <span>Pick your answer and click submit</span>
-                  <el-button style="float: right; padding: 3px 0" type="text">{{data.gid}}</el-button>
+                  <span>Click on the question ID to answer</span>
+                  <el-button style="float: right; padding: 3px 0" type="text">{{$route.params.gid}}</el-button>
                 </div>
-                <div v-for="data in apiData_0" v-bind:key="data.qid">
-                  <h4 style="padding:5px 0 15px 0">Q. {{data.question.toUpperCase()}}</h4>
-                  <el-form>
-                    <el-form-item>
-                      <el-radio-group class="box-container" v-model="ansData" size="medium">
-                        <span v-for="opt,index in data.options" v-bind:key="index">
-                          <h5>Option {{index+1}}</h5>
-                          <el-radio
-                            class="box"
-                            border
-                            v-bind:label="index+1"
-                            v-bind:value="opt.value"
-                          >{{opt.value}}</el-radio>
-                          <br />
-                        </span>
-                      </el-radio-group>
-                    </el-form-item>
-                    <el-form-item size="large">
-                      <el-button type="primary" @click="onSubmit">Submit</el-button>
-                      <el-button @click="$router.go(-1)">Cancel</el-button>
-                    </el-form-item>
-                  </el-form>
+                <div v-for="data,index in apiData_0" v-bind:key="data.qid">
+                  <!-- <el-divider> -->
+                  <el-tag
+                    style="margin:10px;cursor:pointer;"
+                    type="success"
+                    @click="$router.push(data.gid+'/'+data.qid)"
+                  >
+                    <h4 style="padding:5px 0 15px 0">
+                      {{index+1}}.
+                      {{data.qid.toString().substr(0,18)}}
+                    </h4>
+                  </el-tag>
+                  <!-- </el-divider> -->
                 </div>
               </el-card>
             </div>
@@ -131,14 +122,36 @@ export default {
         this.$router.push("/questions");
       });
     },
+    onDelete() {
+      var url = base_url + "questions/" + this.$route.params.gid;
+      this.$confirm(
+        "This will permanently delete the question. Continue?",
+        "Delete Question!",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "error"
+        }
+      ).then(() => {
+        this.axios.delete(url).then(response => {
+          this.deleteData = response.data.msg;
+          this.$message({
+            message: this.deleteData,
+            type: "success"
+          });
+          this.$router.push("/questions");
+        });
+      });
+    },
     getQuestion() {
       // console.log("ansques");
-      var url = base_url + "questions/one/" + this.$route.params.oneid;
+      var url = base_url + "questions/" + this.$route.params.gid;
       console.log(url);
 
       this.axios
         .get(url)
         .then(response => {
+          console.log(response.data.questions);
           this.apiData_0 = response.data.questions;
         })
         .catch(err => {

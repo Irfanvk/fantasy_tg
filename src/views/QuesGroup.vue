@@ -61,13 +61,13 @@
         </card>
       </div>
     </base-header>
-    <span v-for="data in quesData" v-bind:key="data.qid" class="container">
+    <span v-for="data in quesData" v-bind:key="data.qindex" class="container">
       <base-button block type="default mt-3 ">
         <small>{{data.qid}}</small>
         <!-- <badge type="black">{{data.added_on.$date}}</badge> -->
         <!-- <el-divider content-position="left">{{data.status}}</el-divider> -->
         <el-divider content-position="center">{{data.question}}</el-divider>
-        <span v-for="option,index in data.options" v-bind:key="index">
+        <span v-for="option,index in data.options" v-bind:key="data.index">
           <i>
             <el-divider direction="vertical"></el-divider>
             option {{index}} :

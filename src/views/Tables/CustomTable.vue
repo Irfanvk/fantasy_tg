@@ -32,12 +32,22 @@
             <div class="media align-items-center">
               <div class="media-body">
                 <!-- <span class="name mb-0 text-sm" @click="open">{{row.question}}</span> -->
-
+                <el-badge :value="row.q_count" class="item" type="primary">
+                  <el-tag
+                    style="cursor:pointer;"
+                    type="primary"
+                    @click="$router.push('questions/'+row.gid)"
+                  >{{row.teams_playing.toString().substr(0,18)}}</el-tag>
+                </el-badge>
+                <el-divider direction="vertical"></el-divider>
                 <el-tag
-                  style="cursor:pointer;"
-                  type="primary"
-                  @click="$router.push('questions/'+row.qid)"
-                >{{row.teams_playing.toString().substr(0,18)}}</el-tag>
+                  effect="plain"
+                  size="mini"
+                  type="success"
+                >Score per question: {{row.group.score}}</el-tag>
+                <el-divider direction="vertical"></el-divider>
+
+                <el-tag effect="plain" size="mini" type="success">Bonus score: {{row.group.score}}</el-tag>
               </div>
             </div>
           </th>
@@ -154,7 +164,6 @@ export default {
 
         error => {
           return Promise.reject(error);
-          this.axios.get;
         }
       );
       this.axios

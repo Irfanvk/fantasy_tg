@@ -52,7 +52,12 @@ export default new Router({
           component: () => import('./views/PostadminAnswer.vue')
         },
         {
-          path: '/questions/:qid',
+          path: '/questions/:gid',
+          name: 'Group Questions',
+          component: () => import('./views/GroupQuestions.vue')
+        },
+        {
+          path: '/questions/:qid/:oneid',
           name: 'Answer Questions',
           component: () => import('./views/AnsQuestions.vue')
         },
