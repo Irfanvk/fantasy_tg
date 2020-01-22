@@ -12,7 +12,7 @@ import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 // import VueAuthenticate from 'vue-authenticate'
 import lang from 'element-ui/lib/locale/lang/en';
 import locale from 'element-ui/lib/locale';
-
+import CircularCountDownTimer from "vue-circular-count-down-timer";
 // configure language
 locale.use(lang);
 
@@ -36,6 +36,7 @@ Vue.config.productionTip = false
 
 Vue.use(ElementUI);
 Vue.use(Vuetify)
+Vue.use(CircularCountDownTimer);
 Vue.use(require('vue-moment'));
 Vue.use(VueAxios, axios)
 Vue.use(ArgonDashboard)

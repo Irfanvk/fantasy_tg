@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white"
+    class="navbar navbar-vertical fixed-left fixed-top navbar-expand-md navbar-light bg-white"
     id="sidenav-main"
   >
     <div class="container-fluid">
@@ -29,17 +29,17 @@
               aria-haspopup="true"
               aria-expanded="false"
             ></a>
-
+            <!-- 
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">Something else here</a>-->
           </base-dropdown>
           <base-dropdown class="nav-item" position="right">
             <a slot="title" class="nav-link" href="#" role="button">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" :src="img_url" width="50%" height="95%" />
+                  <img alt="Profile" :src="img_url" width="50%" height="95%" />
                 </span>
               </div>
             </a>
@@ -242,4 +242,21 @@ export default {
 };
 </script>
 <style >
+@media (max-width: 750px) {
+  .fixed-left {
+    display: none;
+  }
+  .fixed-top {
+    display: block;
+  }
+}
+
+@media (min-width: 751px) {
+  .fixed-left {
+    display: block;
+  }
+  .fixed-top {
+    display: none;
+  }
+}
 </style>
