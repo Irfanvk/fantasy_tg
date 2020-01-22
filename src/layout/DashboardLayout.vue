@@ -22,7 +22,7 @@
         <sidebar-item
           :link="{name: 'Questions', icon: 'fa fa-question text-blue', path: '/questions'}"
         />
-        <span v-if="admin">
+        <span v-if="admin" style="z-index:9">
           <sidebar-item
             :link="{name: 'Post Questions', icon: 'ni ni-notification-70 text-red', path: '/postquest'}"
           />
@@ -114,4 +114,7 @@ export default {
 };
 </script>
 <style lang="scss">
+.nav-item {
+  z-index: 9;
+}
 </style>
