@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div v-loading="loading">
     <base-header type="gradient-success" class="pb-6 pb-8 pt-1 pt-md-8">
       <i class="fa fa-clone"></i>
     </base-header>
 
     <!--Charts-->
-    <div class="container-fluid mt--7">
+    <div class="container-fluid mt--7" v-loading="loading">
       <!-- End charts-->
 
       <!--Tables-->
@@ -92,11 +92,13 @@ export default {
         mobile: "",
         team: "",
         joined: ""
-      }
+      },
+      loading: false
     };
   },
   methods: {
     getUsers() {
+      this.loading = true;
       var options = {
         hour: "numeric",
         minute: "numeric",
@@ -136,6 +138,7 @@ export default {
             return user;
           });
           this.userCount = response.data.count;
+          this.loading = false;
         })
         .catch(err => {
           // window.location = "/";
@@ -154,6 +157,8 @@ export default {
                 window.location = "/";
               });
           }
+          this.loading = false;
+
           // console.log(err.response);
           this.$notify({
             type: "primary",
