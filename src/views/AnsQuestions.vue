@@ -134,8 +134,6 @@ export default {
     getQuestion() {
       // console.log("ansques");
       var url = base_url + "questions/one/" + this.$route.params.oneid;
-      console.log(url);
-
       this.axios
         .get(url)
         .then(response => {
