@@ -45,7 +45,6 @@ export default {
   },
   methods: {
     linkClick() {
-      // console.log(this.autoClose);
       if (
         this.autoClose &&
         this.$sidebar &&

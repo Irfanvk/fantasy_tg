@@ -91,7 +91,6 @@ export default {
   data() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
-    // console.log(decoded.identity);
     return {
       full_name: decoded.identity.full_name,
       team: decoded.identity.team,

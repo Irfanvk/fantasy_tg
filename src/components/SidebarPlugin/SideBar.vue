@@ -158,7 +158,6 @@ export default {
       this.axios
         .delete(url)
         .then(res => {
-          // console.log("logging out===out");
           localStorage.removeItem("usertoken");
           localStorage.removeItem("refreshtoken");
           this.$notify({
@@ -168,7 +167,7 @@ export default {
           this.$router.push({ name: "login" });
         })
         .catch(err => {
-          // console.log(err);
+          this.$notify({ message: err, type: "warning" });
         });
       // this.emitMethod();
     },
@@ -210,11 +209,11 @@ export default {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
               .catch(e => {
+                this.$notify({message:e})
                 localStorage.clear();
                 window.location = "/";
               });
           }
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "

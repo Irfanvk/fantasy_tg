@@ -71,7 +71,6 @@ export default {
   data() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
-    // console.log(decoded.identity);
     return {
       url_img: localStorage.getItem("avatar"),
       full_name: decoded.identity.full_name,
@@ -122,6 +121,8 @@ export default {
           }
         })
         .catch(err => {
+          this.$notify({ message: err });
+
           // window.location = "/";
         });
     },
