@@ -165,7 +165,7 @@ export default {
         });
     },
     deleteUser: function(id) {
-      var url = base_url + "users/remove";
+      var url = base_url + "users/remove/"+id;
       this.$confirm(
         "This will permanently delete the user. Continue?",
         "Delete User!",
@@ -177,7 +177,7 @@ export default {
       )
         .then(() => {
           // this.$Progress.start()
-          this.axios.delete(url, { email: id }).then(res => {
+          this.axios.delete(url).then(res => {
             this.$notify({
               title: "Warning",
               message: res.data.msg,
@@ -188,7 +188,7 @@ export default {
           });
         })
         .catch(() => {
-          this.$message.error("You cancelled the opertation");
+          this.$message.error("You cancelled the operation");
           // this.$notify({
           //   type: "error",
           //   title: "Error",
