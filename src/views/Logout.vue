@@ -29,10 +29,8 @@ export default {
         message: " User Logged Out "
       });
 
-      //   console.log("vgahvgacca");
       //   this.$router.go(-1);
     }
-    // console.log("Nothing gets called before me!");
   }
 };
 </script>

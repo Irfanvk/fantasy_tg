@@ -166,7 +166,6 @@ export default {
       this.axios.get(url).then(response => {
         this.userData = response.data.result;
         this.userCount = response.data.count;
-        // console.log(this.userData);
       });
     }
   },

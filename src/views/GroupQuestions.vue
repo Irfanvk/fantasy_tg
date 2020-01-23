@@ -144,20 +144,16 @@ export default {
       });
     },
     getQuestion() {
-      // console.log("ansques");
       var url = base_url + "questions/" + this.$route.params.gid;
-      console.log(url);
 
       this.axios
         .get(url)
         .then(response => {
-          console.log(response.data.questions);
           this.apiData_0 = response.data.questions;
         })
         .catch(err => {
           // window.location = "/";
 
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "

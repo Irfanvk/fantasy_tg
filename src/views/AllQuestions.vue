@@ -88,9 +88,9 @@
                       <i class="fa fa-trash"></i>
                     </el-button>
                   </el-tooltip>
-                  <!-- <el-button type="text" size="small">Edit</el-button> -->
-                <!-- </template>
-              </el-table-column> -->
+              <!-- <el-button type="text" size="small">Edit</el-button>-->
+              <!-- </template>
+              </el-table-column>-->
             </el-table>
           </div>
         </div>
@@ -139,7 +139,6 @@ export default {
       this.axios
         .get(url)
         .then(response => {
-          // console.log(response);
           this.allQues = response.data.questions;
           this.allQues = this.allQues.map(ques => {
             ques.added_on = new Date(ques.added_on).toLocaleString(
@@ -149,7 +148,6 @@ export default {
             return ques;
           });
           // this.userCount = response.data.count;
-          // console.log(this.allQues);
         })
         .catch(err => {
           // window.location = "/";
@@ -164,11 +162,11 @@ export default {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
               .catch(e => {
+                this.$notify({ message: e });
                 localStorage.clear();
                 window.location = "/";
               });
           }
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -189,7 +187,7 @@ export default {
         .then(() => {
           // this.$Progress.start()
           this.axios.delete(url).then(
-            response => {
+            ()=> {
               this.$notify({
                 type: "warning",
                 message: this.$createElement(
@@ -201,7 +199,7 @@ export default {
             },
             err => {
               // this.$Progress.fail();
-              // console.log("Err User Remove ", err.response);
+              this.$notify({ message: err });
             }
           );
         })
@@ -223,10 +221,8 @@ export default {
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
       this.$router.push({ name: "login" });
-      //   console.log("vgahvgacca");
       //   this.$router.go(-1);
     }
-    // console.log("Nothing gets called before me!");
   }
 };
 </script>

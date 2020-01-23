@@ -159,7 +159,6 @@ export default {
           }
           this.loading = false;
 
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -180,8 +179,7 @@ export default {
         .then(() => {
           // this.$Progress.start()
           this.axios.delete(url).then(
-            response => {
-              // console.log("delete user");
+            () => {
               this.$notify({
                 type: "warning",
                 message: this.$createElement(
@@ -192,10 +190,6 @@ export default {
               });
               this.getUsers();
             },
-            err => {
-              // this.$Progress.fail();
-              // console.log("Err User Remove ", err.response);
-            }
           );
         })
         .catch(() => {
@@ -216,10 +210,8 @@ export default {
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
       this.$router.push({ name: "login" });
-      //   console.log("vgahvgacca");
       //   this.$router.go(-1);
     }
-    // console.log("Nothing gets called before me!");
   }
 };
 </script>

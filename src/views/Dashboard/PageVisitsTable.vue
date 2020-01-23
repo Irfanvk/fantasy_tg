@@ -95,24 +95,18 @@ export default {
           return response.json();
         })
         .then(response => {
-          // console.log(response);
 
           this.newMatches = response.matches;
           // var d = new Date(this.newMatches.date);
           this.newMatches = this.newMatches.map(user => {
             user.dateTimeGMT = new Date(user.dateTimeGMT).toLocaleString("en");
-            // console.log(user);
             return user;
           });
           this.newMatches1 = this.newMatches.map(user => {
             user.team1 = user["team-1"];
             user.team2 = user["team-2"];
-            // console.log(user);
             return user;
           });
-
-          // console.log(d.getUTCHours()); // Hours
-          // console.log(d.getUTCMinutes());
         });
     }
   },

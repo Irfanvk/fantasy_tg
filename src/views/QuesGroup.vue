@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div>
     <base-alert type="default text-center text-black">
@@ -67,7 +68,7 @@
         <!-- <badge type="black">{{data.added_on.$date}}</badge> -->
         <!-- <el-divider content-position="left">{{data.status}}</el-divider> -->
         <el-divider content-position="center">{{data.question}}</el-divider>
-        <span v-for="option,index in data.options" v-bind:key="data.index">
+        <span v-for="option,index in data.options" v-bind:key="index">
           <i>
             <el-divider direction="vertical"></el-divider>
             option {{index}} :
@@ -130,15 +131,15 @@ export default {
     },
     getGroups() {
       this.loading = true;
-      var options = {
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-        day: "numeric",
-        weekday: "short",
-        year: "numeric",
-        month: "long"
-      };
+      // var options = {
+      //   hour: "numeric",
+      //   minute: "numeric",
+      //   second: "numeric",
+      //   day: "numeric",
+      //   weekday: "short",
+      //   year: "numeric",
+      //   month: "long"
+      // };
       this.loading = true;
       var url = base_url + "questions/" + this.$route.params.gid;
       this.axios
@@ -160,7 +161,6 @@ export default {
         if (valid) {
           this.postData();
         } else {
-          console.log("error submit!!");
           return false;
         }
       });

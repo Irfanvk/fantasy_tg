@@ -197,8 +197,7 @@
                   </div>
                 </div>
                 <hr class="my-4">
-        <!-- Address-->
-        <!-- <h6 class="heading-small text-muted mb-4">Contact information</h6>
+          Address <h6 class="heading-small text-muted mb-4">Contact information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
                     <div class="col-md-12">
@@ -242,8 +241,7 @@
                   </div>
                 </div>
                 <hr class="my-4">
-        <!-- Description-->
-        <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
+         Desciption <h6 class="heading-small text-muted mb-4">About me</h6>
                                 <div class="pl-lg-4">
                                     <div class="form-group">
                                         <base-input alternative=""
@@ -272,7 +270,6 @@ export default {
   data() {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
-    // console.log(decoded.identity);
     return {
       base_url: base_url,
       url_img: "img/theme/team-1-800x800.jpg",
@@ -296,10 +293,8 @@ export default {
   },
   methods: {
     // handleSubmit() {
-    //   console.log("submit");
     // },
     // submitUpload() {
-    //   // console.log("submit");
     //   let url = base_url + "upload/" + this.mobile;
     //   this.axios
     //     .post(url, { email: this.model.email, mobile: this.mobile })
@@ -308,7 +303,6 @@ export default {
     getAvatar() {
       this.url_img = localStorage.getItem("avatar");
       // let url = base_url + "avatar/" + this.email;
-      // // console.log(url);
       // this.axios.post(url).then(response => {
       //   if (response.data.url !== undefined) {
       //     this.url_img = response.data.url;
@@ -322,18 +316,16 @@ export default {
         confirmButtonText: "Yes",
         cancelButtonText: "No"
       })
-        .then(_ => {
+        .then(() => {
           done();
         })
-        .catch(_ => {});
+        .catch(() => {});
     },
-    handleRemove(file, fileList) {
-      // console.log("remove");
-      // console.log(file, fileList);
+    handleRemove() {
+      this.$notify({message:"removed"})
     },
-    handlePreview(file) {
-      // console.log("preview");
-      // console.log(file);
+    handlePreview() {
+  
     },
     handleExceed(files, fileList) {
       this.$message.warning(
@@ -342,18 +334,15 @@ export default {
         } files this time, add up to ${files.length + fileList.length} totally`
       );
     },
-    beforeRemove(file, fileList) {
+    beforeRemove(file) {
       return this.$confirm(`Cancel the transfer of ${file.name} ?`);
     },
     getData() {
       var url = base_url + "upload";
-      // console.log(this.prof_pic);
-      // console.log(url);
       this.axios
         .get(url)
-        .then(response => {
+        .then(() => {
           // this.point2Data = response.data.result;
-          // console.log(this.point2Data);
         })
         .catch(err => {
           // window.location = "/";
@@ -367,7 +356,7 @@ export default {
               .then(response => {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
-              .catch(e => {
+              .catch(() => {
                 localStorage.clear();
                 window.location = "/";
               });
@@ -379,12 +368,11 @@ export default {
               .then(response => {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
-              .catch(e => {
+              .catch(() => {
                 localStorage.clear();
                 window.location = "/";
               });
           }
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -397,7 +385,6 @@ export default {
       this.$router.push({ name: "login" });
       //   this.$router.go(-1);
     }
-    // console.log("Nothing gets called before me!");
   },
   mounted() {
     this.getAvatar();

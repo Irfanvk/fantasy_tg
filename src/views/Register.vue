@@ -274,7 +274,6 @@ export default {
         });
         return;
       }
-      // console.log(this.model)
       this.axios
         .post(url, {
           invite_code: this.model.invite_code,
@@ -316,8 +315,7 @@ export default {
           //   message: res.data.result.email + " Successfully "
           // });
         })
-        .catch(err => {
-          // console.log(err, "aaa");
+        .catch(() => {
           // this.$router.go();
         });
     }

@@ -198,17 +198,16 @@ export default {
     },
     getPoints() {
       var url = base_url + "points";
-      // console.log(url);
       this.axios
         .get(url)
         .then(response => {
           this.point2Data = response.data.result;
-
-          // console.log(this.point2Data);
         })
         .catch(err => {
+          this.$notify({ message: err });
+
           // window.location = "/";
-          let reftoken = localStorage.getItem("refreshtoken");
+          // let reftoken = localStorage.getItem("refreshtoken");
           // delete this.axios.defaults.headers.common.Authorization;
           // if (err.response && err.response.status === 401) {
           //   this.axios
@@ -223,7 +222,6 @@ export default {
           //       window.location = "/";
           //     });
           // }
-          // // console.log(err.response);
           // this.$notify({
           //   type: "primary",
           //   message: err.response.data.msg + ", please login to continue "
@@ -239,7 +237,6 @@ export default {
       this.$router.push({ name: "login" });
       // this.$router.go(-1);
     }
-    // console.log("Nothing gets called before me!");
   }
 };
 </script>

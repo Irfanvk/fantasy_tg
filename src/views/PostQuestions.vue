@@ -253,7 +253,6 @@ export default {
                 window.location = "/";
               });
           }
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -261,8 +260,8 @@ export default {
         });
     },
     RefToken() {
-      var rurl = base_url + "refresh";
-      var ref_token = localStorage.getItem("refreshtoken");
+      // var rurl = base_url + "refresh";
+      // var ref_token = localStorage.getItem("refreshtoken");
       var usertoken = localStorage.getItem("usertoken");
     },
     getGroups() {
@@ -380,8 +379,7 @@ export default {
           //   message: res.data.result.email + " Successfully "
           // });
         })
-        .catch(err => {
-          console.log(err);
+        .catch(() => {
           this.RefToken();
           // this.$router.go();
         });

@@ -401,7 +401,6 @@ export default {
                 window.location = "/";
               });
           }
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -414,7 +413,6 @@ export default {
     //     "https://fantasy.iplt20.com/graphql/query/pwa/shme-home-site-match-query";
     //   var query = '{"query":"query ShmeHomeSiteMatchQuery($slug: String = null) { site(slug: $slug) { slug name tours { id name } matches(page: 0, statuses: [NOT_STARTED, UP_COMING]) { edges { id name startTime status squads { id name shortName squadColorPalette flag { src type } flagWithName { src type } } tour { id name slug } } } }}","variables":{"slug":"ipl-fantasy"}}'
     //   this.$http.post(api).then(response => {
-    //     console.log(response.data);
     //   });
     // }
   },

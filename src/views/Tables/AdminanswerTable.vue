@@ -124,16 +124,15 @@ export default {
         });
     },
     onSubmit() {
-      console.log("submit");
     },
     // ............................
     getQuestions() {
-      var options = {
-        day: "numeric",
-        weekday: "short",
-        year: "numeric",
-        month: "long"
-      };
+      // var options = {
+      //   day: "numeric",
+      //   weekday: "short",
+      //   year: "numeric",
+      //   month: "long"
+      // };
       var url = base_url + "questions";
 
       // const token = localStorage.usertoken;
@@ -153,20 +152,15 @@ export default {
 
         error => {
           return Promise.reject(error);
-          this.axios.get;
         }
       );
       this.axios.get(url).then(response => {
-        // console.log(response, "aa");
-        // console.log(response.data.questions);
         this.quesData = response.data.questions;
         // this.quesData = this.quesData.map(user => {
-        // console.log(Date.parse(user.added_on), "aaaaaaaaaaaaaaaaaaaa");
         // user.added_on = new Date(Date.now()).toLocaleString("en", options);
         // return user;
         // });
         // this.userCount = response.data.count;
-        console.log(this.quesData, "bb");
       });
     }
   },

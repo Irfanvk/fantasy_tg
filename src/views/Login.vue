@@ -156,7 +156,6 @@ export default {
       this.$router.push({ name: "dashboard" });
       //   this.$router.go(-1);
     }
-    // console.log("Nothing gets called before me!");
   }
 };
 </script>

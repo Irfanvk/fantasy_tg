@@ -149,7 +149,6 @@ export default {
           });
           this.loading = false;
 
-          // console.log(err, "aaa");
         });
     },
     resetPassword() {

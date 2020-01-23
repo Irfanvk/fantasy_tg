@@ -166,7 +166,6 @@ export default {
     getPoints() {
       // loading = true;
       var url = base_url + "points";
-      // console.log(url);
       this.axios.interceptors.request.use(
         config => {
           let token = localStorage.usertoken;
@@ -187,7 +186,6 @@ export default {
         .then(response => {
           this.point2Data = response.data.result;
 
-          // console.log(this.point2Data);
         })
         .catch(err => {
           // window.location = "/";
@@ -202,13 +200,12 @@ export default {
               .then(response => {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
-              .catch(e => {
+              .catch(() => {
                 localStorage.clear();
                 window.location = "/";
               });
           }
 
-          console.log(err.response.data);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "
@@ -225,7 +222,6 @@ export default {
       this.$router.push({ name: "login" });
       // this.$router.go(-1);
     }
-    // console.log("Nothing gets called before me!");
   }
 };
 </script>

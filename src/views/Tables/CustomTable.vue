@@ -64,7 +64,7 @@
                 <i class="fas fa-ellipsis-v"></i>
               </a>
 
-              <!-- <template>
+              <template>
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>
@@ -134,17 +134,15 @@ export default {
           });
         });
     },
-    onSubmit() {
-      // console.log("submit");
-    },
+    onSubmit() {},
     // ............................
     getQuestions() {
-      var options = {
-        day: "numeric",
-        weekday: "short",
-        year: "numeric",
-        month: "long"
-      };
+      // var options = {
+      //   day: "numeric",
+      //   weekday: "short",
+      //   year: "numeric",
+      //   month: "long"
+      // };
       var url = base_url + "questiongroups";
 
       // const token = localStorage.usertoken;
@@ -169,7 +167,6 @@ export default {
       this.axios
         .get(url)
         .then(response => {
-          // console.log(response.data.questions);
           this.quesData = response.data.result;
           // this.quesData = this.quesData.map(user => {
           // user.added_on = new Date(Date.now()).toLocaleString("en", options);
@@ -189,7 +186,7 @@ export default {
               .then(response => {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
-              .catch(e => {
+              .catch(() => {
                 localStorage.clear();
                 window.location = "/";
               });
@@ -201,7 +198,7 @@ export default {
               .then(response => {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
-              .catch(e => {
+              .catch(() => {
                 localStorage.clear();
                 window.location = "/";
               });

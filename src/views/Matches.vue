@@ -54,19 +54,16 @@ export default {
       var url = "https://mapps.cricbuzz.com/cbzios/match/livematches.json";
       fetch(url)
         .then(response => {
-          // console.log(response);
-          // console.log("fetch done");
           this.loading = false;
           // ress = response.json();
           return response.json();
         })
         .then(response => {
-          // console.log("ne w ", response);
           this.matchData = response.matches;
 
           this.loading = false;
         })
-        .catch(err => console.error(err));
+        .catch(err => this.$notify({ message: err }));
     }
   },
   mounted() {

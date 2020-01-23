@@ -68,7 +68,11 @@
               <!-- <strong>{{data.teams_playing}}</strong> -->
             </span>
             <div class="col">
-              <el-button type="primary" :loading="loading" @click="getScore(data.gid,data.group.score,data.group.bscore)">Get Scores</el-button>
+              <el-button
+                type="primary"
+                :loading="loading"
+                @click="getScore(data.gid,data.group.score,data.group.bscore)"
+              >Get Scores</el-button>
             </div>
           </base-button>
         </span>
@@ -104,13 +108,11 @@ export default {
     },
     getQuestion() {
       this.loading = true;
-      // console.log("ansques");
       var url = base_url + "questions/all/false";
 
       this.axios.get(url).then(response => {
         this.apiData = response.data.questions;
         this.tempData = response.config.data;
-        // console.log(this.tempData);
         this.loading = false;
       });
     },
@@ -146,7 +148,7 @@ export default {
         });
       this.loading = false;
     },
-    getScore: function(gid,score,bonus) {
+    getScore: function(gid, score, bonus) {
       this.loading = true;
       var url = base_url + "getscore";
       this.$confirm(
@@ -160,7 +162,7 @@ export default {
       )
         .then(() => {
           // this.$Progress.start()
-          this.axios.get(url,{"gid":gid,"score":score,"bonus":bonus}).then(
+          this.axios.get(url, { gid: gid, score: score, bonus: bonus }).then(
             response => {
               this.$notify({
                 type: "warning",
@@ -171,14 +173,13 @@ export default {
                 )
               });
               this.loading = false;
-              console.log(this.loading);
             },
             err => {
+              this.$notify({ message: err });
+
               // this.$Progress.fail();
-              // console.log("Err User Remove ", err.response);
             }
           );
-          // console.log(this.loading);
         })
         .catch(() => {
           this.$notify({
@@ -190,7 +191,6 @@ export default {
             )
           });
         });
-      // console.log(this.loading);
     }
   },
   created() {

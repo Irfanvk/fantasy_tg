@@ -154,7 +154,6 @@ export default {
       });
     },
     getQuestion() {
-      // console.log("ansques");
       var url = base_url + "questions/one/" + this.$route.params.oneid;
       this.axios
         .get(url)
@@ -164,7 +163,6 @@ export default {
         .catch(err => {
           // window.location = "/";
 
-          // console.log(err.response);
           this.$notify({
             type: "primary",
             message: err.response.data.msg + ", please login to continue "

@@ -118,11 +118,9 @@ export default {
   methods: {
     getPoints() {
       var url = base_url + "points";
-      // console.log(url);
       this.axios.get(url).then(response => {
         this.loading = false;
         this.pointData = response.data.result;
-        // console.log(this.pointData);
       });
     }
   },
