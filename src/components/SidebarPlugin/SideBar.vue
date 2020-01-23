@@ -77,7 +77,8 @@
             <div class="col-6 collapse-brand">
               <router-link to="/">
                 <!-- <img src="../../../public/img/brand/ipl-logo.png" /> -->
-                <img src="../../../public/img/brand/2019-ICCWC.png" />
+                <!-- <img src="../../../public/img/brand/2019-ICCWC.png" /> -->
+                <img src="../../../public/img/logo/apple-touch-icon.png" />
               </router-link>
             </div>
             <div class="col-6 collapse-close">
@@ -209,7 +210,7 @@ export default {
                 localStorage.setItem("usertoken", response.data.access_token);
               })
               .catch(e => {
-                this.$notify({message:e})
+                this.$notify({ message: e });
                 localStorage.clear();
                 window.location = "/";
               });
