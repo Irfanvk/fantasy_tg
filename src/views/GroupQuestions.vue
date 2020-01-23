@@ -29,6 +29,10 @@
 
 <template>
   <div>
+    <base-alert type="default text-center text-black">
+      <strong class="display-1 text-center" style>Questions</strong>
+    </base-alert>
+    <el-page-header @back="goBack" content="groups"></el-page-header>
     <base-header type="gradient-success" class="pb-6 pb-8 pt-5 pt-md-8"></base-header>
 
     <!--Charts-->
@@ -104,6 +108,9 @@ export default {
     };
   },
   methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
     onSubmit() {
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);

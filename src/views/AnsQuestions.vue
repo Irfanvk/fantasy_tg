@@ -74,7 +74,7 @@
                     </el-form-item>
                     <el-form-item size="large">
                       <el-button type="primary" @click="onSubmit">Submit</el-button>
-                      <el-button @click="$router.go(-1)">Cancel</el-button>
+                      <el-button @click="cancelled">Cancel</el-button>
                     </el-form-item>
                   </el-form>
                 </div>
@@ -133,6 +133,20 @@ export default {
       //   message: "Sorry, Timeout",
       //   type: "warning"
       // });
+    },
+    cancelled() {
+      this.$confirm("You will lose this question. Continue?", "unanswered!", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+        type: "error"
+      }).then(() => {
+        this.ansData = "UNANSWERED";
+        this.onSubmit();
+        this.$notify({
+          message: "Unanswered",
+          type: "danger"
+        });
+      });
     },
     onSubmit() {
       const token = localStorage.usertoken;
