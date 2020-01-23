@@ -48,7 +48,7 @@
                   <el-button style="float: right; padding: 3px 0" type="text">{{data.gid}}</el-button>
                 </div>
                 <div v-for="data in apiData_0" v-bind:key="data.qid">
-                  <small text-muted>Please answer</small>
+                  <small text-muted>Please answer before timer runs out</small>
                   <circular-count-down-timer
                     class="text-center"
                     @finish="finished()"
