@@ -88,7 +88,7 @@
                       <i class="fa fa-trash"></i>
                     </el-button>
                   </el-tooltip>
-              <!-- <el-button type="text" size="small">Edit</el-button>-->
+              <el-button type="text" size="small">Edit</el-button>-->
               <!-- </template>
               </el-table-column>-->
             </el-table>
@@ -102,7 +102,7 @@
 // Tables
 // import PageVisitsTable from "./Dashboard/PageVisitsTable";
 // import ProjectsTable from "./Tables/ProjectsTable";
-import UsersTable from "./Tables/UsersTable";
+// import UsersTable from "./Tables/UsersTable";
 import { base_url } from "../../config";
 
 export default {
