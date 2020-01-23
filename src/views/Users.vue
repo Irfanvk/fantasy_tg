@@ -104,7 +104,6 @@ export default {
         minute: "numeric",
         second: "numeric",
         day: "numeric",
-        weekday: "short",
         year: "numeric",
         month: "long"
       };
@@ -166,7 +165,7 @@ export default {
         });
     },
     deleteUser: function(id) {
-      var url = base_url + "users/remove?email=" + id;
+      var url = base_url + "users/remove";
       this.$confirm(
         "This will permanently delete the user. Continue?",
         "Delete User!",
@@ -178,29 +177,23 @@ export default {
       )
         .then(() => {
           // this.$Progress.start()
-          this.axios.delete(url).then(
-            () => {
-              this.$notify({
-                type: "warning",
-                message: this.$createElement(
-                  "i",
-                  { style: "color: red" },
-                  "You just removed a User"
-                )
-              });
-              this.getUsers();
-            },
-          );
+          this.axios.delete(url, { email: id }).then(res => {
+            this.$notify({
+              title: "Warning",
+              message: res.data.msg,
+              type: "warning"
+            });
+
+            this.getUsers();
+          });
         })
         .catch(() => {
-          this.$notify({
-            type: "error",
-            message: this.$createElement(
-              "i",
-              { style: "color: red" },
-              "You cancelled the opertation"
-            )
-          });
+          this.$message.error("You cancelled the opertation");
+          // this.$notify({
+          //   type: "error",
+          //   title: "Error",
+          //   message: "You cancelled the opertation"
+          // });
         });
     }
   },
