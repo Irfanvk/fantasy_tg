@@ -306,7 +306,6 @@ export default {
       if (this.url_img === null) {
         this.url_img = "img/theme/team-1-800x800.jpg";
       }
-      console.log(this.url_img);
       // let url = base_url + "avatar/" + this.email;
       // this.axios.post(url).then(response => {
       //   if (response.data.url !== undefined) {
