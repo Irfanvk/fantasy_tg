@@ -95,37 +95,37 @@ export default {
       localStorage.clear();
       window.location = "/";
     },
-    getAvatar() {
-      this.axios.interceptors.request.use(
-        config => {
-          let token = localStorage.usertoken;
+    // getAvatar() {
+    //   this.axios.interceptors.request.use(
+    //     config => {
+    //       let token = localStorage.usertoken;
 
-          if (token) {
-            config.headers["Authorization"] = `Bearer ${token}`;
-          }
+    //       if (token) {
+    //         config.headers["Authorization"] = `Bearer ${token}`;
+    //       }
 
-          return config;
-        },
+    //       return config;
+    //     },
 
-        error => {
-          return Promise.reject(error);
-        }
-      );
-      let url = base_url + "avatar/" + this.email;
-      this.axios
-        .post(url)
-        .then(response => {
-          if (response.data.url !== undefined) {
-            this.url_img = response.data.url;
-            localStorage.setItem("avatar", response.data.url);
-          }
-        })
-        .catch(err => {
-          this.$notify({ message: err });
+    //     error => {
+    //       return Promise.reject(error);
+    //     }
+    //   );
+    //   let url = base_url + "avatar/" + this.email;
+    //   this.axios
+    //     .post(url)
+    //     .then(response => {
+    //       if (response.data.url !== undefined) {
+    //         this.url_img = response.data.url;
+    //         localStorage.setItem("avatar", response.data.url);
+    //       }
+    //     })
+    //     .catch(err => {
+    //       this.$notify({ message: err });
 
-          // window.location = "/";
-        });
-    },
+    //       // window.location = "/";
+    //     });
+    // },
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
@@ -137,7 +137,7 @@ export default {
     }
   },
   created() {
-    this.getAvatar();
+    // this.getAvatar();
   }
 };
 </script>
