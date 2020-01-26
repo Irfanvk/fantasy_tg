@@ -109,6 +109,37 @@
             </div>
           </el-card>
         </div>
+        <div class="col-xl-3">
+          <el-card class="box-card pb-4 pt-5 mt-4 mb-4" style="text-align:center">
+            <div slot="header" class="clearfix">
+              <div class="col">
+                <h6 class="text-uppercase text-muted ls-1 mb-1">All otps</h6>
+              </div>
+              <!-- <el-button style="float: right; padding: 3px 0" type="text">Operation button</el-button> -->
+              <el-divider>
+                <i class="el-icon-star-on"></i>
+              </el-divider>
+              <a style="cursor:pointer" @click="getOtps">
+                <i class="fa fa-list fa-7x" style="color:green"></i>
+              </a>
+            </div>
+            <div class="text item" style="cursor:pointer" @click="getOtps">
+              <h5>Click to see the list</h5>
+            </div>
+          </el-card>
+        </div>
+        <el-dialog title="OTP table" :visible.sync="dialogTableVisible">
+          <span v-if="otp_data!==[]">
+            <el-table :data="otp_data">
+              <el-table-column property="otp" label="OTP" width="150"></el-table-column>
+              <el-table-column property="name" label="Name" width="200"></el-table-column>
+              <el-table-column property="email" label="email" width="200"></el-table-column>
+            </el-table>
+          </span>
+          <span v-else>
+            <h3>No data here :)</h3>
+          </span>
+        </el-dialog>
         <!-- <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center">
             <div slot="header" class="row align-items-center">
@@ -143,6 +174,8 @@ export default {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
     return {
+      dialogTableVisible: false,
+      otp_data: [],
       point2Data: [],
       testingCode: "",
       flag: 0,
@@ -150,6 +183,13 @@ export default {
     };
   },
   methods: {
+    getOtps() {
+      this.dialogTableVisible = true;
+      var url = base_url + "resetrequest";
+      this.axios.get(url).then(response => {
+        this.otp_data = response.data.result;
+      });
+    },
     generateCode() {
       this.loading = true;
       const token = localStorage.usertoken;
@@ -195,42 +235,42 @@ export default {
       /* unselect the range */
       testingCodeToCopy.setAttribute("type", "hidden");
       window.getSelection().removeAllRanges();
-    },
-    getPoints() {
-      var url = base_url + "points";
-      this.axios
-        .get(url)
-        .then(response => {
-          this.point2Data = response.data.result;
-        })
-        .catch(err => {
-          this.$notify({ message: err });
-
-          // window.location = "/";
-          // let reftoken = localStorage.getItem("refreshtoken");
-          // delete this.axios.defaults.headers.common.Authorization;
-          // if (err.response && err.response.status === 401) {
-          //   this.axios
-          //     .post(base_url + "refresh", {
-          //       headers: { Authorization: `Bearer ${reftoken}` }
-          //     })
-          //     .then(response => {
-          //       localStorage.setItem("usertoken", response.data.access_token);
-          //     })
-          //     .catch(e => {
-          //       localStorage.clear();
-          //       window.location = "/";
-          //     });
-          // }
-          // this.$notify({
-          //   type: "primary",
-          //   message: err.response.data.msg + ", please login to continue "
-          // });
-        });
     }
+    // getPoints() {
+    //   var url = base_url + "points";
+    //   this.axios
+    //     .get(url)
+    //     .then(response => {
+    //       this.point2Data = response.data.result;
+    //     })
+    //     .catch(err => {
+    //       this.$notify({ message: err });
+
+    //       // window.location = "/";
+    //       // let reftoken = localStorage.getItem("refreshtoken");
+    //       // delete this.axios.defaults.headers.common.Authorization;
+    //       // if (err.response && err.response.status === 401) {
+    //       //   this.axios
+    //       //     .post(base_url + "refresh", {
+    //       //       headers: { Authorization: `Bearer ${reftoken}` }
+    //       //     })
+    //       //     .then(response => {
+    //       //       localStorage.setItem("usertoken", response.data.access_token);
+    //       //     })
+    //       //     .catch(e => {
+    //       //       localStorage.clear();
+    //       //       window.location = "/";
+    //       //     });
+    //       // }
+    //       // this.$notify({
+    //       //   type: "primary",
+    //       //   message: err.response.data.msg + ", please login to continue "
+    //       // });
+    //     });
+    // }
   },
   created() {
-    this.getPoints();
+    // this.getPoints();
   },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {

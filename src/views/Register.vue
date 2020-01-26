@@ -112,7 +112,7 @@
 
             <base-input
               class="input-group-alternative mb-3"
-              placeholder="Mobile number"
+              placeholder="Mobile number with coutry code"
               addon-left-icon="fa fa-mobile"
               v-model="model.mobile"
             ></base-input>
@@ -250,7 +250,7 @@ export default {
         });
         return;
       }
-      if (this.model.password.match(/.{6,}/)) {
+      if (this.model.password.match(/^([a-zA-Z0-9@#$%^&+=*.\-_]){6,}$/)) {
         this.$alert("Password must be atleast 6 characters", "Error", {
           confirmButtonText: "OK"
         });
