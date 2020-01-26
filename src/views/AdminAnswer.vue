@@ -148,7 +148,7 @@ export default {
         });
       this.loading = false;
     },
-    getScore: function(gid, score, bonus) {
+    getScore: function(ggid, score, bonus) {
       this.loading = true;
       var url = base_url + "getscore";
       this.$confirm(
@@ -162,7 +162,7 @@ export default {
       )
         .then(() => {
           // this.$Progress.start()
-          this.axios.get(url, { gid: gid, score: score, bonus: bonus }).then(
+          this.axios.post(url, { gid: ggid, score: score, bonus: bonus }).then(
             response => {
               this.$notify({
                 type: "warning",
@@ -176,6 +176,7 @@ export default {
             },
             err => {
               this.$notify({ message: err });
+              this.loading = false
 
               // this.$Progress.fail();
             }

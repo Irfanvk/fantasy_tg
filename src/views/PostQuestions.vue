@@ -230,7 +230,7 @@ export default {
       });
     },
     getUsers() {
-      url = base_url + "test";
+      var url = base_url + "test";
       this.axios
         .get(url)
         .then(response => {
