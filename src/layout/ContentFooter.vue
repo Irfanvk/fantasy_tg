@@ -36,9 +36,15 @@
   </footer>
 </template>
 <script>
+import { base_url } from "../../config";
+import jwtDecode from "jwt-decode";
+
 export default {
   data() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
     return {
+      email: decoded.identity.email,
       year: new Date().getFullYear()
     };
   },
@@ -68,8 +74,11 @@ export default {
             localStorage.setItem("avatar", response.data.url);
           }
         })
-        .catch(err => {
-          this.$notify({ message: err });
+        .catch(() => {
+          this.$notify({
+            message: "You haven't uploaded your avatar",
+            type: "info"
+          });
 
           // window.location = "/";
         });

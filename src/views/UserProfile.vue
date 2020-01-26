@@ -29,11 +29,11 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <span v-if="url_img===undefined">
-                      <img src="img/theme/team-1-800x800.jpg" class="rounded-circle" />
-                    </span>
                     <span v-if="url_img!==undefined">
                       <img :src="url_img" class="rounded-circle" id="avatar_circle" />
+                    </span>
+                    <span v-else>
+                      <img src="img/theme/team-1-800x800.jpg" class="rounded-circle" />
                     </span>
                   </a>
                 </div>
@@ -126,7 +126,7 @@
                   >
                     <i class="el-icon-plus"></i>
                     <!-- <el-button size="small" type="primary" @change="handleSubmit">Click to upload</el-button> -->
-                    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+                    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 200kb</div>
                   </el-upload>
                 </span>
                 <span slot="footer" class="dialog-footer">
@@ -272,6 +272,7 @@ export default {
     const decoded = jwtDecode(token);
     return {
       base_url: base_url,
+      fileList: "",
       url_img: "img/theme/team-1-800x800.jpg",
       dialogVisible: false,
       // fileList: [],
@@ -302,6 +303,10 @@ export default {
     // },
     getAvatar() {
       this.url_img = localStorage.getItem("avatar");
+      if (this.url_img === null) {
+        this.url_img = "img/theme/team-1-800x800.jpg";
+      }
+      console.log(this.url_img);
       // let url = base_url + "avatar/" + this.email;
       // this.axios.post(url).then(response => {
       //   if (response.data.url !== undefined) {
@@ -322,11 +327,9 @@ export default {
         .catch(() => {});
     },
     handleRemove() {
-      this.$notify({message:"removed"})
+      this.$notify({ message: "removed" });
     },
-    handlePreview() {
-  
-    },
+    handlePreview() {},
     handleExceed(files, fileList) {
       this.$message.warning(
         `The limit is 1, you selected ${
