@@ -250,7 +250,7 @@ export default {
         });
         return;
       }
-      if (this.model.password.match(/^([a-zA-Z0-9@#$%^&+=*.\-_]){6,}$/)) {
+      if (this.model.password.length<6) {
         this.$alert("Password must be atleast 6 characters", "Error", {
           confirmButtonText: "OK"
         });
