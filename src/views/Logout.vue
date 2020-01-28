@@ -18,6 +18,8 @@ export default {
   },
   created() {
     setTimeout(() => {
+      localStorage.removeItem("usertoken");
+      localStorage.removeItem("avatar");
       window.location = "/";
     }, 5000);
   },
