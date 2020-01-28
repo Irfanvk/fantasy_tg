@@ -155,12 +155,13 @@ export default {
   },
   methods: {
     logout() {
+      localStorage.removeItem("usertoken");
+      localStorage.removeItem("refreshtoken");
+      localStorage.removeItem("avatar");
       var url = base_url + "logout";
       this.axios
         .delete(url)
         .then(res => {
-          localStorage.removeItem("usertoken");
-          localStorage.removeItem("refreshtoken");
           this.$notify({
             type: "warning",
             message: res.data.message
@@ -172,55 +173,55 @@ export default {
         });
       // this.emitMethod();
     },
-    // getAvatar() {
-    //   this.axios.interceptors.request.use(
-    //     config => {
-    //       let token = localStorage.usertoken;
+    getAvatar() {
+      this.axios.interceptors.request.use(
+        config => {
+          let token = localStorage.usertoken;
 
-    //       if (token) {
-    //         config.headers["Authorization"] = `Bearer ${token}`;
-    //       }
+          if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+          }
 
-    //       return config;
-    //     },
+          return config;
+        },
 
-    //     error => {
-    //       return Promise.reject(error);
-    //     }
-    //   );
-    //   let url = base_url + "avatar/" + this.email;
-    //   this.axios
-    //     .post(url)
-    //     .then(response => {
-    //       if (response.data.url !== undefined) {
-    //         this.url_img = response.data.url;
-    //         localStorage.setItem("avatar", response.data.url);
-    //       }
-    //     })
-    //     .catch(err => {
-    //       // window.location = "/";
-    //       let reftoken = localStorage.getItem("refreshtoken");
-    //       delete this.axios.defaults.headers.common.Authorization;
-    //       if (err.response && err.response.status === 401) {
-    //         this.axios
-    //           .post(base_url + "refresh", {
-    //             headers: { Authorization: `Bearer ${reftoken}` }
-    //           })
-    //           .then(response => {
-    //             localStorage.setItem("usertoken", response.data.access_token);
-    //           })
-    //           .catch(e => {
-    //             this.$notify({ message: e });
-    //             localStorage.clear();
-    //             window.location = "/";
-    //           });
-    //       }
-    //       this.$notify({
-    //         type: "primary",
-    //         message: err.response.data.msg + ", please login to continue "
-    //       });
-    //     });
-    // },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+      let url = base_url + "avatar/" + this.email + "?sidebar";
+      this.axios
+        .post(url)
+        .then(response => {
+          if (response.data.url !== undefined) {
+            this.url_img = response.data.url;
+            localStorage.setItem("avatar", response.data.url);
+          }
+        })
+        .catch(err => {
+          // window.location = "/";
+          let reftoken = localStorage.getItem("refreshtoken");
+          delete this.axios.defaults.headers.common.Authorization;
+          if (err.response && err.response.status === 401) {
+            this.axios
+              .post(base_url + "refresh", {
+                headers: { Authorization: `Bearer ${reftoken}` }
+              })
+              .then(response => {
+                localStorage.setItem("usertoken", response.data.access_token);
+              })
+              .catch(e => {
+                this.$notify({ message: e });
+                localStorage.clear();
+                window.location = "/";
+              });
+          }
+          this.$notify({
+            type: "primary",
+            message: err.response.data.msg + ", please login to continue "
+          });
+        });
+    },
     // emitMethod() {
     //   EventBus.$emit("logged-in", "loggedin");
     // },
@@ -232,7 +233,7 @@ export default {
     }
   },
   created() {
-    // this.getAvatar();
+    this.getAvatar();
   },
   beforeDestroy() {
     if (this.$sidebar.showSidebar) {
