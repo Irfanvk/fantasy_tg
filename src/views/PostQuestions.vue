@@ -191,8 +191,8 @@ export default {
 
     return {
       dynamicValidateForm: {
-        score: "10",
-        bscore: "5"
+        score: 10,
+        bscore: 5
       },
       editmode: false,
       loading: false,
