@@ -120,7 +120,7 @@
                 <i class="el-icon-star-on"></i>
               </el-divider>
               <a style="cursor:pointer" @click="getOtps">
-                <i class="fa fa-list fa-7x" style="color:green"></i>
+                <i class="el-icon-key fa-7x" style="color:green"></i>
               </a>
             </div>
             <div class="text item" style="cursor:pointer" @click="getOtps">
