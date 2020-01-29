@@ -70,9 +70,30 @@
             <el-table :data="allQues" style="border:2px solid black;border-radius:5px;z-index:0">
               <el-table-column type="index" />
               <el-table-column prop="added_on" label="Added On" width="150"></el-table-column>
-              <el-table-column prop="gid" label="GroupID" width="120"></el-table-column>
+              <el-table-column prop="gid" label="Group ID" width="120"></el-table-column>
+              <el-table-column prop="qid" label="Question ID" width="120"></el-table-column>
               <el-table-column prop="question" label="Question" width="120"></el-table-column>
-              <el-table-column prop="options.option" label="Options" width="120"></el-table-column>
+              <el-table-column label="Options"><template slot-scope="scope"><span v-for="data in scope.row.options"><li>{{data.value}}</li></span></template></el-table-column>
+              <el-table-column label="Action">
+                <template slot-scope="scope">
+                  <el-button
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Delete Question"
+                    type="danger"
+                    icon="el-icon-delete"
+                    circle
+                    @click.native.prevent="deleteQues(scope.row.qid)"
+                  ></el-button>
+                </template>
+              </el-table-column>
+              <!-- <el-table-column label="Options" width="120">
+                <span v-for="data in allQues">
+                  <span v-for="opt in data.options ">
+                    <li>{{opt.value}}</li>
+                  </span>
+                </span>
+              </el-table-column>-->
 
               <!-- <el-table-column prop="joined" label="Joined on" width="155" sortable></el-table-column> -->
 
@@ -115,13 +136,6 @@ export default {
   data() {
     return {
       allQues: "",
-      userData: {
-        email: "",
-        full_name: "",
-        mobile: "",
-        team: "",
-        joined: ""
-      }
     };
   },
   methods: {
@@ -141,7 +155,7 @@ export default {
         .then(response => {
           this.allQues = response.data.questions;
           this.allQues = this.allQues.map(ques => {
-            ques.added_on = new Date(ques.added_on).toLocaleString(
+            ques.added_on = new Date(ques.added_on.$date).toLocaleString(
               "en",
               options
             );
@@ -173,46 +187,29 @@ export default {
           });
         });
     },
-    deleteQues: function(id) {
-      var url = base_url + "users/remove?email=" + id;
-      this.$confirm(
-        "This will permanently delete the user. Continue?",
-        "Delete User!",
-        {
-          confirmButtonText: "OK",
-          cancelButtonText: "Cancel",
-          type: "error"
-        }
-      )
+    deleteQues(qid) {
+      var url = base_url + "questions/" + qid;
+      this.$confirm("This will delete the question. Continue?", "Delete!", {
+        confirmButtonText: "OK",
+        cancelButtonText: "Cancel",
+        type: "error"
+      })
         .then(() => {
-          // this.$Progress.start()
-          this.axios.delete(url).then(
-            ()=> {
-              this.$notify({
-                type: "warning",
-                message: this.$createElement(
-                  "i",
-                  { style: "color: red" },
-                  "You just removed a User"
-                )
-              });
-            },
-            err => {
-              // this.$Progress.fail();
-              this.$notify({ message: err });
-            }
-          );
+          this.axios.delete(url).then(response => {
+            this.$notify({
+              type: "warning",
+              message: response.data.msg
+            });
+          });
+          this.getallQuestions();
         })
         .catch(() => {
           this.$notify({
-            type: "error",
-            message: this.$createElement(
-              "i",
-              { style: "color: red" },
-              "You cancelled the opertation"
-            )
+            type: "warning",
+            message: "action cancelled"
           });
         });
+      // this.axios.delete(url).then(res=> )
     }
   },
   created() {
