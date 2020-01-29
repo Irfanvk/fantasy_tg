@@ -36,11 +36,7 @@
       </div>
       <div class="row">
         <span v-for="data in groupData" v-bind:key="data.gid" class="container">
-          <base-button
-            block
-            type="default mt-3 "
-            v-on:click="navigate(data.gid,data.teams_playing)"
-          >
+          <base-button block type="default mt-3 ">
             <small>{{data.gid}}</small>
             <!-- <badge type="black">{{data.added_on.$date}}</badge> -->
             <!-- <el-divider content-position="left">{{data.status}}</el-divider> -->
@@ -92,6 +88,7 @@ export default {
   components: {
     // PageVisitsTable,
     // ProjectsTable,
+    // eslint-disable-next-line vue/no-unused-components
     AdminanswerTable
   },
   data() {
@@ -117,6 +114,7 @@ export default {
       });
     },
     getGroups() {
+      // eslint-disable-next-line no-unused-vars
       var options = {
         hour: "numeric",
         minute: "numeric",
@@ -140,10 +138,10 @@ export default {
           //   return data;
           // });
         })
-        .catch(err => {
+        .catch(() => {
           this.$notify({
             type: "danger",
-            message: err
+            message: "something went wrong"
           });
         });
       this.loading = false;
@@ -163,6 +161,7 @@ export default {
         .then(() => {
           // this.$Progress.start()
           this.axios.post(url, { gid: ggid, score: score, bonus: bonus }).then(
+            // eslint-disable-next-line no-unused-vars
             response => {
               this.$notify({
                 type: "warning",
@@ -173,14 +172,16 @@ export default {
                 )
               });
               this.loading = false;
+              this.getGroups();
             },
             err => {
               this.$notify({ message: err });
-              this.loading = false
+              this.loading = false;
 
               // this.$Progress.fail();
             }
           );
+          this.getGroups();
         })
         .catch(() => {
           this.$notify({
@@ -191,6 +192,7 @@ export default {
               "You cancelled the opertation"
             )
           });
+          this.loading = false;
         });
     }
   },
