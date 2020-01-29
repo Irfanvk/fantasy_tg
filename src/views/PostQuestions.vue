@@ -1,7 +1,7 @@
 <template>
   <div>
     <base-header type="gradient-success" id="mt" class="pb-6 pb-8 pt-5 pt-md-8">
-      <div class="container-fluid mt-2">
+      <div class="container-fluid mt-2" v-loading="loading">
         <div class="row">
           <div class="col-xl-8 order-xl-1">
             <card shadow type="secondary">
@@ -172,9 +172,13 @@
         </span>
         <strong>
           <!-- <el-button type="primary" icon="el-icon-edit" circle @click="editGroup(data.gid)"></el-button> -->
-          <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
         </strong>
       </base-button>
+      <card block class="text-center">
+        <strong>
+          <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
+        </strong>
+      </card>
     </span>
   </div>
 </template>
@@ -365,6 +369,7 @@ export default {
             message: res.data.msg + " Successfully "
           });
           this.getGroups();
+          this.loading = false;
           // this.$router.push({ name: "Questions" });
           // this.$notify({
           //   type: "secondary",
