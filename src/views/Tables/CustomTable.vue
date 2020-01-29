@@ -11,47 +11,55 @@
         </div>
       </div>
     </div>
+    <span v-if="quesData!==[]">
+      <div class="table-responsive" style="z-index:0">
+        <base-table
+          class="table align-items-center table-flush"
+          :class="type === 'dark' ? 'table-dark': ''"
+          :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
+          tbody-classes="list"
+          :data="quesData"
+        >
+          <template slot="columns">
+            <!-- <th>Index</th> -->
+            <th>Question ID</th>
+            <!-- <th>ID</th> -->
+          </template>
 
-    <div class="table-responsive" style="z-index:0">
-      <base-table
-        class="table align-items-center table-flush"
-        :class="type === 'dark' ? 'table-dark': ''"
-        :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
-        tbody-classes="list"
-        :data="quesData"
-      >
-        <template slot="columns">
-          <!-- <th>Index</th> -->
-          <th>Question ID</th>
-          <!-- <th>ID</th> -->
-        </template>
-
-        <template slot-scope="{row}">
-          <!-- <th scope="row" type="index" :data="qnum">{{qnum++}}</th> -->
-          <th scope="row" style="max-width:50%">
-            <div class="media align-items-center">
-              <div class="media-body">
-                <!-- <span class="name mb-0 text-sm" @click="open">{{row.question}}</span> -->
-                <el-badge :value="row.q_count" class="item" type="primary">
+          <template slot-scope="{row}">
+            <!-- <th scope="row" type="index" :data="qnum">{{qnum++}}</th> -->
+            <th scope="row" style="max-width:50%">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <!-- <span class="name mb-0 text-sm" @click="open">{{row.question}}</span> -->
+                  <el-badge :value="row.q_count" class="item" type="primary">
+                    <el-tag
+                      style="cursor:pointer;"
+                      type="primary"
+                      @click="$router.push('questions/'+row.gid)"
+                    >{{row.teams_playing.toString().substr(0,18)}}</el-tag>
+                  </el-badge>
+                  <el-divider direction="vertical"></el-divider>
                   <el-tag
-                    style="cursor:pointer;"
-                    type="primary"
-                    @click="$router.push('questions/'+row.gid)"
-                  >{{row.teams_playing.toString().substr(0,18)}}</el-tag>
-                </el-badge>
-                <el-divider direction="vertical"></el-divider>
-                <el-tag
-                  effect="plain"
-                  size="mini"
-                  type="success"
-                >Score per question: {{row.group.score}}</el-tag>
-                <el-divider direction="vertical"></el-divider>
+                    effect="plain"
+                    size="mini"
+                    type="success"
+                  >Score per question: {{row.group.score}}</el-tag>
+                  <el-divider direction="vertical"></el-divider>
 
-                <el-tag effect="plain" size="mini" type="success">Bonus score: {{row.group.bscore}}</el-tag>
+                  <el-tag
+                    effect="plain"
+                    size="mini"
+                    type="success"
+                  >Bonus score: {{row.group.bscore}}</el-tag>
+                  <br />
+                  <span v-if="row.description!==''">
+                    <el-tag type="warning" block class="mt-2">{{row.description}}</el-tag>
+                  </span>
+                </div>
               </div>
-            </div>
-          </th>
-          <!-- <td class="text-right">
+            </th>
+            <!-- <td class="text-right">
             <base-dropdown class="dropdown" position="right">
               <a
                 slot="title"
@@ -68,12 +76,18 @@
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>
-          </template>-->
-          <!-- </base-dropdown> -->
-          <!-- </td> -->
-        </template>
-      </base-table>
-    </div>
+            </template>-->
+            <!-- </base-dropdown> -->
+            <!-- </td> -->
+          </template>
+        </base-table>
+      </div>
+    </span>
+    <span v-else class="text-center">
+      <i class="el-icon-moon-night fa-7x"></i>
+      <br />
+      <small>No data</small>
+    </span>
   </div>
 </template>
 
@@ -214,6 +228,7 @@ export default {
     this.getQuestions();
   }
 };
+// var intvl = setInterval(this.getQuestions(), 10000);
 </script>
 <style>
 .avatar {
