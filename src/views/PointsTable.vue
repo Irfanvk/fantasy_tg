@@ -185,7 +185,6 @@ export default {
         .get(url)
         .then(response => {
           this.point2Data = response.data.result;
-
         })
         .catch(err => {
           // window.location = "/";
@@ -215,7 +214,7 @@ export default {
     }
   },
   created() {
-    this.getPoints();
+    // this.getPoints();
   },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
