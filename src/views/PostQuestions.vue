@@ -175,7 +175,14 @@
         </strong>
       </base-button>
       <card block class="text-center">
-        <strong>
+        <el-switch
+          v-model="data.hide"
+          active-text="hide"
+          @change="patchGroup(data.gid,data.hide)"
+          inactive-text="show"
+        ></el-switch>
+        <el-divider direction="vertical"></el-divider>
+        <strong class="pl-2">
           <el-button type="danger" icon="el-icon-delete" circle @click="deleteGroup(data.gid)"></el-button>
         </strong>
       </card>
@@ -266,9 +273,11 @@ export default {
     RefToken() {
       // var rurl = base_url + "refresh";
       // var ref_token = localStorage.getItem("refreshtoken");
+      // eslint-disable-next-line no-unused-vars
       var usertoken = localStorage.getItem("usertoken");
     },
     getGroups() {
+      // eslint-disable-next-line no-unused-vars
       var options = {
         hour: "numeric",
         minute: "numeric",
@@ -279,7 +288,7 @@ export default {
         month: "long"
       };
       this.loading = true;
-      var url = base_url + "questiongroups";
+      var url = base_url + "questiongroupsadmin";
       this.axios
         .get(url)
         .then(res => {
@@ -309,6 +318,15 @@ export default {
     //   this.teams_playing=
     //   )
     // },
+    patchGroup(gid,toggle) {
+      var url = base_url + "questionsgroups/" + gid;
+      this.axios.post(url, { toggle: toggle }).then(res =>
+        this.$notify({
+          type: "warning",
+          message: res.data.msg
+        })
+      );
+    },
     editGroup_() {
       // var url = base_url + "editgroup/" + gid;
       // this.axios
