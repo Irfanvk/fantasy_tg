@@ -139,18 +139,49 @@
           </div>
         </div>
 
-        <!-- <div class="col-xl-8 order-xl-1">
+        <div class="col-xl-8 order-xl-1">
           <card shadow type="secondary">
             <div slot="header" class="bg-white border-0">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
+                  <h3 class="mb-0">My Answers</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                  <el-button class="btn btn-sm btn-primary" @click="getAnswers()">Click to see</el-button>
                 </div>
               </div>
-        </div>-->
+            </div>
+            <el-table ref="filterTable" :data="answerData" style="width: 100%">
+              <el-table-column prop="added_on" label="Date" sortable width="180" column-key="date"></el-table-column>
+              <el-table-column prop="question" label="Question" width="180"></el-table-column>
+              <el-table-column
+                prop="answer"
+                label="Answer"
+                width="100"
+                sortable
+              >
+                <template slot-scope="scope">
+                  <el-tag
+                    :type="scope.row.answer === 'unanswered' ? 'danger' : 'success'"
+                    disable-transitions
+                  >{{scope.row.answer}}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="correct" label="Right Answer" :formatter="formatter" sortable>
+                <template slot-scope="scope">
+                  <el-tag type="primary">{{scope.row.correct}}</el-tag>
+                </template>
+              </el-table-column>
+            </el-table>
+            <!-- <div>
+              <el-table :data="answerData" style="width: 100%" :row-class-name="tableRowClassName">
+                <el-table-column prop="question" label="Date" width="180"></el-table-column>
+                <el-table-column prop="answer" label="Name" width="180"></el-table-column>
+                <el-table-column prop="correct" label="Address"></el-table-column>
+              </el-table></div>
+            -->
+          </card>
+        </div>
         <!-- <template>
               <form @submit.prevent>
                 <h6 class="heading-small text-muted mb-4">User information</h6>
@@ -281,6 +312,8 @@ export default {
       mobile: decoded.identity.mobile,
       email: decoded.identity.email,
       admin: decoded.identity.admin,
+      uid: decoded.identity.uid,
+      answerData: [],
       model: {
         full_name_: this.full_name,
         email_: this.email,
@@ -301,6 +334,34 @@ export default {
     //     .post(url, { email: this.model.email, mobile: this.mobile })
     //     .then(res => {});
     // },
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex === 1) {
+        return "warning-row";
+      } else if (rowIndex === 3) {
+        return "success-row";
+      }
+      return "";
+    },
+    getAnswers() {
+      var options = {
+        hour: "numeric",
+        minute: "numeric",
+        day: "numeric",
+        year: "numeric",
+        month: "long"
+      };
+      var url = base_url + "getuseranswer/" + this.uid;
+      this.axios.get(url).then(response => {
+        this.answerData = response.data.result;
+        this.answerData = this.answerData.map(user => {
+          user.added_on = new Date(user.added_on.$date).toLocaleString(
+            "en",
+            options
+          );
+          return user;
+        });
+      });
+    },
     getAvatar() {
       this.url_img = localStorage.getItem("avatar");
       if (this.url_img === null) {
@@ -380,6 +441,23 @@ export default {
             message: err.response.data.msg + ", please login to continue "
           });
         });
+    },
+    resetDateFilter() {
+      this.$refs.filterTable.clearFilter("date");
+    },
+    clearFilter() {
+      this.$refs.filterTable.clearFilter();
+    },
+    // eslint-disable-next-line no-unused-vars
+    formatter(row, column) {
+      return row.address;
+    },
+    filterTag(value, row) {
+      return row.tag === value;
+    },
+    filterHandler(value, row, column) {
+      const property = column["property"];
+      return row[property] === value;
     }
   },
   beforeCreate() {
@@ -390,6 +468,7 @@ export default {
   },
   mounted() {
     this.getAvatar();
+    // this.getAnswers();
     // this.getData();
   }
 };
@@ -402,5 +481,12 @@ export default {
   width: 200px;
   height: 200px;
   object-fit: cover;
+}
+.el-table .warning-row {
+  background: oldlace;
+}
+
+.el-table .success-row {
+  background: #f0f9eb;
 }
 </style>
