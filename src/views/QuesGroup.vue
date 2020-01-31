@@ -171,7 +171,8 @@ export default {
         .post(url, {
           options: this.dynamicValidateForm.options,
           question: this.dynamicValidateForm.question,
-          gid: this.$route.params.gid
+          gid: this.$route.params.gid,
+          playing: this.$route.params.teams
         })
         .then(res => {
           this.$notify({
