@@ -112,7 +112,7 @@
 
             <base-input
               class="input-group-alternative mb-3"
-              placeholder="Mobile number with coutry code"
+              placeholder="Mobile number with country code"
               addon-left-icon="fa fa-mobile"
               v-model="model.mobile"
             ></base-input>
@@ -317,6 +317,7 @@ export default {
         })
         .catch(() => {
           // this.$router.go();
+          this.loading = false;
         });
     }
   },
