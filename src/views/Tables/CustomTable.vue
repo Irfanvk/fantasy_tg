@@ -182,6 +182,12 @@ export default {
         .get(url)
         .then(response => {
           this.quesData = response.data.result;
+          if (this.quesData.length === 0) {
+            this.$notify({
+              type: "primary",
+              message: " There are no questions right now, Pls come back later !!"
+            });
+          }
           // this.quesData = this.quesData.map(user => {
           // user.added_on = new Date(Date.now()).toLocaleString("en", options);
           // return user;
