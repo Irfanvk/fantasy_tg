@@ -250,7 +250,7 @@ export default {
         });
         return;
       }
-      if (this.model.password.length<6) {
+      if (this.model.password.length < 6) {
         this.$alert("Password must be atleast 6 characters", "Error", {
           confirmButtonText: "OK"
         });
@@ -263,6 +263,7 @@ export default {
         });
         this.model.password = "";
         this.model.confirmpass = "";
+        this.loading = false;
         return;
       }
       if (
