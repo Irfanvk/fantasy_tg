@@ -73,7 +73,7 @@
                       </el-radio-group>
                     </el-form-item>
                     <el-form-item size="large">
-                      <el-button type="primary" @click="onSubmit">Submit</el-button>
+                      <el-button type="primary" @click="onSubmit(data.playing,data.gid)">Submit</el-button>
                       <el-button @click="cancelled">Cancel</el-button>
                     </el-form-item>
                   </el-form>
@@ -148,7 +148,7 @@ export default {
         });
       });
     },
-    onSubmit() {
+    onSubmit(playing, gid) {
       const token = localStorage.usertoken;
       const decoded = jwtDecode(token);
       var url =
@@ -157,15 +157,17 @@ export default {
         decoded.identity.email +
         "?qid=" +
         this.$route.params.oneid;
-      this.axios.post(url, { answer: this.ansData }).then(response => {
-        this.apiPostData = response.data;
-        this.$message({
-          message: this.apiPostData.msg,
-          type: this.apiPostData.type
+      this.axios
+        .post(url, { answer: this.ansData, playing: playing, gid: gid })
+        .then(response => {
+          this.apiPostData = response.data;
+          this.$message({
+            message: this.apiPostData.msg,
+            type: this.apiPostData.type
+          });
+          // this.$router.push("/questions");
+          this.$router.go(-1);
         });
-        // this.$router.push("/questions");
-        this.$router.go(-1);
-      });
     },
     getQuestion() {
       var url = base_url + "questions/one/" + this.$route.params.oneid;
