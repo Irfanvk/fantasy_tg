@@ -152,14 +152,9 @@
               </div>
             </div>
             <el-table ref="filterTable" :data="answerData" style="width: 100%">
-              <el-table-column prop="added_on" label="Date" sortable width="180" column-key="date"></el-table-column>
+              <el-table-column prop="added_on" label="Date" sortable width="100" column-key="date"></el-table-column>
               <el-table-column prop="question" label="Question" width="180"></el-table-column>
-              <el-table-column
-                prop="answer"
-                label="Answer"
-                width="100"
-                sortable
-              >
+              <el-table-column prop="answer" label="Answer" width="150" sortable>
                 <template slot-scope="scope">
                   <el-tag
                     :type="scope.row.answer === 'unanswered' ? 'danger' : 'success'"
@@ -167,7 +162,12 @@
                   >{{scope.row.answer}}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="correct" label="Right Answer" :formatter="formatter" sortable>
+              <el-table-column prop="admin_answer" label="Right Answer" :formatter="formatter" sortable>
+                <template slot-scope="scope">
+                  <el-tag type="success">{{scope.row.admin_answer}}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column prop="correct" label="Correct" :formatter="formatter" sortable>
                 <template slot-scope="scope">
                   <el-tag type="primary">{{scope.row.correct}}</el-tag>
                 </template>
@@ -334,6 +334,7 @@ export default {
     //     .post(url, { email: this.model.email, mobile: this.mobile })
     //     .then(res => {});
     // },
+    // eslint-disable-next-line no-unused-vars
     tableRowClassName({ row, rowIndex }) {
       if (rowIndex === 1) {
         return "warning-row";
