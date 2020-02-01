@@ -34,6 +34,21 @@
           </div>
         </div>
       </div>
+      <el-dialog title="Result" :visible.sync="dialogTableVisible">
+        <download-csv
+          class="btn btn-default"
+          block
+          :data="getResult"
+          name="filename.csv"
+        >Download CSV (This is a slot)</download-csv>
+        <el-table :data="getResult">
+          <el-table-column property="user_name" label="Name" width="150"></el-table-column>
+          <el-table-column property="score" label="Score" sortable></el-table-column>
+          <el-table-column property="bonus" label="Bonus" sortable></el-table-column>
+          <el-table-column property="total_score" label="Total Score" sortable></el-table-column>
+          <el-table-column prop="questions_answered" label="Qns Answered"></el-table-column>
+        </el-table>
+      </el-dialog>
       <div class="row">
         <span v-for="data in groupData" v-bind:key="data.gid" class="container">
           <base-button block type="default mt-3 ">
@@ -96,7 +111,9 @@ export default {
       apiData: [],
       tempData: [],
       loading: false,
-      groupData: []
+      groupData: [],
+      getResult: [],
+      dialogTableVisible: false
     };
   },
   methods: {
@@ -163,15 +180,13 @@ export default {
           this.axios.post(url, { gid: ggid, score: score, bonus: bonus }).then(
             // eslint-disable-next-line no-unused-vars
             response => {
+              this.getResult = response.data.result;
               this.$notify({
                 type: "warning",
-                message: this.$createElement(
-                  "i",
-                  { style: "color: red" },
-                  "You just calculated points"
-                )
+                message: "You just calculated points"
               });
               this.loading = false;
+              this.dialogTableVisible = true;
               this.getGroups();
             },
             err => {
@@ -216,5 +231,8 @@ export default {
 <style>
 .el-message-box {
   width: 330px;
+}
+.el-dialog {
+  width: auto;
 }
 </style>
