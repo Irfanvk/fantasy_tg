@@ -13,6 +13,8 @@ import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
 import lang from 'element-ui/lib/locale/lang/en';
 import locale from 'element-ui/lib/locale';
 import CircularCountDownTimer from "vue-circular-count-down-timer";
+import JsonCSV from 'vue-json-csv'
+
 // configure language
 locale.use(lang);
 
@@ -34,6 +36,7 @@ if (token) {
 
 Vue.config.productionTip = false
 
+Vue.component('downloadCsv', JsonCSV)
 Vue.use(ElementUI);
 Vue.use(Vuetify)
 Vue.use(CircularCountDownTimer);
