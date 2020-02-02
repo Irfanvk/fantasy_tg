@@ -174,6 +174,7 @@ export default {
     }
   },
   mounted() {
+    this.getQuestion();
     this.repeatData();
   },
   beforeDestroy() {
