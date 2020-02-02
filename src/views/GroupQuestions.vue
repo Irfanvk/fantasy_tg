@@ -166,12 +166,19 @@ export default {
             message: err.response.data.msg + ", please login to continue "
           });
         });
+    },
+    repeatData() {
+      this.polling = setInterval(() => {
+        this.getQuestion();
+      }, 15000);
     }
   },
-  created() {
-    this.getQuestion();
+  mounted() {
+    this.repeatData();
   },
-  mounted() {},
+  beforeDestroy() {
+    clearInterval(this.polling);
+  },
   beforeCreate() {
     if (!localStorage.getItem("usertoken")) {
       this.$router.push({ name: "login" });

@@ -185,7 +185,8 @@ export default {
           if (this.quesData.length === 0) {
             this.$notify({
               type: "primary",
-              message: " There are no questions right now, Pls come back later !!"
+              message:
+                " There are no questions right now, Pls come back later !!"
             });
           }
           // this.quesData = this.quesData.map(user => {
@@ -228,16 +229,25 @@ export default {
             message: err.response.data.msg + ", please login to continue "
           });
         });
+    },
+    repeatData() {
+      this.polling = setInterval(() => {
+        this.getQuestions();
+      }, 10000);
     }
   },
   mounted() {
     this.getQuestions();
+    this.repeatData();
   },
+  beforeDestroy() {
+    clearInterval(this.polling);
+  },
+
   created() {
     // location.reload()
   },
-  beforeCreate(){
-  }
+  beforeCreate() {}
 };
 // var intvl = setInterval(this.getQuestions(), 10000);
 </script>
