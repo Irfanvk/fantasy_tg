@@ -185,8 +185,7 @@ export default {
           if (this.quesData.length === 0) {
             this.$notify({
               type: "primary",
-              message:
-                " There are no questions right now, Pls come back later !!"
+              message: " There are no questions right now, Pls come back later !!"
             });
           }
           // this.quesData = this.quesData.map(user => {
@@ -233,12 +232,12 @@ export default {
   },
   mounted() {
     this.getQuestions();
-    var refreshdata = setInterval(this.getQuestions, 15000);
   },
   created() {
     // location.reload()
   },
-  beforeCreate() {}
+  beforeCreate(){
+  }
 };
 // var intvl = setInterval(this.getQuestions(), 10000);
 </script>
