@@ -170,6 +170,7 @@ export default {
   },
   created() {
     this.getQuestion();
+    var refreshdata = setInterval(this.getQuestion, 15000);
   },
   mounted() {},
   beforeCreate() {
