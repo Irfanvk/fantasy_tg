@@ -47,6 +47,11 @@ export default new Router({
           component: () => import('./views/AdminAnswer.vue')
         },
         {
+          path: '/answerstatus',
+          name: 'Answer Status',
+          component: () => import('./views/AnswerStatus.vue')
+        },
+        {
           path: '/postadminanswer/:qid',
           name: 'Post Admin Answer',
           component: () => import('./views/PostadminAnswer.vue')
