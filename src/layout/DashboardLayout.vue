@@ -36,13 +36,14 @@
           <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}" />
         </span>-->
         <sidebar-item
+          :link="{name: 'Answers Status', icon: 'ni ni-badge text-blue', path: '/answerstatus'}"
+        />
+        <sidebar-item
           :link="{name: 'Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"
         />
         <!-- <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/> -->
         <span v-if="admin">
-          <sidebar-item
-            :link="{name: 'Users', icon: 'ni ni ni-single-02 text-red', path: '/users'}"
-          />
+          <sidebar-item :link="{name: 'Users', icon: 'ni ni-single-02 text-red', path: '/users'}" />
           <!-- <sidebar-item
             :link="{name: 'Admins', icon: 'ni ni ni-single-02 text-green', path: '/users/admin'}"
           />-->
