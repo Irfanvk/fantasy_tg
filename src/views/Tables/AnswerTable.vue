@@ -34,7 +34,7 @@
             slot-scope="scope"
           >{{scope.row.added_on.$date | moment("MMM Do YYYY, h:mm:ss a")}}</template>
         </el-table-column>
-        <el-table-column align="left" prop="added_by" label="Name" width="150">
+        <el-table-column align="center" prop="added_by" label="Name" width="150">
           <template slot="header" slot-scope="scope">
             <el-input v-model="search" size="mini" placeholder="Type to search" />
           </template>
@@ -49,14 +49,14 @@
           </template>
         </el-table-column>
 
-        <el-table-column property="question" label="Question"></el-table-column>
+        <el-table-column property="question" label="Question" width="200"></el-table-column>
         <el-table-column property="answer" label="Answer"></el-table-column>
         <el-table-column prop="correct" label="Correct">
           <template slot-scope="scope">
-            <el-tag
-              :type="scope.row.correct === 'false' ? 'danger' : 'success'"
-              disable-transitions
-            >{{scope.row.correct}}</el-tag>
+            <el-tag :type="scope.row.correct === true ? 'success' : 'danger'" disable-transitions>
+              <span v-if="scope.row.correct===true">correct</span>
+              <span v-else>wrong</span>
+            </el-tag>
           </template>
         </el-table-column>
       </el-table>
