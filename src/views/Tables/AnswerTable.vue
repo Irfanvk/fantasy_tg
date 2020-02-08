@@ -29,7 +29,7 @@
       <el-table
         :data="answerData.filter(data => !search || data.added_by.full_name.toLowerCase().includes(search.toLowerCase()))"
       >
-        <el-table-column prop="added_on" label="Date" width="90">
+        <el-table-column prop="added_on" label="Date" width="90" sortable>
           <template
             slot-scope="scope"
           >{{scope.row.added_on.$date | moment("MMM Do YYYY, h:mm:ss a")}}</template>
@@ -49,9 +49,9 @@
           </template>
         </el-table-column>
 
-        <el-table-column property="question" label="Question" width="200"></el-table-column>
-        <el-table-column property="answer" label="Answer"></el-table-column>
-        <el-table-column prop="correct" label="Correct">
+        <el-table-column property="question" label="Question" width="200" sortable></el-table-column>
+        <el-table-column property="answer" label="Answer" sortable></el-table-column>
+        <el-table-column prop="correct" label="Correct" sortable>
           <template slot-scope="scope">
             <el-tag :type="scope.row.correct === true ? 'success' : 'danger'" disable-transitions>
               <span v-if="scope.row.correct===true">correct</span>
