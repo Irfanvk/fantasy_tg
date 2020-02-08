@@ -332,11 +332,11 @@
       <!-- End charts-->
 
       <!--Tables-->
-      <div class="row mt-5">
+      <!-- <div class="row mt-5">
         <div class="col-xl-8 mb-5 mb-xl-0" style="max-width:100%">
           <page-visits-table></page-visits-table>
         </div>
-      </div>
+      </div>-->
       <!--End tables-->
     </div>
   </div>
