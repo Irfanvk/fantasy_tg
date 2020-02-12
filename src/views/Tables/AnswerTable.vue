@@ -51,7 +51,7 @@
 
         <el-table-column property="question" label="Question" width="200" sortable></el-table-column>
         <el-table-column property="answer" label="Answer" sortable></el-table-column>
-        <el-table-column prop="correct" label="Correct" sortable>
+        <el-table-column prop="correct" label="Status" sortable>
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.correct === true ? 'success' : 'danger'"
