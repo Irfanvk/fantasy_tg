@@ -25,7 +25,7 @@
         <el-table-column label="Answer" prop="answer"></el-table-column>
       </el-table>
     </el-dialog>-->
-    <el-dialog title="Answer Table" :visible.sync="dialogTableVisible">
+    <el-dialog title="Answer Table" :visible.sync="dialogTableVisible" v-loading="loading">
       <el-table
         :data="answerData.filter(data => !search || data.added_by.full_name.toLowerCase().includes(search.toLowerCase()))"
       >
@@ -51,7 +51,7 @@
 
         <el-table-column property="question" label="Question" width="200" sortable></el-table-column>
         <el-table-column property="answer" label="Answer" sortable></el-table-column>
-        <el-table-column prop="correct" label="Status" sortable>
+        <el-table-column prop="correct" label="Status" sortable width="100">
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.correct === true ? 'success' : 'danger'"
@@ -60,11 +60,11 @@
             >
               <span v-if="scope.row.correct===true">
                 <i class="ni ni-check-bold"></i>
-                <!-- correct -->
+                correct
               </span>
               <span v-else-if="scope.row.correct===false">
                 <i class="fa fa-times"></i>
-                <!-- wrong -->
+                wrong
               </span>
               <span v-else>
                 <i class="el-icon-info"></i>
@@ -221,6 +221,7 @@ export default {
       });
     },
     getAnswers(gid) {
+      this.loading = true;
       var url = base_url + "groups/answers/" + gid;
       this.dialogTableVisible = true;
       this.axios.get(url).then(res => {
