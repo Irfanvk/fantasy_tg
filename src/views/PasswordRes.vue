@@ -117,7 +117,7 @@ export default {
   methods: {
     resetVerify() {
       this.loading = true;
-      var url = base_url + "resetrequest";
+      var url = base_url + "emailresetrequest";
       if (this.model.email === "") {
         this.$alert("Email cannot be blank", "Error", {
           confirmButtonText: "OK"
@@ -137,10 +137,10 @@ export default {
           });
           this.loading = false;
           this.flag = res.data.flag;
-          this.$notify({
-            type: "primary",
-            message: res.data.result.email
-          });
+          // this.$notify({
+          //   type: "primary",
+          //   message: res.data.result.email
+          // });
         })
         .catch(err => {
           this.$notify({
@@ -148,7 +148,6 @@ export default {
             type: "danger"
           });
           this.loading = false;
-
         });
     },
     resetPassword() {
@@ -180,16 +179,18 @@ export default {
         this.model.confirmpass = "";
         return;
       }
-      this.axios.post(url2, { password: this.model.password }).then(res => {
-        this.$notify({
-          title: res.data.title,
-          type: res.data.type,
-          message: res.data.msg
+      this.axios
+        .post(url2, { password: this.model.password, email: this.model.email })
+        .then(res => {
+          this.$notify({
+            title: res.data.title,
+            type: res.data.type,
+            message: res.data.msg
+          });
+          if (res.data.retry === false) {
+            this.$router.push({ name: "login" });
+          }
         });
-        if (res.data.retry === false) {
-          this.$router.push({ name: "login" });
-        }
-      });
     }
   },
   beforeCreate() {
