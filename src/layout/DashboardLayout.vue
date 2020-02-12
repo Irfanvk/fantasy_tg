@@ -32,7 +32,7 @@
             :link="{name: 'Post Admin Answer', icon: 'ni ni-notification-70 text-yellow', path: '/adminanswer'}"
           />
         </span>
-        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}" />
+        <!-- <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}" /> -->
         <span v-if="admin">
           <sidebar-item
             :link="{name: 'Answers Status', icon: 'ni ni-badge text-blue', path: '/answerstatus'}"
