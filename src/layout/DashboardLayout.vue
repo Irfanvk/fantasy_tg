@@ -32,12 +32,12 @@
             :link="{name: 'Post Admin Answer', icon: 'ni ni-notification-70 text-yellow', path: '/adminanswer'}"
           />
         </span>
-        <!-- <span v-if="admin">
-          <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}" />
-        </span>-->
-        <sidebar-item
-          :link="{name: 'Answers Status', icon: 'ni ni-badge text-blue', path: '/answerstatus'}"
-        />
+        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}" />
+        <span v-if="admin">
+          <sidebar-item
+            :link="{name: 'Answers Status', icon: 'ni ni-badge text-blue', path: '/answerstatus'}"
+          />
+        </span>
         <sidebar-item
           :link="{name: 'Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"
         />
