@@ -53,9 +53,23 @@
         <el-table-column property="answer" label="Answer" sortable></el-table-column>
         <el-table-column prop="correct" label="Correct" sortable>
           <template slot-scope="scope">
-            <el-tag :type="scope.row.correct === true ? 'success' : 'danger'" disable-transitions>
-              <span v-if="scope.row.correct===true">correct</span>
-              <span v-else>wrong</span>
+            <el-tag
+              :type="scope.row.correct === true ? 'success' : 'danger'"
+              disable-transitions
+              effect="plain"
+            >
+              <span v-if="scope.row.correct===true">
+                <i class="ni ni-check-bold"></i>
+                <!-- correct -->
+              </span>
+              <span v-else-if="scope.row.correct===false">
+                <i class="fa fa-times"></i>
+                <!-- wrong -->
+              </span>
+              <span v-else>
+                <i class="el-icon-info"></i>
+                pending
+              </span>
             </el-tag>
           </template>
         </el-table-column>
