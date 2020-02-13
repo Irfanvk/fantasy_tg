@@ -18,22 +18,23 @@
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(0, 0, 0, 0.8)"
     >
-      <base-table
+      <!-- <base-table
         class="table align-items-center table-flush"
         :class="type === 'dark' ? 'table-dark': ''"
         :thead-classes="type === 'dark' ? 'thead-dark': 'thead-light'"
         tbody-classes="list"
         :data="pointData"
+        sortable
       >
         <template slot="columns">
           <th>Player</th>
           <th>Points</th>
           <th>mobile</th>
-          <th>Team</th>
+          <th sortable>Team</th>
         </template>
 
-        <template slot-scope="{row}">
-          <!-- <th scope="row">
+      <template slot-scope="{row}">-->
+      <!-- <th scope="row">
             <div class="media align-items-center">
               <a href="#" class="avatar rounded-circle mr-3">
                 <img alt="Image placeholder" :src="row.img" />
@@ -42,13 +43,20 @@
                 <span class="name mb-0 text-sm">{{row.title}}</span>
               </div>
             </div>
-          </th>-->
-          <td class="points" sortable>{{row.full_name}}</td>
-          <td>{{row.score}}</td>
+      </th>-->
+      <!-- <td class="points">{{row.full_name}}</td>
+          <td sortable>{{row.score}}</td>
           <td>{{row.mobile}}</td>
-          <td>{{row.team}}</td>
+          <td>{{row.team.toUpperCase()}}</td>
         </template>
-      </base-table>
+      </base-table>-->
+
+      <el-table :data="pointData" style="width: 100%">
+        <el-table-column prop="full_name" label="Player" width="120" style="font-size:8em"></el-table-column>
+        <el-table-column prop="score" label="Points" sortable></el-table-column>
+        <el-table-column prop="mobile" label="Mobile" width="100"></el-table-column>
+        <el-table-column prop="team" label="Team" sortable></el-table-column>
+      </el-table>
     </div>
 
     <!-- <div class="card-footer d-flex justify-content-end"
@@ -117,7 +125,7 @@ export default {
   },
   methods: {
     getPoints() {
-      var url = base_url + "points";
+      var url = base_url + "points?point";
       this.axios.get(url).then(response => {
         this.loading = false;
         this.pointData = response.data.result;
@@ -128,9 +136,75 @@ export default {
     this.getPoints();
   }
 };
+function sortTable(n) {
+  var table,
+    rows,
+    switching,
+    i,
+    x,
+    y,
+    shouldSwitch,
+    dir,
+    switchcount = 0;
+  table = document.getElementById("myTable2");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < rows.length - 1; i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
 </script>
 <style>
 .avatar {
   background-color: #fff;
+}
+.el-table {
+  font-size: 11px;
+  font-weight: inherit;
 }
 </style>
