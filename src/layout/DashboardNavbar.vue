@@ -17,15 +17,11 @@
             <span class="avatar avatar-sm rounded-circle">
               <!-- <img alt="Image placeholder" src="../../public/img/brand/ipl-logo.png"> -->
               <!-- <img alt="Image placeholder" src="../../public/img/theme/team-4-800x800.jpg" /> -->
-              <span v-if="url_img!==null||undefined">
+              <span v-if="url_img!==undefined">
                 <img :src="url_img" alt="Img" class="rounded-circle" />
               </span>
               <span v-else>
-                <img
-                  src="../../public/img/theme/team-4-800x800.jpg"
-                  alt="Image"
-                  class="rounded-circle"
-                />
+                <img src="img/theme/team-4-800x800.jpg" alt="Image" class="rounded-circle" />
               </span>
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
@@ -95,37 +91,38 @@ export default {
       localStorage.clear();
       window.location = "/";
     },
-    // getAvatar() {
-    //   this.axios.interceptors.request.use(
-    //     config => {
-    //       let token = localStorage.usertoken;
+    getAvatar() {
+      this.axios.interceptors.request.use(
+        config => {
+          let token = localStorage.usertoken;
 
-    //       if (token) {
-    //         config.headers["Authorization"] = `Bearer ${token}`;
-    //       }
+          if (token) {
+            config.headers["Authorization"] = `Bearer ${token}`;
+          }
 
-    //       return config;
-    //     },
+          return config;
+        },
 
-    //     error => {
-    //       return Promise.reject(error);
-    //     }
-    //   );
-    //   let url = base_url + "avatar/" + this.email;
-    //   this.axios
-    //     .post(url)
-    //     .then(response => {
-    //       if (response.data.url !== undefined) {
-    //         this.url_img = response.data.url;
-    //         localStorage.setItem("avatar", response.data.url);
-    //       }
-    //     })
-    //     .catch(err => {
-    //       this.$notify({ message: err });
-
-    //       // window.location = "/";
-    //     });
-    // },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+      let url = base_url + "avatar/" + this.email + "?dashboard";
+      this.axios
+        .post(url)
+        .then(response => {
+          if (response.data.url !== undefined) {
+            this.url_img = response.data.url;
+            localStorage.setItem("avatar", response.data.url);
+          }
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {
+          this.url_img = "img/theme/team-4-800x800.jpg";
+          localStorage.setItem("avatar", this.url_img);
+          // window.location = "/";
+        });
+    },
     toggleSidebar() {
       this.$sidebar.displaySidebar(!this.$sidebar.showSidebar);
     },
@@ -137,7 +134,7 @@ export default {
     }
   },
   created() {
-    // this.getAvatar();
+    this.getAvatar();
   }
 };
 </script>
