@@ -291,6 +291,7 @@ export default {
               type: "danger",
               message: res.data.msg
             });
+            this.loading = false;
             return;
           }
           this.loading = false;
