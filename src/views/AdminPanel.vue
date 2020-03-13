@@ -134,6 +134,12 @@
               <el-table-column property="otp" label="OTP" width="150"></el-table-column>
               <el-table-column property="name" label="Name" width="200"></el-table-column>
               <el-table-column property="email" label="email" width="200"></el-table-column>
+              <el-table-column  label="Action" width="200">
+                <template slot-scope="scope">
+                  <!-- <el-button size="mini" @click="editUser(scope.row.email)">Edit</el-button> -->
+                  <el-button size="mini" type="danger" @click="deleteOtp(scope.row.otp)">Delete</el-button>
+                </template>
+              </el-table-column>
             </el-table>
           </span>
           <span v-else>
@@ -208,6 +214,41 @@ export default {
 
         // this.$router.push("/questions");
       });
+    },
+    deleteOtp: function(id) {
+      this.loading=true
+      var url = base_url + "otp/remove/"+id;
+      this.$confirm(
+        "This will delete the OTP. Continue?",
+        "Delete User!",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "error"
+        }
+      )
+        .then(() => {
+          // this.$Progress.start()
+          this.axios.delete(url).then(res => {
+            this.$notify({
+              title: "Warning",
+              message: res.data.msg,
+              type: "warning"
+            });
+
+            this.getOtps();
+            this.loading=false
+          });
+        })
+        .catch(() => {
+          this.$message.error("You cancelled the operation");
+          this.loading=false
+          // this.$notify({
+          //   type: "error",
+          //   title: "Error",
+          //   message: "You cancelled the opertation"
+          // });
+        });
     },
     copyTestingCode() {
       let testingCodeToCopy = document.querySelector("#testing-code");
