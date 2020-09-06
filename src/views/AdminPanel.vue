@@ -371,7 +371,7 @@ export default {
 };
 </script>
 <style>
-  h1, h2 {
+  /* h1, h2 {
   font-weight: normal;
 }
 ul {
@@ -384,5 +384,5 @@ li {
 }
 a {
   color: #35495E;
-}
+} */
 </style>
