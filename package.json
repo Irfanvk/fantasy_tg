@@ -15,7 +15,7 @@
     "chart.js": "2.8.0",
     "core-js": "2.6.5",
     "element-ui": "^2.8.2",
-    "firebase": "^6.0.2",
+    "firebase": "^6.6.2",
     "flatpickr": "4.5.7",
     "jwt-decode": "^2.2.0",
     "nouislider": "13.1.4",

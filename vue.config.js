@@ -2,9 +2,9 @@ const webpack = require('webpack');
 const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
-  devServer: {
-    proxy: 'https://mapps.cricbuzz.com',
-  },
+  // devServer: {
+  //   proxy: 'https://mapps.cricbuzz.com',
+  // },
   publicPath: isProd ? "" : "",
   configureWebpack: {
     // Set up all the aliases we use in our app.
