@@ -292,7 +292,7 @@ export default {
         console.log('Notification permission status:', status);
       });
       if (Notification.permission === 'granted') {
-        console.log(navigator)
+        // console.log(navigator.serviceWorker.getRegistration())
         navigator.serviceWorker.getRegistration()
           .then(function (reg) {
             if(reg == undefined){
