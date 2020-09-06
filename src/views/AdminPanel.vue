@@ -4,6 +4,14 @@
       <!-- Card stats -->
       <div class="row">
         <div class="col-xl-3">
+            <div class="push">
+              <el-button type="primary"  @click="displayNotification">{{msg}}<i class="el-icon-upload el-icon-right"></i></el-button>
+              <!-- <button type="info" @click="displayNotification">{{msg}}</button> -->
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center mt-4">
             <div slot="header" class="row align-items-center">
               <div class="col">
@@ -180,6 +188,7 @@ export default {
     const token = localStorage.usertoken;
     const decoded = jwtDecode(token);
     return {
+      msg: 'Push',
       dialogTableVisible: false,
       otp_data: [],
       point2Data: [],
@@ -276,7 +285,47 @@ export default {
       /* unselect the range */
       testingCodeToCopy.setAttribute("type", "hidden");
       window.getSelection().removeAllRanges();
+    },
+    // push notifications
+    displayNotification () {
+      Notification.requestPermission(function(status) {
+        console.log('Notification permission status:', status);
+      });
+      if (Notification.permission === 'granted') {
+        console.log(navigator)
+        navigator.serviceWorker.getRegistration()
+          .then(function (reg) {
+            if(reg == undefined){
+              console.log("only works online")
+              return
+            }
+            var options = {
+              body: 'First notification!',
+              icon: 'img/newico/notification-flat.png',
+              vibrate: [100, 50, 100],
+              data: {
+                dateOfArrival: Date.now(),
+                primaryKey: 1
+              },
+              actions: [
+                {
+                  action: 'explore',
+                  title: 'Go to the site',
+                  icon: 'img/newico/checkmark.png'
+                },
+                {
+                  action: 'close',
+                  title: 'Close the notification',
+                  icon: 'img/newico/xmark.png'
+                }
+              ]
+            }
+            reg.showNotification('IPL & TPL... SOON!', options)
+          }
+        )
+      }
     }
+  
     // getPoints() {
     //   var url = base_url + "points";
     //   this.axios
@@ -321,4 +370,19 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+  h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #35495E;
+}
+</style>
