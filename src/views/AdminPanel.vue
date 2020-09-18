@@ -4,14 +4,6 @@
       <!-- Card stats -->
       <div class="row">
         <div class="col-xl-3">
-            <div class="push">
-              <el-button type="primary"  @click="displayNotification">{{msg}}<i class="el-icon-upload el-icon-right"></i></el-button>
-              <!-- <button type="info" @click="displayNotification">{{msg}}</button> -->
-            </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-3">
           <card header-classes="bg-transparent" class="row align-items-center mt-4">
             <div slot="header" class="row align-items-center">
               <div class="col">
@@ -287,7 +279,7 @@ export default {
       window.getSelection().removeAllRanges();
     },
     // push notifications
-    displayNotification () {
+   /* displayNotification () {
       Notification.requestPermission(function(status) {
         console.log('Notification permission status:', status);
       });
@@ -324,7 +316,7 @@ export default {
           }
         )
       }
-    }
+    }*/
   
     // getPoints() {
     //   var url = base_url + "points";
