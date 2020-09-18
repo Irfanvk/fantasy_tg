@@ -325,117 +325,180 @@
     </base-header>
 
     <!--Charts-->
-    <div class="container-fluid mt--7">
+    <!-- <div class="container-fluid mt--7">
       <div class="row">
         <div class="col-xl-4"></div>
-      </div>
-      <!-- End charts-->
+      </div> -->
+    <!-- End charts-->
 
-      <!--Tables-->
-      <!-- <div class="row mt-5">
+    <!--Tables-->
+    <!-- <div class="row mt-5">
         <div class="col-xl-8 mb-5 mb-xl-0" style="max-width:100%">
           <page-visits-table></page-visits-table>
         </div>
       </div>-->
-      <!--End tables-->
-    </div>
+    <!--End tables-->
+    <!-- </div> -->
   </div>
-</template>
-<script>
-// Tables
-import PageVisitsTable from "./Dashboard/PageVisitsTable";
-import { base_url } from "../../config";
+  <el-button type="primary" icon="el-icon-message-solid" v-if="$route.name=='dashboard'" @click="getMessagingToken">
+    notifications_none
+  </el-button>
 
-export default {
-  components: {
-    PageVisitsTable
-  },
-  data() {
-    return {
-      bigLineChart: {
-        allData: [
-          [0, 20, 10, 30, 15, 40, 20, 60, 60],
-          [0, 20, 5, 25, 10, 30, 15, 40, 40]
-        ],
-        activeIndex: 0,
-        chartData: {
-          datasets: [],
-          labels: []
-        }
-      },
-      redBarChart: {
-        chartData: {
-          labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [
-            {
+</template>
+
+<script>
+  import firebase from '../configFirebase.js'
+  // Tables
+  import PageVisitsTable from "./Dashboard/PageVisitsTable";
+  import {
+    base_url
+  } from "../../config";
+
+  export default {
+    components: {
+      // eslint-disable-next-line vue/no-unused-components
+      PageVisitsTable
+    },
+    data() {
+      return {
+        bigLineChart: {
+          allData: [
+            [0, 20, 10, 30, 15, 40, 20, 60, 60],
+            [0, 20, 5, 25, 10, 30, 15, 40, 40]
+          ],
+          activeIndex: 0,
+          chartData: {
+            datasets: [],
+            labels: []
+          }
+        },
+        redBarChart: {
+          chartData: {
+            labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            datasets: [{
               label: "Sales",
               data: [25, 20, 30, 22, 17, 29]
-            }
-          ]
-        }
-      }
-    };
-  },
-  methods: {
-    initTest() {
-      var url = base_url + "test";
-      this.axios
-        .get(url)
-        .then(response => {
-          this.dataTest = response.data.status;
-        })
-        .catch(err => {
-          // window.location = "/";
-          let reftoken = localStorage.getItem("refreshtoken");
-          delete this.axios.defaults.headers.common.Authorization;
-          if (err.response && err.response.status === 401) {
-            this.axios
-              .post(base_url + "refresh", {
-                headers: { Authorization: `Bearer ${reftoken}` }
-              })
-              .then(response => {
-                localStorage.setItem("usertoken", response.data.access_token);
-              })
-              .catch(e => {
-                localStorage.clear();
-                window.location = "/";
-              });
+            }]
           }
-          this.$notify({
-            type: "primary",
-            message: err.response.data.msg + ", please login to continue "
+        }
+      };
+    },
+    methods: {
+      initTest() {
+        var url = base_url + "test";
+        this.axios
+          .get(url)
+          .then(response => {
+            this.dataTest = response.data.status;
+          })
+          .catch(err => {
+            // window.location = "/";
+            let reftoken = localStorage.getItem("refreshtoken");
+            delete this.axios.defaults.headers.common.Authorization;
+            if (err.response && err.response.status === 401) {
+              this.axios
+                .post(base_url + "refresh", {
+                  headers: {
+                    Authorization: `Bearer ${reftoken}`
+                  }
+                })
+                .then(response => {
+                  localStorage.setItem("usertoken", response.data.access_token);
+                })
+                .catch(e => {
+                  localStorage.clear();
+                  window.location = "/";
+                });
+            }
+            this.$notify({
+              type: "primary",
+              message: err.response.data.msg + ", please login to continue "
+            });
           });
-        });
-    }
+      },
 
-    // getMatchdata() {
-    //   var api =
-    //     "https://fantasy.iplt20.com/graphql/query/pwa/shme-home-site-match-query";
-    //   var query = '{"query":"query ShmeHomeSiteMatchQuery($slug: String = null) { site(slug: $slug) { slug name tours { id name } matches(page: 0, statuses: [NOT_STARTED, UP_COMING]) { edges { id name startTime status squads { id name shortName squadColorPalette flag { src type } flagWithName { src type } } tour { id name slug } } } }}","variables":{"slug":"ipl-fantasy"}}'
-    //   this.$http.post(api).then(response => {
-    //   });
-    // }
-  },
-  mounted() {
-    this.initTest();
-    // this.initBigChart(0);
-    // this.getMatchdata()
-  },
-  beforeCreate() {
-    if (!localStorage.getItem("usertoken")) {
-      // this.$router.push({ name: "login" });
-      this.$router.push({ name: "login" });
+      // getMatchdata() {
+      //   var api =
+      //     "https://fantasy.iplt20.com/graphql/query/pwa/shme-home-site-match-query";
+      //   var query = '{"query":"query ShmeHomeSiteMatchQuery($slug: String = null) { site(slug: $slug) { slug name tours { id name } matches(page: 0, statuses: [NOT_STARTED, UP_COMING]) { edges { id name startTime status squads { id name shortName squadColorPalette flag { src type } flagWithName { src type } } tour { id name slug } } } }}","variables":{"slug":"ipl-fantasy"}}'
+      //   this.$http.post(api).then(response => {
+      //   });
+      // }
+      getMessagingToken() {
+        messaging.getToken().then(async (token) => {
+          if (token) {
+            const currentMessageToken = window.localStorage.getItem('messagingToken')
+            console.log('token will be updated', currentMessageToken != token)
+            if (currentMessageToken != token) {
+              await this.saveToken(token)
+            }
+          } else {
+            console.log('No Instance ID token available. Request permission to generate one.');
+            this.notificationsPermisionRequest();
+          }
+        }).catch(function (err) {
+          console.log('An error occurred while retrieving token. ', err);
+        });
+      },
+      notificationsPermisionRequest() {
+        messaging.requestPermission()
+          .then(() => {
+            this.getMessagingToken();
+          })
+          .catch((err) => {
+            console.log('Unable to get permission to notify.', err);
+          });
+      },
+      listenTokenRefresh() {
+        const currentMessageToken = window.localStorage.getItem('messagingToken')
+        console.log('currentMessageToken', currentMessageToken);
+        if (!!currentMessageToken) {
+          messaging.onTokenRefresh(function () {
+            messaging.getToken().then(function (token) {
+              this.saveToken(token);
+            }).catch(function (err) {
+              console.log('Unable to retrieve refreshed token ', err);
+            });
+          });
+        }
+      },
+      saveToken(token) {
+        console.log('tokens', token)
+        this.axios.post(`https://us-central1-cropchien.cloudfunctions.net/GeneralSubscription`, {
+            token
+          })
+          .then(response => {
+            window.localStorage.setItem('messagingToken', token)
+            console.log(response)
+          }).catch((err) => {
+            console.log(err)
+          })
+      },
+
+    },
+    mounted() {
+      this.initTest();
+      this.listenTokenRefresh();
+      // this.initBigChart(0);
+      // this.getMatchdata()
+    },
+    beforeCreate() {
+      if (!localStorage.getItem("usertoken")) {
+        // this.$router.push({ name: "login" });
+        this.$router.push({
+          name: "login"
+        });
+      }
     }
-  }
-};
+  };
 </script>
 <style>
-.card {
-  margin: auto;
-  margin-bottom: 20px;
-}
+  .card {
+    margin: auto;
+    margin-bottom: 20px;
+  }
 
-img {
-  border-radius: 5px;
-}
+  img {
+    border-radius: 5px;
+  }
 </style>
