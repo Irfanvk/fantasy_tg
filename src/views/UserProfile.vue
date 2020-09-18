@@ -114,6 +114,21 @@
                   <!-- http://127.0.0.1:5000/upload -->
                   <!-- :action="'http://127.0.0.1:5000/upload/'+email" -->
                   <el-upload
+                    class="upload-demo"
+                    :action="base_url+'upload/'+email"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :file-list="fileList"
+                    :on-exceed="handleExceed"
+                    :before-upload="onBeforeUpload"
+                    :limit="1"
+                    list-type="picture"
+                  >
+                    <el-button size="small" type="primary">Click to upload</el-button>
+                    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+                  </el-upload>
+                  <!-- **************************************************************** -->
+                  <!-- <el-upload
                     class="upload"
                     :action="base_url+'upload/'+email"
                     :on-preview="handlePreview"
@@ -124,10 +139,11 @@
                     :on-exceed="handleExceed"
                     :file-list="fileList"
                   >
-                    <i class="el-icon-plus"></i>
-                    <!-- <el-button size="small" type="primary" @change="handleSubmit">Click to upload</el-button> -->
-                    <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 200kb</div>
-                  </el-upload>
+                  <i class="el-icon-plus"></i>-->
+                  <!-- <el-button size="small" type="primary" @change="handleSubmit">Click to upload</el-button> -->
+                  <!-- <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 200kb</div>
+                  </el-upload>-->
+                  <!-- ******************************************************************* -->
                 </span>
                 <span slot="footer" class="dialog-footer">
                   <el-button @click="dialogVisible = false">Cancel</el-button>
@@ -162,7 +178,12 @@
                   >{{scope.row.answer}}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column prop="admin_answer" label="Right Answer" :formatter="formatter" sortable>
+              <el-table-column
+                prop="admin_answer"
+                label="Right Answer"
+                :formatter="formatter"
+                sortable
+              >
                 <template slot-scope="scope">
                   <el-tag type="success">{{scope.row.admin_answer}}</el-tag>
                 </template>
@@ -375,6 +396,20 @@ export default {
       //     localStorage.setItem("avatar", response.data.url);
       //   }
       // });
+    },
+    onBeforeUpload(file)
+    {
+      // const isIMAGE = file.type === 'image/jpeg'||'image/gif'||'image/png';
+      const isLt1M = file.size / 1024 / 1024 < 0.6;
+
+      // if (!isIMAGE) {
+      //   this.$message.error('Upload file can only be in picture format!');
+      // }
+      if (!isLt1M) {
+        this.$message.error('Upload file size cannot exceed 400 KB!');
+      }
+      // return isIMAGE && isLt1M;
+      return isLt1M;
     },
     handleClose(done) {
       this.$confirm("Are you sure to close this?", {
