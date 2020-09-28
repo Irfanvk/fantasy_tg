@@ -26,6 +26,14 @@
       </el-table>
     </el-dialog>-->
     <el-dialog title="Answer Table" :visible.sync="dialogTableVisible" v-loading="loading">
+      <span v-if="admin">
+        <download-csv
+          class="btn btn-default"
+          block
+          :data="modData"
+          name="AnswerTable.csv"
+        >Download</download-csv>
+      </span>
       <el-table
         :data="answerData.filter(data => !search || data.added_by.full_name.toLowerCase().includes(search.toLowerCase()))"
       >
@@ -135,6 +143,7 @@
   </div>
 </template>
 <script>
+import jwtDecode from "jwt-decode";
 import { base_url } from "../../../config";
 export default {
   name: "answers-table",
@@ -145,10 +154,14 @@ export default {
     title: String
   },
   data() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
     return {
       search: "",
+      admin: decoded.identity.admin,
       pointData: [],
       answerData: [],
+      modData:[],
       dialogTableVisible: false,
       loading: true,
       tableData: [
@@ -227,6 +240,22 @@ export default {
       this.axios.get(url).then(res => {
         this.loading = false;
         this.answerData = res.data.result;
+        this.dupAnswers(gid)
+      });
+    },
+    dupAnswers(gid) {
+      var url2 = base_url + "groups/answers/" + gid;
+      this.axios.get(url2).then(res2 => {
+        this.loading = false;
+        this.modData = res2.data.result;
+        this.modData = this.modData.map(tdata => {
+          tdata.added_by = tdata.added_by.full_name;
+          tdata.added_on = new Date(tdata.added_on.$date).toLocaleString("en", this.options);
+          // tdata.uans_id = delete
+          return tdata;
+        //  return tdata.added_by = tdata.added_by.full_name;
+        });
+        // console.log(this.modData)
       });
     }
   },
