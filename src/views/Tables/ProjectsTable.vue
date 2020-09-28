@@ -7,6 +7,14 @@
         </div>
         <div class="col text-right">
           <!-- <base-button type="primary" size="sm">See all</base-button> -->
+          <span v-if="admin">
+            <download-csv
+              class="btn btn-default"
+              block
+              :data="pointData"
+              name="PointsTable.csv"
+            >Download</download-csv>
+          </span>
         </div>
       </div>
     </div>
@@ -66,6 +74,7 @@
   </div>
 </template>
 <script>
+import jwtDecode from "jwt-decode";
 import { base_url } from "../../../config";
 export default {
   name: "projects-table",
@@ -76,9 +85,12 @@ export default {
     title: String
   },
   data() {
+    const token = localStorage.usertoken;
+    const decoded = jwtDecode(token);
     return {
       pointData: [],
       loading: true,
+      admin: decoded.identity.admin,
       tableData: [
         {
           img: "img/theme/bootstrap.jpg",
