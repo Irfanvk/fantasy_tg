@@ -19,12 +19,7 @@ module.exports = {
     themeColor: '#172b4d',
     msTileColor: '#172b4d',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: '#172b4d',
-    // configure the workbox plugin
-    workboxPluginMode: 'InjectManifest',
-    workboxOptions: {
-      swSrc: "src/firebase-messaging-sw.js"
-    }
+    appleMobileWebAppStatusBarStyle: '#172b4d'
   },
   css: {
     // Enable CSS source maps.
